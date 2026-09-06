@@ -1,0 +1,285 @@
+{
+  "anniversary": {
+    "name": "Anniversary",
+    "model": "Mercedes Sprinter",
+    "seats": 8,
+    "image": "/assets/byjh/anniversary.jpg",
+    "specifications": {
+      "Entertainment": [
+        "S-Class Button Control",
+        "Intercom",
+        "55\" Samsung Smart TV",
+        "Apple TV 4K",
+        "PS5",
+        "Burmester Speaker Covers",
+        "Audison High-End Sound System"
+      ],
+      "Interior": [
+        "Oak Wood Mahogany Finishes",
+        "Horizon Ambient Lighting",
+        "White Beam Lights",
+        "Starlight",
+        "S-Class Air Vents",
+        "Side Panel Bar Section",
+        "Sliding Fridge Function",
+        "Automatic Door & Sliding Side Steps",
+        "Webasto Air Condition",
+        "Eberspacher Diesel Heater",
+        "Charging Ports and Minibar Section",
+        "Front Dashboard & Door Panel Color Change",
+        "Polyamide Microfiber Carpet Installation",
+        "Genuine Alcantara",
+        "Hall Lighting"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery",
+        "Full Function Electrical Jet Seats",
+        "Massage, Heating & Cooling Features",
+        "Limousine Bench Section",
+        "Electrical Drawer Under Entrance Seats",
+        "Oak Wood Table with Fine Chrome Table Leg"
+      ],
+      "Privacy": [
+        "Business Partition",
+        "Custom Size Jalousie Curtains",
+        "Driver Side Light & Partition Control Button"
+      ]
+    }
+  },
+  "potus": {
+    "name": "Potus",
+    "model": "Mercedes Sprinter",
+    "seats": 8,
+    "image": "/assets/byjh/potus.jpg",
+    "specifications": {
+      "Entertainment": [
+        "S-Class Button Control",
+        "43\" Samsung Crystal Smart TV",
+        "Apple TV 4K",
+        "PS5",
+        "Audison High-End Sound System"
+      ],
+      "Interior": [
+        "Oak Wood Mahogany Finishes",
+        "Horizon Ambient Lighting",
+        "White Beam Lights",
+        "Starlight",
+        "S-Class Air Vents",
+        "Side Panel Bar Section",
+        "Automatic Door & Sliding Side Steps",
+        "Webasto Air Condition",
+        "Eberspacher Diesel Heater",
+        "Charging Ports and Minibar Section",
+        "Front Dashboard & Door Panel Color Change",
+        "Polyamide Microfiber Carpet Installation",
+        "Genuine Alcantara",
+        "Hall Lighting"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery",
+        "Full Function Electrical Jet Seats",
+        "Massage, Heating & Cooling Features",
+        "Electrical Drawer Under Entrance Seats"
+      ],
+      "Privacy": [
+        "Business Partition",
+        "Custom Jalousie Curtains",
+        "Driver Side Light & Partition Control Button"
+      ]
+    }
+  },
+  "desire": {
+    "name": "Desire",
+    "model": "Mercedes V-Class",
+    "seats": 5,
+    "image": "/assets/byjh/desire.jpg",
+    "specifications": {
+      "Entertainment": [
+        "Touch Screen Control Panel",
+        "43\" Samsung Crystal Smart TV",
+        "Apple TV 4K",
+        "PS5",
+        "Burmester Speaker Covers"
+      ],
+      "Interior": [
+        "Carbon Leather Finishes",
+        "Cyber Style Ambient Lights",
+        "White Beam Lights",
+        "Starlight",
+        "S-Class Air Vents",
+        "Front Dashboard & Door Panel Leather Wrapping",
+        "Polyamide Microfiber Carpet Installation",
+        "Genuine Alcantara",
+        "BYJH Welcome Light",
+        "Wireless Charging Ports"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery Full Function Electrical Jet Seats",
+        "Massage, Heated & Cooling Features"
+      ],
+      "Privacy": [
+        "Business Partition",
+        "Privacy Curtains",
+        "Driver Side Light & Partition Control Button"
+      ]
+    }
+  },
+  "dream": {
+    "name": "Dream",
+    "model": "Mercedes V-Class",
+    "seats": 5,
+    "image": "/assets/byjh/dream.jpg",
+    "specifications": {
+      "Entertainment": [
+        "42-inch HQ smart TV (adjustable, moving up and down)",
+        "Gladen HQ sound system",
+        "PlayStation 5",
+        "Wi-Fi"
+      ],
+      "Interior": [
+        "RGD Ambience LED Lighting",
+        "Starlight Roof",
+        "Maybach Tables",
+        "Mini Bar",
+        "Umbrella",
+        "Carpet",
+        "USB Sockets"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery",
+        "5 Nappa Leather Seats",
+        "Two Moveable Chairs"
+      ],
+      "Privacy": [
+        "Custom Jalouise Black Out Curtains"
+      ]
+    }
+  },
+  "grateful": {
+    "name": "Grateful",
+    "model": "Mercedes V-Class",
+    "seats": 5,
+    "image": "/assets/byjh/grateful.jpg",
+    "specifications": {
+      "Entertainment": [
+        "Touch Screen Control Panel",
+        "Intercom",
+        "43\" Samsung Crystal Smart TV",
+        "Apple TV 4K",
+        "Burmester Speaker Covers",
+        "Audison High-End Sound System"
+      ],
+      "Interior": [
+        "Oak Wood Mahogany Finishes",
+        "Horizon Ambient Lighting",
+        "Beam Lights",
+        "Starlight",
+        "S-Class Air Vents",
+        "Side Panel Bar Section",
+        "Sliding Minibar Section",
+        "By Journey Home Side Step Chrome",
+        "Front Dashboard & Door Panel Leather Wrapping",
+        "Polyamide Microfiber Carpet Installation",
+        "Genuine Alcantara"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery",
+        "Maybach Table",
+        "Full Function Electrical Jet Seats",
+        "Massage, Heating & Cooling Features",
+        "Triple Door Entrance Seat with Folding Armrest"
+      ],
+      "Privacy": [
+        "Business Partition",
+        "Driver Side Light & Partition Control Button"
+      ]
+    }
+  },
+  "bliss": {
+    "name": "Bliss",
+    "model": "Mercedes V-Class",
+    "seats": 5,
+    "image": "/assets/byjh/bliss.jpg",
+    "specifications": {
+      "Entertainment": [
+        "42-inch HQ Smart TV",
+        "Burmester & Gladen HQ sound system",
+        "PlayStation 5",
+        "iPad iOS Control",
+        "Wi-Fi"
+      ],
+      "Interior": [
+        "Full Immersive Ambiance Lighting",
+        "Starlight Roof",
+        "Nespresso Coffee Machine Maker",
+        "Carpet"
+      ],
+      "Seating": [
+        "4 BYJH Nappa Leather Seats",
+        "Two Moveable Chairs",
+        "In-Built Massage Function Seats"
+      ],
+      "Privacy": [
+        "Enclosed Private Seating",
+        "Curtains"
+      ]
+    }
+  },
+  "intimate": {
+    "name": "Intimate",
+    "model": "Mercedes V-Class",
+    "seats": 5,
+    "image": "/assets/byjh/intimate.jpg",
+    "specifications": {
+      "Entertainment": [
+        "Burmester & Gladen HQ Sound System",
+        "42-inch HQ smart TV (adjustable, moving up and down)",
+        "PlayStation 5",
+        "Wi-Fi"
+      ],
+      "Interior": [
+        "RGD Ambience LED Lighting",
+        "Starlight Roof",
+        "Maybach Tables",
+        "Mini Bar",
+        "Umbrella",
+        "Carpet",
+        "USB Sockets"
+      ],
+      "Seating": [
+        "BYJH Seat Upholstery",
+        "5 Nappa Leather Seats",
+        "Two Moveable Chairs"
+      ],
+      "Privacy": [
+        "Custom Jalouise Black Out Curtains"
+      ]
+    }
+  },
+  "snug": {
+    "name": "Snug",
+    "model": "Mercedes V-Class",
+    "seats": 6,
+    "image": "/assets/byjh/snug.jpg",
+    "specifications": {
+      "Entertainment": [
+        "32-inch HQ smart TV (adjustable, moving up and down)",
+        "Burmester & Gladen HQ sound system",
+        "PlayStation 5"
+      ],
+      "Interior": [
+        "RGD Ambiance LED lighting",
+        "Starlight Roof",
+        "Umbrella",
+        "Carpet",
+        "USB Sockets"
+      ],
+      "Seating": [
+        "6 BYJH Nappa Leather Seats"
+      ],
+      "Privacy": [
+        "Enclosed Private Seating"
+      ]
+    }
+  }
+}

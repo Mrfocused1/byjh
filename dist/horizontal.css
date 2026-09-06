@@ -1,0 +1,216 @@
+/* Every Journey: the vehicle stays at road level while the story passes below. */
+body .horizontal-story {
+  --profile-height: clamp(220px, 38svh, 360px);
+  --profile-width: min(52vw, 76svh, 850px);
+  height: auto;
+  padding-top: 330px;
+}
+.horizontal-story .horizontal-sticky {
+  position: relative;
+  top: 0;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  background: var(--paper);
+}
+.profile-header {
+  height: var(--profile-height);
+  flex: 0 0 var(--profile-height);
+  position: relative;
+  overflow: clip;
+}
+.profile-labels {
+  position: absolute;
+  z-index: 3;
+  inset: 26px var(--margin) auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.profile-labels .eyebrow {font-size: 11px; letter-spacing: .19em;}
+.horizontal-hint {color: #7b7b75; white-space: nowrap;}
+.horizontal-hint span {margin-left: 12px;}
+.horizontal-story .side-scene {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 0;
+  overflow: clip;
+}
+.horizontal-story .side-word {
+  left: 9vw;
+  bottom: -8px;
+  width: max-content;
+  white-space: nowrap;
+  font-size: clamp(130px, 21vw, 330px);
+  line-height: .87;
+  letter-spacing: -.065em;
+  transform: none;
+  will-change: transform;
+}
+.horizontal-story .side-vehicle {inset: 0; opacity: 1;}
+.horizontal-story .profile-vehicle {
+  width: var(--profile-width);
+  bottom: calc(var(--profile-width) * -.157);
+  filter: drop-shadow(0 2px 2px #0003);
+  /* Orthographic turning keeps the van's scale steady as it changes direction. */
+  transform: translateX(-50%) rotateY(var(--profile-yaw, 0deg));
+  transform-origin: 50% 68.5546875%;
+  backface-visibility: visible;
+  will-change: transform;
+}
+/* Each wheel face reuses the original photograph. Its round crop sits inside
+   the stationary tyre, so the wheel arch and body lighting stay in place.
+   Coordinates refer to the 768 x 512 side-view quadrant of the source sheet. */
+.profile-wheel {
+  position: absolute;
+  width: 8.3333333333%;
+  height: 12.5%;
+  top: 68.5546875%;
+  overflow: hidden;
+  clip-path: circle(50%);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--wheel-angle, 0deg));
+  pointer-events: none;
+  will-change: transform;
+}
+.profile-wheel-rear {left: 21.6145833333%;}
+.profile-wheel-front {left: 75.5208333333%;}
+.horizontal-content {
+  position: relative;
+  background: #111;
+  color: #fafafa;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.horizontal-window {position: relative; min-height: 0; flex: 1; outline-offset: -4px; touch-action: pan-y;}
+.horizontal-track {display: block; position: relative;}
+.horizontal-panel {
+  padding: 42px var(--margin);
+  border-top: 1px solid #33332f;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.horizontal-panel .eyebrow {font-size: 11px; color: #999992; margin-bottom: 20px;}
+.horizontal-panel p:not(.eyebrow) {font-size: 18px; line-height: 1.5; color: #b0b0a9; max-width: 420px;}
+.horizontal-panel h3 {font-size: 38px; letter-spacing: -.045em; line-height: .98; margin-bottom: 18px;}
+.horizontal-panel .service-symbol {width: auto; font-size: 36px; margin: 0 0 20px; text-align: left; line-height: 1;}
+.horizontal-panel .text-link {font-size: 11px; letter-spacing: .12em; margin-top: 26px; min-height: 44px; text-align: left;}
+.journey-intro h2 {font-size: clamp(42px, 5.2vw, 88px); line-height: .94; letter-spacing: -.06em;}
+.journey-intro h2 span {display: block; color: #666661; font-size: .55em; margin-top: 15px; letter-spacing: -.045em;}
+.intro-description {margin-top: 30px;}
+.intro-description p + p {margin-top: 16px;}
+.horizontal-controls {
+  min-height: 90px;
+  padding: 16px var(--margin) 24px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #111;
+}
+.horizontal-pagination {display: flex; align-items: center; gap: 20px; color: #aaa;}
+#horizontal-count {font-size: 12px; letter-spacing: .12em; font-variant-numeric: tabular-nums; min-width: 64px;}
+.horizontal-meter {width: 100px; height: 1px; background: #40403b;}
+.horizontal-meter i {display: block; height: 100%; background: #ddd; transform: scaleX(0); transform-origin: left;}
+.horizontal-controls .rail-book {font-size: 11px; margin: 0; border: 1px solid #55554e; border-radius: 999px; padding: 8px 24px; min-height: 44px; gap: 22px;}
+.horizontal-arrows {display: flex; gap: 10px;}
+.horizontal-arrows button {border: 1px solid #55554e; border-radius: 50%; width: 44px; height: 44px; font-size: 23px; line-height: 1; transition: background .2s;}
+.horizontal-arrows button:hover {background: #343430;}
+.horizontal-arrows button:disabled {opacity: .25; cursor: default;}
+
+body.horizontal-enabled .horizontal-story {height: var(--horizontal-total, calc(100svh + 330px));}
+.horizontal-enabled .horizontal-story .horizontal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  /* Keep the pinned surface on one stable compositor layer while its contents move. */
+  transform: translateZ(0);
+  will-change: transform;
+}
+.horizontal-enabled .horizontal-window {overflow: clip;}
+.horizontal-enabled .horizontal-track {display: flex; width: max-content; height: 100%; will-change: transform;}
+.horizontal-enabled .horizontal-panel {
+  flex: 0 0 auto;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  border-top: 0;
+  border-right: 1px solid #343430;
+  padding: 34px 3vw 24px;
+}
+.horizontal-enabled .journey-intro {
+  width: 100vw;
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-content: center;
+  align-items: center;
+  column-gap: 7vw;
+}
+.horizontal-enabled .intro-description {margin: 0;}
+.horizontal-enabled .service-panel {width: clamp(320px, 34vw, 520px);}
+.horizontal-enabled .service-panel .text-link {margin-top: auto; padding-top: 14px;}
+.horizontal-enabled .horizontal-controls {display: flex;}
+.horizontal-enabled .service-panel p {font-size: 17px; line-height: 1.45;}
+
+@media (max-width: 760px) {
+  body .horizontal-story {padding-top: 260px; --profile-height: clamp(200px, 31svh, 290px); --profile-width: min(88vw, 420px, 90svh);}
+  .profile-labels {inset: 23px 22px auto; gap: 12px;}
+  .profile-labels .eyebrow {font-size: 9px; letter-spacing: .12em;}
+  .horizontal-hint {max-width: 110px; white-space: normal; text-align: right;}
+  .horizontal-hint span {margin-left: 3px;}
+  .horizontal-story .side-word {font-size: 33vw; left: 5vw; bottom: 2px;}
+  .horizontal-panel {padding: 34px 24px;}
+  .horizontal-panel p:not(.eyebrow) {font-size: 17px; line-height: 1.5;}
+  .horizontal-panel h3 {font-size: 32px; line-height: .98; margin-bottom: 14px;}
+  .horizontal-panel .service-symbol {font-size: 31px; margin-bottom: 20px;}
+  .horizontal-panel .eyebrow {font-size: 10px; margin-bottom: 15px;}
+  .horizontal-panel .text-link {font-size: 10px; letter-spacing: .09em;}
+  .journey-intro h2 {font-size: 12vw;}
+  .journey-intro h2 span {font-size: .52em; margin-top: 12px;}
+  .horizontal-enabled .horizontal-panel {padding: 28px 24px 20px;}
+  .horizontal-enabled .journey-intro {display: flex; justify-content: space-between; width: 100vw; gap: 20px;}
+  .horizontal-enabled .intro-description {margin: 0;}
+  .horizontal-enabled .intro-description p {font-size: 17px; line-height: 1.4;}
+  .horizontal-enabled .intro-description p + p {display: none;}
+  .horizontal-enabled .intro-description .text-link {margin-top: 12px;}
+  .horizontal-enabled .service-panel {width: 84vw;}
+  .horizontal-enabled .service-panel p {font-size: 17px; line-height: 1.5;}
+  .horizontal-controls {min-height: 82px; padding: 12px 20px 22px; gap: 12px;}
+  .horizontal-pagination {gap: 0;}
+  #horizontal-count {font-size: 10px; min-width: 50px; letter-spacing: .06em;}
+  .horizontal-meter {display: none;}
+  .horizontal-controls .rail-book {padding: 8px 13px; font-size: 9px; gap: 8px; letter-spacing: .05em;}
+  .horizontal-controls .rail-book span {font-size: 20px;}
+  .horizontal-arrows {gap: 6px;}
+  .horizontal-arrows button {width: 40px; height: 44px; font-size: 21px; border-radius: 24px;}
+}
+@media (max-height: 700px) {
+  body .horizontal-story {--profile-height: 33svh; --profile-width: min(48vw, 68svh, 650px);}
+  .horizontal-enabled .horizontal-panel {padding-top: 20px; padding-bottom: 16px;}
+  .horizontal-enabled .horizontal-panel .service-symbol {font-size: 26px; margin-bottom: 12px;}
+  .horizontal-enabled .horizontal-panel h3 {font-size: 29px; margin-bottom: 12px;}
+  .horizontal-enabled .horizontal-panel p:not(.eyebrow) {font-size: 16px; line-height: 1.4;}
+  .horizontal-enabled .horizontal-panel .text-link {font-size: 10px; margin-top: 12px; padding-top: 8px; min-height: 42px;}
+  .horizontal-enabled .journey-intro h2 {font-size: clamp(32px, 4.7vw, 70px);}
+  .horizontal-controls {min-height: 70px; padding-top: 10px; padding-bottom: 15px;}
+}
+@media (max-width: 760px) and (max-height: 700px) {
+  body .horizontal-story {--profile-width: min(82vw, 58svh, 400px);}
+  .horizontal-enabled .journey-intro h2 {font-size: 11vw;}
+  .horizontal-enabled .horizontal-panel {padding-left: 22px; padding-right: 22px;}
+  .horizontal-enabled .service-panel p {font-size: 16px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-story .side-vehicle, .horizontal-story .side-word {transform: none !important;}
+}

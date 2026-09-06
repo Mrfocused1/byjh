@@ -1,0 +1,71 @@
+{
+  "retrieved": "2026-09-06",
+  "brand": "https://byjh.co.uk/",
+  "fleet": [
+    {
+      "name": "Anniversary",
+      "seats": 8,
+      "model": "Mercedes SPRINTER",
+      "page": "https://byjh.co.uk/anniversary"
+    },
+    {
+      "name": "Potus",
+      "seats": 8,
+      "model": "Mercedes SPRINTER",
+      "page": "https://byjh.co.uk/potus"
+    },
+    {
+      "name": "Desire",
+      "seats": 5,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/desire"
+    },
+    {
+      "name": "Dream",
+      "seats": 5,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/dream"
+    },
+    {
+      "name": "Grateful",
+      "seats": 5,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/grateful"
+    },
+    {
+      "name": "Bliss",
+      "seats": 5,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/bliss"
+    },
+    {
+      "name": "Intimate",
+      "seats": 5,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/intimate"
+    },
+    {
+      "name": "Snug",
+      "seats": 6,
+      "model": "Mercedes V-CLASS",
+      "page": "https://byjh.co.uk/snug"
+    }
+  ],
+  "custom_builds": "https://byjh.co.uk/custom-builds",
+  "journey_enquiries": "https://byjh.co.uk/journey",
+  "images": {
+    "anniversary": "https://framerusercontent.com/images/TeopVW8Ps78MN3WWZhfrK8NOI.jpeg",
+    "potus": "https://framerusercontent.com/images/QmQ8XuFNxcn0gEBy5hUZ2klTY.jpeg",
+    "desire": "https://framerusercontent.com/images/KBHZzUPcQUDbSemHfGYKoQXssg.jpeg",
+    "dream": "https://framerusercontent.com/images/4jeBs8HkSkYO47ruJXmktaS8.jpeg",
+    "grateful": "https://framerusercontent.com/images/yYyvz4VaDkzFe4p358OmMSmAj0.jpeg",
+    "bliss": "https://framerusercontent.com/images/KijpFRGWEUII7nDKrQDkGmvt0.jpeg",
+    "intimate": "https://framerusercontent.com/images/lFylulqJbBhMi28TQkRekJ7Ob0k.jpeg",
+    "snug": "https://framerusercontent.com/images/UyjcpZXHLr5UaBrGjlND2MCVkk.jpeg",
+    "anniversary-cabin": "https://framerusercontent.com/images/OnfQHvpXkhqjk8uqq3bTHqkyHw4.jpeg",
+    "custom-sprinter": "https://framerusercontent.com/images/NNztRxy7pT8hmunLYxF9VAZBYs.jpeg",
+    "custom-vclass": "https://framerusercontent.com/images/1ll1LZX4IjmId0bFneFRzyaIlNk.jpeg"
+  },
+  "notes": "Fleet names, seat counts and vehicle specification groups use the original BYJH pages. The approved scroll vehicle illustration is retained.",
+  "specifications_retrieved": "2026-09-06"
+}

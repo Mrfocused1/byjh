@@ -1,0 +1,52 @@
+/* BYJH's own mark and photography within the approved journey layout. */
+.byjh-brand {flex-direction: row; align-items: center; gap: 18px;}
+.byjh-brand img {width: 52px; height: 58px; object-fit: contain; flex: none;}
+.byjh-brand span {font-size: 9px; letter-spacing: .2em; line-height: 1.8;}
+.footer-top .byjh-brand img {width: 60px; height: 66px;}
+.heading-logo {display: block; width: auto; height: .95em; min-height: 52px; max-width: 100%; object-fit: contain; object-position: left center; margin-top: .08em;}
+.world-copy .heading-logo {filter: brightness(0); opacity: 1;}
+.experience .body-copy {color: #fff;}
+.hero-watermark {font-size: 30vw; top: -10%;}
+.menu-secondary {display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 28px; font-size: 13px;}
+.menu-secondary a {padding: 6px 0; border-bottom: 1px solid var(--line);}
+.fleet-image {display: block; position: relative; width: 100%; padding: 0; text-align: left; overflow: hidden; margin-bottom: 24px; flex-shrink: 0; background: #242424;}
+.fleet-image img {width: 100%; height: 220px; object-fit: cover;}
+.fleet-image.image-pending > img, .fleet-image.image-failed > img {opacity: 0;}
+.image-loading {position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; background: #1c1c1b; color: #b9b9b1; font-size: 12px; pointer-events: none;}
+.image-loading::before {content: ''; width: 46px; height: 51px; background: url('/assets/byjh/logo-light.png') center / contain no-repeat; animation: byjh-loading-pulse 1.5s ease-in-out infinite;}
+@keyframes byjh-loading-pulse {0%,100% {opacity: .3;} 50% {opacity: .95;}}
+.image-failed .image-loading::before, .motion-off .image-loading::before {animation: none; opacity: .65;}
+@media (prefers-reduced-motion: reduce) {.image-loading::before {animation: none; opacity: .65;}}
+.fleet-panel .eyebrow {margin-bottom: 12px;}
+.fleet-panel h3 {font-size: clamp(25px, 2.7vw, 38px);}
+.horizontal-enabled .fleet-image img {height: clamp(105px, 19svh, 230px);}
+.horizontal-enabled .fleet-image {margin-bottom: 20px;}
+.horizontal-enabled .fleet-panel h3 {font-size: clamp(25px, 2.7vw, 38px); margin-bottom: 10px;}
+.horizontal-enabled .fleet-panel .eyebrow {font-size: 10px; letter-spacing: .1em;}
+.horizontal-enabled .fleet-panel .fleet-spec {font-size: 15px; line-height: 1.45;}
+.cabin-dialog .text-link {display: flex; width: fit-content; margin-top: 18px; font-size: 11px;}
+@media (max-width: 760px) {
+  .byjh-brand {gap: 12px;}
+  .byjh-brand img {width: 43px; height: 48px;}
+  .byjh-brand span {font-size: 7px; letter-spacing: .15em;}
+  .footer-top .byjh-brand img {width: 46px; height: 51px;}
+  .footer-top .byjh-brand span {font-size: 6px; letter-spacing: .13em;}
+  .hero h1 span:first-child {font-size: 16vw;}
+  .hero h1 span:last-child {font-size: 17.3vw;}
+  .hero-watermark {font-size: 39vw; top: 18%;}
+  .hero-copy > .eyebrow {font-size: 9px; letter-spacing: .18em;}
+  .fleet-panel h3, .horizontal-enabled .fleet-panel h3 {font-size: 29px;}
+  .horizontal-enabled .fleet-image img {height: clamp(115px, 22svh, 220px);}
+  .horizontal-enabled .fleet-panel .eyebrow {font-size: 9px; letter-spacing: .1em; margin-bottom: 10px;}
+}
+@media (max-height: 700px) and (min-height: 560px) {
+  .horizontal-enabled .fleet-image {margin-bottom: 12px;}
+  .horizontal-enabled .fleet-image img {height: 16svh;}
+  .horizontal-enabled .fleet-panel .eyebrow {font-size: 9px; margin-bottom: 8px;}
+  .horizontal-enabled .fleet-panel h3 {font-size: 26px; margin-bottom: 8px;}
+  .horizontal-enabled .fleet-panel .fleet-spec {font-size: 14px;}
+}
+@media (max-width: 360px) {
+  .byjh-brand span {font-size: 6px;}
+  .horizontal-enabled .fleet-panel h3 {font-size: 25px;}
+}
