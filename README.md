@@ -52,6 +52,8 @@ node --test tests/vehicle-motion.test.cjs
 
 ## Deploy elsewhere
 
+For Vercel, import this repository with the root directory left at the repository root. The included `vercel.json` sets the output directory to `dist`; no build command is required.
+
 Publish `dist/` as the web root on a static host. URLs such as `/assets/`, `/gallery/`, and `/contact/` are root-relative. A host mounted at a subdirectory, such as a default GitHub Pages project URL, needs corresponding URL changes or a custom domain served at the root.
 
 Uploading this repository does not enable GitHub Pages or change the existing live site. The `.openai/hosting.json` file is only needed for the existing ChatGPT Sites deployment and is not required by other static hosts.
