@@ -8,6 +8,8 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const smooth = (v) => { const t = clamp(v); return t * t * (3 - 2 * t); };
   let motion = window.BYJH.motion;
+  const touchViewport = matchMedia('(hover: none) and (pointer: coarse)');
+  let viewportWidth = innerWidth, viewportHeight = innerHeight;
   const journey = $('#journey');
   const road = $('#road');
   const surface = $('.road-surface');
@@ -43,13 +45,13 @@
   function measure() {
     const width = journey.clientWidth;
     const mobile = width <= 760;
-    const horizontalEnabled = motion && innerHeight >= 560;
+    const horizontalEnabled = motion && viewportHeight >= 560;
     document.body.classList.toggle('horizontal-enabled', horizontalEnabled);
     const horizontalPadding = parseFloat(getComputedStyle(perspective).paddingTop);
     const horizontalMax = horizontalEnabled ? Math.max(0, horizontalTrack.scrollWidth - horizontalWindow.clientWidth) : 0;
-    const horizontalLead = Math.max(160, Math.min(280, innerHeight * .25));
-    const horizontalSpan = Math.max(horizontalMax, innerHeight * 1.6);
-    const horizontalTail = Math.max(140, innerHeight * .2);
+    const horizontalLead = Math.max(160, Math.min(280, viewportHeight * .25));
+    const horizontalSpan = Math.max(horizontalMax, viewportHeight * 1.6);
+    const horizontalTail = Math.max(140, viewportHeight * .2);
     const horizontalHeight = horizontalPadding + horizontalSticky.offsetHeight + horizontalLead + horizontalSpan + horizontalTail;
     const horizontalHeightValue = `${Math.ceil(horizontalHeight)}px`;
     if (perspective.style.getPropertyValue('--horizontal-total') !== horizontalHeightValue) {
@@ -71,7 +73,7 @@
     const exitRoadY = exitStartY + exitRadius;
     // Leave enough road beyond the viewport for the entire rotated sprite.
     const exitX = width + rw * 3.3;
-    const exitScrollSpan = Math.max(300, Math.min(650, innerHeight * .65));
+    const exitScrollSpan = Math.max(300, Math.min(650, viewportHeight * .65));
     const bend = mobile ? 84 : Math.min(150, width * .14);
     const startY = 52;
     // A single continuous road enters from the left, follows the cabin on the
@@ -108,8 +110,8 @@
       exitStartY, exitScrollSpan,
       exitStartLength: sampledDistanceForY(exitStartY),
       // Start the side-on entrance only after the overhead vehicle has left.
-      profileStart: top + exitStartY + exitScrollSpan - innerHeight * .57,
-      profileSpan: Math.max(220, innerHeight * .40),
+      profileStart: top + exitStartY + exitScrollSpan - viewportHeight * .57,
+      profileSpan: Math.max(220, viewportHeight * .40),
       horizontal: {
         enabled: horizontalEnabled,
         pinStart: top + pivotTop + horizontalPadding,
@@ -120,11 +122,11 @@
         stops: horizontalPanels.map(panel => Math.min(panel.offsetLeft, horizontalMax)),
         wordTravel: Math.max(0, sideWord.scrollWidth - width + width * .1)
       },
-      endScroll: document.documentElement.scrollHeight - innerHeight,
+      endScroll: document.documentElement.scrollHeight - viewportHeight,
       chapterTops: chapters.map(el => ({ top: el.getBoundingClientRect().top + scrollY, label: el.dataset.chapter })),
       photos: $$('.cabin-photo img,.occasion-photo img').map(el => ({ el, top: el.parentElement.getBoundingClientRect().top + scrollY, height: el.parentElement.clientHeight }))
     };
-    targetLength = distanceForY(renderedScroll + innerHeight * .57 - top);
+    targetLength = distanceForY(renderedScroll + viewportHeight * .57 - top);
     renderedLength = targetLength;
     vehicleMotion.rebase(renderedScroll);
     storyMotion.rebase(actualScroll);
@@ -181,7 +183,7 @@
     chapterPercent.textContent = `${Math.round(totalProgress * 100)}%`;
     indicator.classList.toggle('visible', motion && y > metrics.top - 170 && y < metrics.horizontal.pinStart - 160 && y < metrics.endScroll - 170);
     let active = metrics.chapterTops[0];
-    for (const chapter of metrics.chapterTops) if (chapter.top <= y + innerHeight * .48) active = chapter;
+    for (const chapter of metrics.chapterTops) if (chapter.top <= y + viewportHeight * .48) active = chapter;
     const parts = active.label.split(' / ');
     chapterNumber.textContent = parts[0]; chapterLabel.textContent = parts[1];
 
@@ -205,7 +207,7 @@
     if (horizontalChapter.textContent !== panelLabel) horizontalChapter.textContent = panelLabel;
     horizontalPrevious.disabled = nearestPanel === 0;
     horizontalNext.disabled = nearestPanel === horizontalPanels.length - 1;
-    targetLength = distanceForY(y + innerHeight * .57 - metrics.top);
+    targetLength = distanceForY(y + viewportHeight * .57 - metrics.top);
     renderedLength = lerp(renderedLength, targetLength, motion ? Math.min(1, ease * 1.45) : 1);
     const point = surface.getPointAtLength(renderedLength);
     const before = surface.getPointAtLength(Math.max(0, renderedLength - 4));
@@ -215,7 +217,7 @@
     const storySteering = storyMotion.step(actualScroll, 0, elapsed, motion);
     traveller.style.transform = `translate3d(${point.x}px,${point.y}px,0) rotate(${steering.heading}deg)`;
     profileVehicle.style.setProperty('--profile-yaw', `${storySteering.yaw}deg`);
-    const entered = smooth((y + innerHeight * .65 - metrics.top + 40) / 150);
+    const entered = smooth((y + viewportHeight * .65 - metrics.top + 40) / 150);
     traveller.style.opacity = motion ? String(entered) : '0';
     // Both views enter/exit by travelling beyond their clipping boundary.
     // Neither vehicle nor road dissolves while still on screen.
@@ -235,7 +237,7 @@
       const heroShift = clamp(y / Math.max(1, metrics.top), 0, 1);
       if (heroVehicle) heroVehicle.style.transform = `translate(calc(-50% + ${heroShift * 50}px),calc(-50% + ${heroShift * 24}px))`;
       for (const photo of metrics.photos) {
-        const photoProgress = clamp((y + innerHeight - photo.top) / (innerHeight + photo.height));
+        const photoProgress = clamp((y + viewportHeight - photo.top) / (viewportHeight + photo.height));
         photo.el.style.transform = `translate3d(0,${-photoProgress * photo.height * .075}px,0)`;
       }
     } else {
@@ -289,11 +291,23 @@
   }
   window.addEventListener('byjh:motion', event => { motion = event.detail; updateMotion(); });
   window.addEventListener('scroll', () => { actualScroll = scrollPosition(); requestRender(); }, { passive: true });
-  window.addEventListener('resize', () => { actualScroll = scrollPosition(); geometryDirty = true; requestRender(); }, { passive: true });
+  window.addEventListener('resize', () => {
+    actualScroll = scrollPosition();
+    // Mobile browser chrome changes innerHeight during a swipe. Rebuilding the
+    // scroll range at that point moves the fleet even at the same scrollY.
+    // Width changes (including rotation) and desktop resizes still remeasure.
+    if (innerWidth !== viewportWidth || (!touchViewport.matches && innerHeight !== viewportHeight)) {
+      viewportWidth = innerWidth;
+      viewportHeight = innerHeight;
+      geometryDirty = true;
+    }
+    requestRender();
+  }, { passive: true });
   window.addEventListener('pageshow', () => { actualScroll = scrollPosition(); renderedScroll = actualScroll; geometryDirty = true; requestRender(); });
   new ResizeObserver(() => { geometryDirty = true; requestRender(); }).observe(journey);
   document.fonts.ready.then(() => { geometryDirty = true; requestRender(); });
-  $$('img').forEach(img => img.addEventListener('load', () => { geometryDirty = true; requestRender(); }));
+  // Images reserve their dimensions. ResizeObserver handles actual layout
+  // changes without rebuilding the road each time a lazy image decodes.
 
   $$('a[href="#services"],a[href="/#services"]').forEach(link => link.addEventListener('click', event => {
     event.preventDefault();

@@ -1,9 +1,10 @@
 /* Every Journey: the vehicle stays at road level while the story passes below. */
 body .horizontal-story {
+  --horizontal-padding: 330px;
   --profile-height: clamp(220px, 38svh, 360px);
   --profile-width: min(52vw, 76svh, 850px);
   height: auto;
-  padding-top: 330px;
+  padding-top: var(--horizontal-padding);
 }
 .horizontal-story .horizontal-sticky {
   position: relative;
@@ -127,7 +128,12 @@ body .horizontal-story {
 .horizontal-arrows button:hover {background: #343430;}
 .horizontal-arrows button:disabled {opacity: .25; cursor: default;}
 
-body.horizontal-enabled .horizontal-story {height: var(--horizontal-total, calc(100svh + 330px));}
+body.horizontal-enabled .horizontal-story {
+  height: var(--horizontal-total, calc(100svh + var(--horizontal-padding)));
+  /* Safari's toolbar can reveal more than 100svh during a swipe. Keep that
+     extra area dark without resizing the pinned layout or its scroll range. */
+  background: linear-gradient(var(--paper) var(--horizontal-padding), #111 var(--horizontal-padding));
+}
 .horizontal-enabled .horizontal-story .horizontal-sticky {
   position: sticky;
   top: 0;
@@ -164,7 +170,7 @@ body.horizontal-enabled .horizontal-story {height: var(--horizontal-total, calc(
 .horizontal-enabled .service-panel p {font-size: 17px; line-height: 1.45;}
 
 @media (max-width: 760px) {
-  body .horizontal-story {padding-top: 260px; --profile-height: clamp(200px, 31svh, 290px); --profile-width: min(88vw, 420px, 90svh);}
+  body .horizontal-story {--horizontal-padding: 260px; --profile-height: clamp(200px, 31svh, 290px); --profile-width: min(88vw, 420px, 90svh);}
   .profile-labels {inset: 23px 22px auto; gap: 12px;}
   .profile-labels .eyebrow {font-size: 9px; letter-spacing: .12em;}
   .horizontal-hint {max-width: 110px; white-space: normal; text-align: right;}
