@@ -41,6 +41,30 @@
   const vehicleMotion = window.BYJHVehicleMotion.create(renderedScroll);
   const storyMotion = window.BYJHVehicleMotion.create(actualScroll);
   let targetLength = 0, renderedLength = 0, geometryDirty = false;
+  const scrollTimeline = typeof ScrollTimeline === 'function' && CSS.supports('animation-range-start', '1px')
+    ? new ScrollTimeline({ source: document.scrollingElement, axis: 'block' }) : null;
+  let horizontalAnimations = [];
+
+  function animateHorizontal() {
+    horizontalAnimations.forEach(animation => animation.cancel());
+    horizontalAnimations = [];
+    const horizontal = metrics.horizontal;
+    if (!scrollTimeline || !horizontal.enabled) return;
+    const timing = {
+      timeline: scrollTimeline,
+      rangeStart: `${horizontal.start}px`,
+      rangeEnd: `${horizontal.start + horizontal.span}px`,
+      duration: 'auto', fill: 'both', easing: 'linear'
+    };
+    // The compositor follows native scrolling even between JavaScript frames.
+    // Keep all passing scenery on the same timeline, with no catch-up easing.
+    horizontalAnimations = [
+      horizontalTrack.animate({ transform: ['translate3d(0,0,0)', `translate3d(${-horizontal.max}px,0,0)`] }, timing),
+      sideWord.animate({ transform: ['translate3d(0,0,0)', `translate3d(${-horizontal.wordTravel}px,0,0)`] }, timing),
+      horizontalMeter.animate({ transform: ['scaleX(0)', 'scaleX(1)'] }, timing),
+      sideVehicle.animate({ translate: ['0px 0px', `${metrics.width * .065}px 0px`] }, timing)
+    ];
+  }
 
   function measure() {
     const width = journey.clientWidth;
@@ -130,6 +154,7 @@
     renderedLength = targetLength;
     vehicleMotion.rebase(renderedScroll);
     storyMotion.rebase(actualScroll);
+    animateHorizontal();
     geometryDirty = false;
   }
 
@@ -180,12 +205,14 @@
     const y = renderedScroll;
     const totalProgress = clamp(y / Math.max(1, metrics.endScroll));
     progressBar.style.transform = `scaleX(${totalProgress})`;
-    chapterPercent.textContent = `${Math.round(totalProgress * 100)}%`;
+    const percent = `${Math.round(totalProgress * 100)}%`;
+    if (chapterPercent.textContent !== percent) chapterPercent.textContent = percent;
     indicator.classList.toggle('visible', motion && y > metrics.top - 170 && y < metrics.horizontal.pinStart - 160 && y < metrics.endScroll - 170);
     let active = metrics.chapterTops[0];
     for (const chapter of metrics.chapterTops) if (chapter.top <= y + viewportHeight * .48) active = chapter;
     const parts = active.label.split(' / ');
-    chapterNumber.textContent = parts[0]; chapterLabel.textContent = parts[1];
+    if (chapterNumber.textContent !== parts[0]) chapterNumber.textContent = parts[0];
+    if (chapterLabel.textContent !== parts[1]) chapterLabel.textContent = parts[1];
 
     // The pinned scene follows native scrolling directly. A second easing pass
     // after the browser's own momentum made the scene drift and catch up.
@@ -193,20 +220,25 @@
     const horizontal = metrics.horizontal;
     const horizontalProgress = horizontal.enabled ? clamp((actualScroll - horizontal.start) / horizontal.span) : 0;
     const horizontalX = horizontalProgress * horizontal.max;
-    horizontalTrack.style.transform = horizontal.enabled ? `translate3d(${-horizontalX}px,0,0)` : 'none';
-    sideWord.style.transform = horizontal.enabled ? `translate3d(${-horizontalProgress * horizontal.wordTravel}px,0,0)` : 'none';
-    horizontalMeter.style.transform = `scaleX(${horizontalProgress})`;
+    if (!horizontalAnimations.length) {
+      horizontalTrack.style.transform = horizontal.enabled ? `translate3d(${-horizontalX}px,0,0)` : 'none';
+      sideWord.style.transform = horizontal.enabled ? `translate3d(${-horizontalProgress * horizontal.wordTravel}px,0,0)` : 'none';
+      horizontalMeter.style.transform = `scaleX(${horizontalProgress})`;
+    }
     let nearestPanel = 0;
     horizontal.stops.forEach((stop, i) => {
       if (Math.abs(stop - horizontalX) < Math.abs(horizontal.stops[nearestPanel] - horizontalX)) nearestPanel = i;
     });
+    // Wide screens can show several cards at the final clamped stop.
+    if (horizontal.max > 0 && horizontalX >= horizontal.max - .5) nearestPanel = horizontalPanels.length - 1;
     activeHorizontalPanel = nearestPanel;
     const counter = `${String(nearestPanel + 1).padStart(2, '0')} / ${String(horizontalPanels.length).padStart(2, '0')}`;
     if (horizontalCount.textContent !== counter) horizontalCount.textContent = counter;
     const panelLabel = `04 / ${horizontalPanels[nearestPanel].dataset.panelLabel}`;
     if (horizontalChapter.textContent !== panelLabel) horizontalChapter.textContent = panelLabel;
-    horizontalPrevious.disabled = nearestPanel === 0;
-    horizontalNext.disabled = nearestPanel === horizontalPanels.length - 1;
+    const atStart = nearestPanel === 0, atEnd = nearestPanel === horizontalPanels.length - 1;
+    if (horizontalPrevious.disabled !== atStart) horizontalPrevious.disabled = atStart;
+    if (horizontalNext.disabled !== atEnd) horizontalNext.disabled = atEnd;
     targetLength = distanceForY(y + viewportHeight * .57 - metrics.top);
     renderedLength = lerp(renderedLength, targetLength, motion ? Math.min(1, ease * 1.45) : 1);
     const point = surface.getPointAtLength(renderedLength);
@@ -224,7 +256,7 @@
     const spriteWidth = metrics.profileWidth;
     sideVehicle.style.opacity = '1';
     const profileDrift = horizontalProgress * metrics.width * .065;
-    sideVehicle.style.transform = motion ? `translate3d(${-(metrics.width + spriteWidth) * (1 - entrance) + profileDrift}px,0,0)` : 'none';
+    sideVehicle.style.transform = motion ? `translate3d(${-(metrics.width + spriteWidth) * (1 - entrance) + (horizontalAnimations.length ? 0 : profileDrift)}px,0,0)` : 'none';
     // Count both entrance travel and scenery passing the pinned van. Steering
     // mirrors the complete vehicle, including the correctly rolling wheels.
     const rollingDistance = (metrics.width + spriteWidth) * entrance + horizontalX + profileDrift;
@@ -257,11 +289,18 @@
     }
     window.scrollTo({ top: horizontal.start + horizontal.stops[i] / horizontal.max * horizontal.span, behavior });
   }
-  horizontalPrevious.addEventListener('click', () => goToPanel(activeHorizontalPanel - 1));
-  horizontalNext.addEventListener('click', () => goToPanel(activeHorizontalPanel + 1));
+  function adjacentPanel(direction) {
+    let index = clamp(activeHorizontalPanel + direction, 0, horizontalPanels.length - 1);
+    const stops = metrics?.horizontal.stops;
+    if (!stops) return index;
+    while (index > 0 && index < horizontalPanels.length - 1 && stops[index] === stops[activeHorizontalPanel]) index += direction;
+    return index;
+  }
+  horizontalPrevious.addEventListener('click', () => goToPanel(adjacentPanel(-1)));
+  horizontalNext.addEventListener('click', () => goToPanel(adjacentPanel(1)));
   $$('[data-go-panel]').forEach(button => button.addEventListener('click', () => goToPanel(Number(button.dataset.goPanel))));
   horizontalWindow.addEventListener('keydown', event => {
-    const directions = { ArrowLeft: activeHorizontalPanel - 1, ArrowRight: activeHorizontalPanel + 1, Home: 0, End: horizontalPanels.length - 1 };
+    const directions = { ArrowLeft: adjacentPanel(-1), ArrowRight: adjacentPanel(1), Home: 0, End: horizontalPanels.length - 1 };
     if (!(event.key in directions) || event.altKey || event.metaKey || event.ctrlKey) return;
     event.preventDefault();
     goToPanel(directions[event.key]);
@@ -281,7 +320,7 @@
     if (!swipeStart) return;
     const dx = event.clientX - swipeStart.x, dy = event.clientY - swipeStart.y;
     swipeStart = null;
-    if (metrics?.horizontal.enabled && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) goToPanel(activeHorizontalPanel + (dx < 0 ? 1 : -1));
+    if (metrics?.horizontal.enabled && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) goToPanel(adjacentPanel(dx < 0 ? 1 : -1));
   }, { passive: true });
   horizontalWindow.addEventListener('pointercancel', () => { swipeStart = null; }, { passive: true });
   function updateMotion() {

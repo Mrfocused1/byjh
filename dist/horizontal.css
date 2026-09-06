@@ -138,9 +138,8 @@ body.horizontal-enabled .horizontal-story {
   position: sticky;
   top: 0;
   height: 100svh;
-  /* Keep the pinned surface on one stable compositor layer while its contents move. */
-  transform: translateZ(0);
-  will-change: transform;
+  /* Let the browser pin this surface natively. Only the moving children need
+     animated layers; transforming the sticky container adds another offset. */
 }
 .horizontal-enabled .horizontal-window {overflow: clip;}
 .horizontal-enabled .horizontal-track {display: flex; width: max-content; height: 100%; will-change: transform;}

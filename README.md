@@ -42,13 +42,15 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 
 The homepage currently embeds its fleet data in `script#fleet-data`. When changing `fleet-data.json`, update that embedded data too. The gallery markup is static; changes to its metadata file also need to be reflected in `dist/gallery/index.html`.
 
-## Check vehicle motion
+## Check scroll and vehicle motion
 
 With Node.js installed:
 
 ```sh
-node --test tests/vehicle-motion.test.cjs
+node --test tests/*.test.cjs
 ```
+
+For browser checks, make `puppeteer-core` available to Node, set `PUPPETEER_EXECUTABLE_PATH` to a Chrome executable, and run `node tests/homepage-browser.cjs` while the local server is running. Set `BYJH_QA_URL` to test another URL. This covers mobile touch swipes, desktop scrolling, the older-browser fallback, navigation controls, and reduced motion. Mobile emulation uses Chromium; physical iPhone Safari remains a separate visual check.
 
 ## Deploy elsewhere
 
