@@ -29,17 +29,33 @@ const puppeteer = require('puppeteer-core');
         });
       });
       await page.waitForFunction(() => Math.abs(document.querySelector('.horizontal-sticky').getBoundingClientRect().top) < 1);
+      await page.waitForFunction(() => {
+        const progress = new DOMMatrixReadOnly(getComputedStyle(document.querySelector('.page-progress i')).transform).a;
+        return Math.abs(progress - scrollY / (document.documentElement.scrollHeight - innerHeight)) * innerWidth < .1;
+      });
       const native = await page.evaluate(() => document.querySelector('.horizontal-track').getAnimations().length);
       assert.equal(native, mode === 'fallback' ? 0 : 1, `${mode}: expected scroll animation path`);
       const cdp = await page.createCDPSession();
+      const { root } = await cdp.send('DOM.getDocument', { depth: 0 });
+      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '.profile-vehicle' });
+      const { node } = await cdp.send('DOM.describeNode', { nodeId });
+      let layers = [];
+      cdp.on('LayerTree.layerTreeDidChange', event => {
+        layers = event.layers || [];
+      });
+      const vehiclePaints = () => layers.filter(layer => layer.backendNodeId === node.backendNodeId).reduce((sum, layer) => sum + layer.paintCount, 0);
+      await cdp.send('LayerTree.enable');
       for (const direction of [-1, 1]) {
+        const paintsBefore = vehiclePaints();
         await page.evaluate(() => {
           window.scrollFrames = [];
           window.recordScroll = true;
           function sample(t) {
             if (!window.recordScroll) return;
             const track = document.querySelector('.horizontal-track').getBoundingClientRect();
-            scrollFrames.push({ t, x: track.x, y: track.y, scroll: scrollY });
+            const progress = new DOMMatrixReadOnly(getComputedStyle(document.querySelector('.page-progress i')).transform).a;
+            const expected = scrollY / (document.documentElement.scrollHeight - innerHeight);
+            scrollFrames.push({ t, x: track.x, y: track.y, scroll: scrollY, progressError: Math.abs(progress - expected) * innerWidth });
             requestAnimationFrame(sample);
           }
           requestAnimationFrame(sample);
@@ -56,6 +72,12 @@ const puppeteer = require('puppeteer-core');
         assert.ok(verticalRange < 1, `${mode}: pinned content bounced vertically by ${verticalRange}px`);
         const deltas = frames.slice(1).map((frame, i) => ({ dx: frame.x - frames[i].x, dt: frame.t - frames[i].t }));
         assert.ok(deltas.every(delta => delta.dx * direction >= -1), `${mode}: scenery reversed during one-direction scrolling`);
+        const progressError = Math.max(...frames.map(frame => frame.progressError));
+        assert.ok(layers.some(layer => layer.backendNodeId === node.backendNodeId), 'must observe the vehicle layer');
+        const paints = vehiclePaints() - paintsBefore;
+        console.log(`${mode}: progress error ${progressError.toFixed(3)}px; vehicle repaints ${paints}`);
+        assert.ok(progressError < .25, `${mode}: header progress trails native scroll by ${progressError}px`);
+        assert.ok(paints <= 3, `${mode}: rotating wheels repainted the vehicle ${paints} times`);
         console.log(`${mode} ${direction < 0 ? 'forward' : 'reverse'}: no bounce; max frame gap ${Math.max(...deltas.map(d => d.dt)).toFixed(1)} ms`);
       }
       await page.locator('#horizontal-next').click();

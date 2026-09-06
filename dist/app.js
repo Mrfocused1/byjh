@@ -17,6 +17,7 @@
   const heroVehicle = $('.hero-vehicle');
   const sideVehicle = $('#side-vehicle');
   const profileVehicle = $('.profile-vehicle');
+  const profileWheels = $$('.profile-wheel');
   const perspective = $('#perspective');
   const horizontalSticky = $('.horizontal-sticky');
   const horizontalWindow = $('.horizontal-window');
@@ -43,6 +44,10 @@
   let targetLength = 0, renderedLength = 0, geometryDirty = false;
   const scrollTimeline = typeof ScrollTimeline === 'function' && CSS.supports('animation-range-start', '1px')
     ? new ScrollTimeline({ source: document.scrollingElement, axis: 'block' }) : null;
+  const progressAnimation = scrollTimeline ? progressBar.animate(
+    { transform: ['scaleX(0)', 'scaleX(1)'] },
+    { timeline: scrollTimeline, duration: 'auto', fill: 'both', easing: 'linear' }
+  ) : null;
   let horizontalAnimations = [];
 
   function animateHorizontal() {
@@ -203,8 +208,9 @@
     renderedScroll = lerp(renderedScroll, actualScroll, ease);
     if (Math.abs(renderedScroll - actualScroll) < .12) renderedScroll = actualScroll;
     const y = renderedScroll;
-    const totalProgress = clamp(y / Math.max(1, metrics.endScroll));
-    progressBar.style.transform = `scaleX(${totalProgress})`;
+    // Progress reports native scroll position, not the vehicle's eased pose.
+    const totalProgress = clamp(actualScroll / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+    if (!progressAnimation) progressBar.style.transform = `scaleX(${totalProgress})`;
     const percent = `${Math.round(totalProgress * 100)}%`;
     if (chapterPercent.textContent !== percent) chapterPercent.textContent = percent;
     indicator.classList.toggle('visible', motion && y > metrics.top - 170 && y < metrics.horizontal.pinStart - 160 && y < metrics.endScroll - 170);
@@ -248,7 +254,7 @@
     const steering = vehicleMotion.step(y, angle, elapsed, motion);
     const storySteering = storyMotion.step(actualScroll, 0, elapsed, motion);
     traveller.style.transform = `translate3d(${point.x}px,${point.y}px,0) rotate(${steering.heading}deg)`;
-    profileVehicle.style.setProperty('--profile-yaw', `${storySteering.yaw}deg`);
+    profileVehicle.style.transform = `translateX(-50%) rotateY(${storySteering.yaw}deg)`;
     const entered = smooth((y + viewportHeight * .65 - metrics.top + 40) / 150);
     traveller.style.opacity = motion ? String(entered) : '0';
     // Both views enter/exit by travelling beyond their clipping boundary.
@@ -262,7 +268,9 @@
     const rollingDistance = (metrics.width + spriteWidth) * entrance + horizontalX + profileDrift;
     const tyreRadius = Math.max(1, spriteWidth * 40 / 768);
     const wheelAngle = storyMotion.roll(rollingDistance, tyreRadius, motion);
-    profileVehicle.style.setProperty('--wheel-angle', `${wheelAngle}deg`);
+    // Rotate the wheel layers directly. An inherited custom property on the
+    // vehicle invalidates its photographic background on every wheel update.
+    for (const wheel of profileWheels) wheel.style.transform = `translate(-50%, -50%) rotate(${wheelAngle}deg)`;
     profileVehicle.style.opacity = '1';
     road.style.opacity = '1';
     if (motion) {

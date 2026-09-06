@@ -1,4 +1,5 @@
 /* Every Journey: the vehicle stays at road level while the story passes below. */
+.page-progress i {will-change: transform;}
 body .horizontal-story {
   --horizontal-padding: 330px;
   --profile-height: clamp(220px, 38svh, 360px);
@@ -59,7 +60,7 @@ body .horizontal-story {
   bottom: calc(var(--profile-width) * -.157);
   filter: drop-shadow(0 2px 2px #0003);
   /* Orthographic turning keeps the van's scale steady as it changes direction. */
-  transform: translateX(-50%) rotateY(var(--profile-yaw, 0deg));
+  transform: translateX(-50%) rotateY(0deg);
   transform-origin: 50% 68.5546875%;
   backface-visibility: visible;
   will-change: transform;
@@ -75,7 +76,7 @@ body .horizontal-story {
   overflow: hidden;
   clip-path: circle(50%);
   transform-origin: 50% 50%;
-  transform: translate(-50%, -50%) rotate(var(--wheel-angle, 0deg));
+  transform: translate(-50%, -50%) rotate(0deg);
   pointer-events: none;
   will-change: transform;
 }
