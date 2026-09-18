@@ -1,4 +1,4 @@
-/* Enquiry preparation. Delivery stays explicit until an inbox is connected. */
+/* Enquiry review and delivery through /api/contact. */
 (() => {
   'use strict';
   const form = document.querySelector('#contact-form');
@@ -10,6 +10,9 @@
   const date = document.querySelector('#contact-date');
   const summary = document.querySelector('#contact-summary');
   const status = document.querySelector('#contact-status');
+  const send = document.querySelector('#send-enquiry');
+  const note = document.querySelector('#review-note');
+  let payload = null;
   const today = new Date();
   date.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
@@ -42,6 +45,7 @@
         `Duration: ${data.get('duration') || 'To be confirmed'}`);
     }
     lines.push('', 'Message:', data.get('message').trim());
+    payload = Object.fromEntries(data.entries());
     summary.value = lines.join('\n');
     form.hidden = true;
     review.hidden = false;
@@ -54,10 +58,29 @@
     document.querySelector('#contact-name').focus({ preventScroll: true });
     form.scrollIntoView({ behavior: window.BYJH.motion ? 'smooth' : 'instant', block: 'start' });
   });
+  send.addEventListener('click', async () => {
+    send.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      note.textContent = 'Thank you. Your enquiry has been sent and we will be in touch shortly.';
+      status.textContent = 'Enquiry sent.';
+      document.querySelector('#edit-enquiry').hidden = true;
+      form.reset(); updateType();
+    } catch {
+      send.disabled = false;
+      status.textContent = 'Sorry, we could not send your enquiry. Please copy it and email info@byjh.co.uk.';
+    }
+  });
   document.querySelector('#copy-enquiry').addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(summary.value);
-      status.textContent = 'Enquiry copied. It has not been sent.';
+      status.textContent = 'Enquiry copied to your clipboard.';
     } catch {
       summary.focus(); summary.select();
       status.textContent = 'Select and copy your enquiry above.';
