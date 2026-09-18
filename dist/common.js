@@ -162,6 +162,7 @@
     let manuallyPaused = false, explicitPlay = false, visible = true, playPending = false;
     hero.muted = true; hero.defaultMuted = true;
     function syncButton() {
+      if (!play) return;
       play.textContent = hero.paused ? 'PLAY FILM ▷' : 'PAUSE FILM Ⅱ';
       play.setAttribute('aria-label', hero.paused ? 'Play background film' : 'Pause background film');
     }
@@ -173,13 +174,13 @@
         hero.play().catch(() => {}).finally(() => { playPending = false; syncButton(); });
       }
     };
-    play.addEventListener('click', () => {
+    if (play) play.addEventListener('click', () => {
       if (hero.paused) { manuallyPaused = false; explicitPlay = true; }
       else { manuallyPaused = true; explicitPlay = false; }
       updateHero();
     });
     hero.addEventListener('play', syncButton); hero.addEventListener('pause', syncButton);
-    hero.addEventListener('error', () => { play.hidden = true; });
+    hero.addEventListener('error', () => { if (play) play.hidden = true; });
     new IntersectionObserver(entries => { visible = entries[0].isIntersecting; updateHero(); },{threshold:.1}).observe(hero);
     document.addEventListener('visibilitychange', updateHero);
     window.addEventListener('byjh:motion', () => { if (!motion) explicitPlay = false; updateHero(); });
