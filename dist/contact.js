@@ -1,4 +1,4 @@
-/* Enquiry review and delivery through /api/contact. */
+/* Enquiry review; sending opens the visitor's email app addressed to BYJH. */
 (() => {
   'use strict';
   const form = document.querySelector('#contact-form');
@@ -11,8 +11,7 @@
   const summary = document.querySelector('#contact-summary');
   const status = document.querySelector('#contact-status');
   const send = document.querySelector('#send-enquiry');
-  const note = document.querySelector('#review-note');
-  let payload = null;
+  const RECIPIENTS = ['info@byjh.co.uk', 'remmie@byjh.co.uk'];
   const today = new Date();
   date.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
@@ -45,7 +44,6 @@
         `Duration: ${data.get('duration') || 'To be confirmed'}`);
     }
     lines.push('', 'Message:', data.get('message').trim());
-    payload = Object.fromEntries(data.entries());
     summary.value = lines.join('\n');
     form.hidden = true;
     review.hidden = false;
@@ -58,24 +56,10 @@
     document.querySelector('#contact-name').focus({ preventScroll: true });
     form.scrollIntoView({ behavior: window.BYJH.motion ? 'smooth' : 'instant', block: 'start' });
   });
-  send.addEventListener('click', async () => {
-    send.disabled = true;
-    status.textContent = 'Sending…';
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) throw new Error(String(response.status));
-      note.textContent = 'Thank you. Your enquiry has been sent and we will be in touch shortly.';
-      status.textContent = 'Enquiry sent.';
-      document.querySelector('#edit-enquiry').hidden = true;
-      form.reset(); updateType();
-    } catch {
-      send.disabled = false;
-      status.textContent = 'Sorry, we could not send your enquiry. Please copy it and email info@byjh.co.uk.';
-    }
+  send.addEventListener('click', () => {
+    const subject = `BYJH enquiry — ${type.selectedOptions[0].textContent}`;
+    location.href = `mailto:${RECIPIENTS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary.value)}`;
+    status.textContent = 'Your email app should now be open. Press send there to complete your enquiry.';
   });
   document.querySelector('#copy-enquiry').addEventListener('click', async () => {
     try {

@@ -19,7 +19,7 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 - Contact: enquiry form with validation, vehicle preselection, enquiry review, and copying.
 - Responsive layouts, keyboard-accessible dialogs, and support for the operating system's reduced-motion preference.
 
-**Contact form status:** email delivery is not connected. The current form prepares and copies an enquiry and explicitly tells visitors that it has not been sent. Connect an email service or backend before enabling online submission.
+**Contact form status:** the review step's Send button opens the visitor's email app with an enquiry addressed to info@byjh.co.uk and remmie@byjh.co.uk. Nothing is sent from the server; for automatic delivery, add an email service or backend.
 
 ## Project structure
 
