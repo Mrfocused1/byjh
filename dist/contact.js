@@ -22,7 +22,7 @@
   const params = new URLSearchParams(location.search);
   const requestedVehicle = params.get('vehicle');
   if ([...vehicle.options].some(option => option.value === requestedVehicle)) vehicle.value = requestedVehicle;
-  if (['journey', 'custom-build', 'general'].includes(params.get('enquiry'))) type.value = params.get('enquiry');
+  if (['journey', 'custom-build', 'membership', 'partnership', 'general'].includes(params.get('enquiry'))) type.value = params.get('enquiry');
   type.addEventListener('change', updateType);
   updateType();
 

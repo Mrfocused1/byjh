@@ -15,6 +15,8 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 ## Pages and features
 
 - Home: uploaded hero video, a Sprinter following the road on scroll, direction changes, rotating wheels, horizontal fleet storytelling, and vehicle specification dialogs.
+- Members: the homepage road winds down the page, switching sides between members; the Sprinter follows it on scroll and uncovers each member as it drives past.
+- Partners: two rows of partner logos form the lane lines of a road the Sprinter drives along; they run faster while scrolling and reverse when scrolling back up. A full logo grid follows.
 - Gallery: photographs and eight videos, with an image and video viewer.
 - Contact: enquiry form with validation, vehicle preselection, enquiry review, and copying.
 - Responsive layouts, keyboard-accessible dialogs, and support for the operating system's reduced-motion preference.
@@ -26,6 +28,10 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 | Path | Contents |
 | --- | --- |
 | `dist/index.html` | Homepage and embedded vehicle specifications |
+| `dist/members/index.html` | Members page; each `article.member` is one member; sides alternate automatically |
+| `dist/members.js`, `dist/members.css` | Members road, reveal and chapter indicator |
+| `dist/partners/index.html` | Partners page; the partner list (`ul.partner-grid`) also feeds the road |
+| `dist/partners.js`, `dist/partners.css` | Partner logo road and grid |
 | `dist/gallery/index.html` | Gallery page |
 | `dist/contact/index.html` | Contact page |
 | `dist/app.js` | Homepage road and horizontal scroll behaviour |

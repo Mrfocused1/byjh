@@ -1,0 +1,27 @@
+/* Members: the homepage road, winding down the page. Each member is revealed as the van drives past. */
+.members-intro {display:grid; grid-template-columns:1.4fr 1fr; gap:7vw; align-items:end; padding-bottom:40px;}
+
+.members-journey {padding-top:120px;}
+.member {position:relative; min-height:max(560px, 72svh); display:flex; flex-direction:column; justify-content:center; padding-top:60px; padding-bottom:60px;}
+.member-reveal {max-width:760px;}
+.path-clear-left .member-reveal {margin-left:auto; text-align:right;}
+.member-no {color:var(--muted);}
+.member-name {font-size:clamp(48px, 7.2vw, 112px); margin:24px 0 22px; text-transform:uppercase;}
+.member-sector {color:var(--muted);}
+.member-since {display:inline-block; margin-top:28px; padding:12px 0; border-top:1px solid var(--line); min-width:min(100%, 320px); font-size:12px; letter-spacing:.16em; text-transform:uppercase;}
+.member-open .pill {margin-top:34px;}
+.member-open .member-name {margin-top:28px;}
+.road-exit {height:320px;}
+
+/* The van uncovers each member from the top as it drives alongside. Without script everything is simply shown. */
+.members-ready .member-reveal {clip-path:inset(0 0 calc(100% - var(--reveal, 0) * 100%) 0); opacity:calc(.15 + var(--reveal, 0) * .85); transform:translateY(calc((1 - var(--reveal, 0)) * 18px));}
+.members-ready.motion-off .member-reveal {clip-path:none; opacity:1; transform:none;}
+
+@media (max-width:760px) {
+  .members-intro {display:block; padding-bottom:20px;}
+  .members-journey {padding-top:100px;}
+  .member {min-height:max(460px, 64svh);}
+  .member-name {font-size:clamp(33px, 10vw, 64px); margin:20px 0 16px; letter-spacing:-.058em; overflow-wrap:anywhere;}
+  .member-since {font-size:10px; margin-top:20px;}
+  .road-exit {height:220px;}
+}

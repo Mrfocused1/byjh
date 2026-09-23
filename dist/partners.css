@@ -1,0 +1,61 @@
+/* Partners: two rows of partner logos form the lane lines of a road the van drives along. */
+.partners-intro {display:grid; grid-template-columns:1.4fr 1fr; gap:7vw; align-items:end; padding-bottom:40px;}
+
+/* ---------- The road ---------- */
+.partners-drive {position:relative; height:260svh; margin-top:60px;}
+.drive-sticky {position:sticky; top:0; height:100svh; min-height:520px; display:flex; flex-direction:column; justify-content:center; gap:34px; overflow:hidden;}
+.drive-road {--road-h:clamp(300px, 54svh, 540px); position:relative; height:var(--road-h); display:grid; grid-template-rows:1fr auto 1.15fr auto 1fr;
+  background:#111; border-block:8px solid #30302f;}
+/* Solid edge lines, as on a real carriageway. */
+.drive-road::before, .drive-road::after {content:''; position:absolute; left:0; right:0; height:3px; background:#424240;}
+.drive-road::before {top:14px;} .drive-road::after {bottom:14px;}
+.logo-lane {grid-row:2; position:relative; height:56px; overflow:hidden; display:flex; align-items:center;}
+.lane-bottom {grid-row:4;}
+.logo-track {display:flex; align-items:center; gap:clamp(70px, 8vw, 120px); padding-left:clamp(70px, 8vw, 120px); will-change:transform; flex:none;}
+.logo-track img {height:40px; width:auto; max-width:170px; object-fit:contain; flex:none; filter:brightness(0) invert(1); opacity:.42; transition:opacity .35s;}
+.logo-track img.tall {height:52px;}
+.logo-track img.near {opacity:1;}
+.van-lane {grid-row:3; position:relative;}
+.road-van {position:absolute; left:32%; top:50%; width:0; height:0; will-change:transform;}
+.road-van .overhead-vehicle {width:calc(var(--road-h) * .95); filter:drop-shadow(0 8px 6px #000c);}
+
+.drive-caption {display:flex; align-items:baseline; gap:26px; padding:0 var(--margin);}
+.drive-caption .eyebrow {color:var(--muted);}
+.passing-name {font-size:clamp(26px, 3vw, 44px); letter-spacing:-.05em; line-height:1; text-transform:uppercase;}
+.drive-hint {margin-left:auto;}
+
+/* ---------- The full list ---------- */
+.partners-list {padding:110px var(--margin) 120px;}
+.list-head {margin-bottom:60px;}
+.list-head h2 {margin-top:26px;}
+.partner-grid {list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line);}
+.partner {position:relative; aspect-ratio:1.45; display:grid; place-items:center; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px;}
+.partner img {max-width:58%; max-height:42%; width:auto; height:auto; object-fit:contain; filter:brightness(0); opacity:.82; transition:filter .4s, opacity .4s, transform .4s;}
+.partner span {position:absolute; left:20px; bottom:16px; right:20px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);}
+@media (hover:hover) {
+  .partner:hover img {filter:none; opacity:1; transform:scale(1.04);}
+}
+.partners-end {display:flex; justify-content:space-between; align-items:center; gap:30px; margin-top:90px; padding-top:40px; border-top:1px solid var(--line);}
+.partners-end p {font-size:clamp(22px, 2.4vw, 34px); letter-spacing:-.04em;}
+
+/* Without motion the road is a still picture and the list does the work. */
+.motion-off .partners-drive {height:auto;}
+.motion-off .drive-sticky {position:relative; height:auto; min-height:0; padding:40px 0;}
+.motion-off .drive-hint {display:none;}
+
+@media (max-width:760px) {
+  .partners-intro {display:block; padding-bottom:20px;}
+  .partners-drive {height:220svh; margin-top:30px;}
+  .drive-road {--road-h:clamp(250px, 42svh, 380px);}
+  .logo-lane {height:40px;}
+  .logo-track img {height:26px; max-width:110px;}
+  .logo-track img.tall {height:36px;}
+  .road-van {left:38%;}
+  .drive-caption {flex-wrap:wrap; gap:10px 16px; padding:0 24px;}
+  .drive-hint {margin-left:0; flex-basis:100%;}
+  .partners-list {padding:80px 24px 90px;}
+  .partner-grid {grid-template-columns:repeat(2, minmax(0, 1fr));}
+  .partner {padding:18px;}
+  .partner span {left:12px; bottom:10px; font-size:8px;}
+  .partners-end {flex-direction:column; align-items:flex-start;}
+}
