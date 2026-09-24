@@ -32,8 +32,12 @@
 .partner {position:relative; aspect-ratio:1.45; display:grid; place-items:center; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:28px;}
 .partner img {max-width:58%; max-height:42%; width:auto; height:auto; object-fit:contain; filter:brightness(0); opacity:.82; transition:filter .4s, opacity .4s, transform .4s;}
 .partner span {position:absolute; left:20px; bottom:16px; right:20px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);}
+.partner .partner-colour {position:absolute; opacity:0; pointer-events:none;}
 @media (hover:hover) {
   .partner:hover img {filter:none; opacity:1; transform:scale(1.04);}
+  /* Logos simplified for single-colour use can carry their full-colour original for hover. */
+  .partner:has(.partner-colour):hover img:first-child {opacity:0;}
+  .partner:hover .partner-colour {opacity:1;}
 }
 .partners-end {display:flex; justify-content:space-between; align-items:center; gap:30px; margin-top:90px; padding-top:40px; border-top:1px solid var(--line);}
 .partners-end p {font-size:clamp(22px, 2.4vw, 34px); letter-spacing:-.04em;}
