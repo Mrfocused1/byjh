@@ -19,6 +19,7 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 - Partners: two rows of partner logos form the lane lines of a road the Sprinter drives along; they run faster while scrolling and reverse when scrolling back up. A full logo grid follows.
 - Gallery: photographs and eight videos, with an image and video viewer.
 - Contact: enquiry form with validation, vehicle preselection, enquiry review, and copying.
+- Logo intro: the animated BYJH logo plays when a visitor arrives on any page and as the transition between pages (see below).
 - Responsive layouts, keyboard-accessible dialogs, and support for the operating system's reduced-motion preference.
 
 **Contact form status:** the review step's Send button opens the visitor's email app with an enquiry addressed to info@byjh.co.uk and remmie@byjh.co.uk. Nothing is sent from the server; for automatic delivery, add an email service or backend.
@@ -38,6 +39,8 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 | `dist/common.js` | Shared navigation, dialogs, media, image loading, and motion preferences |
 | `dist/vehicle-motion.js` | Scroll direction, turning, and wheel movement helpers |
 | `dist/contact.js` | Contact form validation and enquiry preparation |
+| `dist/intro.js`, `dist/intro.css` | Logo intro on arrival and page transitions; loaded synchronously in every page's `<head>` |
+| `dist/assets/intro/` | Rendered intro videos: 1920×1080 desktop and 1080×1920 mobile cuts, MP4 (H.264) and WebM (VP9) |
 | `dist/*.css` | Layout, branding, and responsive styles |
 | `dist/assets/` | All 55 image, logo, favicon, sprite, and video assets used by the site |
 | `fleet-data.json` | Editable source copy of the fleet specification data |
@@ -48,6 +51,18 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 
 The homepage currently embeds its fleet data in `script#fleet-data`. When changing `fleet-data.json`, update that embedded data too. The gallery markup is static; changes to its metadata file also need to be reflected in `dist/gallery/index.html`.
 
+## Logo intro
+
+Every page includes `<link rel="stylesheet" href="/intro.css?v=1"><script src="/intro.js?v=1"></script>` directly after its `<title>`. Keep the script synchronous: it covers the page before the first paint.
+
+- Arriving on any page (typed URL, external link, reload) plays the 4-second intro, then fades into the page. Portrait screens get the mobile cut; wider screens get the desktop cut.
+- Clicking an internal link fades to the intro colour, navigates, and the next page opens with the intro. Same-page anchors, links opened in new tabs, downloads, media files and links whose click is already handled (gallery viewer) are left alone.
+- Visitors can skip with the SKIP button, a click or tap anywhere, or Escape, Enter or Space.
+- It is skipped for back/forward navigation, the reduced-motion preference, Save-Data, automated browsers (`navigator.webdriver`, so the existing browser checks are unaffected) and any URL containing `?nointro`.
+- If the video cannot start within 3.5 seconds, or autoplay is blocked (for example iPhone Low Power Mode), the page is shown straight away.
+
+The background colour `#070408` in `intro.css` must match the videos. The videos are rendered in Blender from a separate motion-graphics project; replace the four files in `dist/assets/intro/` and bump `?v=` in each page to update them.
+
 ## Check scroll and vehicle motion
 
 With Node.js installed:
@@ -56,7 +71,7 @@ With Node.js installed:
 node --test tests/*.test.cjs
 ```
 
-For browser checks, make `puppeteer-core` available to Node, set `PUPPETEER_EXECUTABLE_PATH` to a Chrome executable, and run `node tests/homepage-browser.cjs` while the local server is running. Set `BYJH_QA_URL` to test another URL. This covers mobile touch swipes, desktop scrolling, the older-browser fallback, navigation controls, and reduced motion. Mobile emulation uses Chromium; physical iPhone Safari remains a separate visual check.
+For browser checks, make `puppeteer-core` available to Node, set `PUPPETEER_EXECUTABLE_PATH` to a Chrome executable, and run `node tests/homepage-browser.cjs` while the local server is running. Set `BYJH_QA_URL` to test another URL. This covers mobile touch swipes, desktop scrolling, the older-browser fallback, navigation controls, and reduced motion. `node tests/intro-browser.cjs` checks the logo intro the same way. Mobile emulation uses Chromium; physical iPhone Safari remains a separate visual check.
 
 ## Deploy elsewhere
 

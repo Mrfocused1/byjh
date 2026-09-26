@@ -1,0 +1,14 @@
+/* BYJH logo intro: plays on arrival and between pages. The background colour
+   must match the rendered video (assets/intro/*) so the frame edges disappear. */
+:root{--intro-bg:#070408}
+/* Cover the page from the very first paint until intro.js takes over. */
+html.byjh-intro-on{background:var(--intro-bg);overflow:hidden}
+html.byjh-intro-on::after{content:"";position:fixed;inset:0;z-index:2147483646;background:var(--intro-bg)}
+.byjh-intro{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:var(--intro-bg);opacity:1;transition:opacity .5s ease}
+.byjh-intro video{width:100%;height:100%;object-fit:cover;background:var(--intro-bg);pointer-events:none}
+.byjh-intro.is-entering{opacity:0;transition-duration:.3s}
+.byjh-intro.is-entering.is-in{opacity:1}
+.byjh-intro.is-leaving{opacity:0;pointer-events:none}
+.byjh-intro-skip{position:absolute;right:var(--margin,24px);bottom:28px;padding:12px 18px;border:1px solid #ffffff38;border-radius:999px;color:#ffffffb3;font-size:10px;letter-spacing:.23em;opacity:0;transition:opacity .4s .6s,color .25s,border-color .25s}
+.byjh-intro.is-playing .byjh-intro-skip{opacity:1}
+.byjh-intro-skip:hover,.byjh-intro-skip:focus-visible{color:#fff;border-color:#ffffff99}
