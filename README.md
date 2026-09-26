@@ -19,7 +19,7 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 - Partners: two rows of partner logos form the lane lines of a road the Sprinter drives along; they run faster while scrolling and reverse when scrolling back up. A full logo grid follows.
 - Gallery: photographs and eight videos, with an image and video viewer.
 - Contact: enquiry form with validation, vehicle preselection, enquiry review, and copying.
-- Logo intro: the animated BYJH logo plays when a visitor arrives on any page and as the transition between pages (see below).
+- Logo intro: the animated BYJH logo plays on the first page of a visit, and a short logo stamp plays between pages (see below).
 - Responsive layouts, keyboard-accessible dialogs, and support for the operating system's reduced-motion preference.
 
 **Contact form status:** the review step's Send button opens the visitor's email app with an enquiry addressed to info@byjh.co.uk and remmie@byjh.co.uk. Nothing is sent from the server; for automatic delivery, add an email service or backend.
@@ -39,8 +39,8 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 | `dist/common.js` | Shared navigation, dialogs, media, image loading, and motion preferences |
 | `dist/vehicle-motion.js` | Scroll direction, turning, and wheel movement helpers |
 | `dist/contact.js` | Contact form validation and enquiry preparation |
-| `dist/intro.js`, `dist/intro.css` | Logo intro on arrival and page transitions; loaded synchronously in every page's `<head>` |
-| `dist/assets/intro/` | Rendered intro videos: 1920×1080 desktop and 1080×1920 mobile cuts, MP4 (H.264) and WebM (VP9) |
+| `dist/intro.js`, `dist/intro.css` | Logo intro and page transitions; loaded synchronously in every page's `<head>` |
+| `dist/assets/intro/` | Rendered videos: `intro-*` (4 s intro) and `stamp-*` (0.9 s page transition), each as 1920×1080 desktop and 1080×1920 mobile cuts in MP4 (H.264) and WebM (VP9) |
 | `dist/*.css` | Layout, branding, and responsive styles |
 | `dist/assets/` | All 55 image, logo, favicon, sprite, and video assets used by the site |
 | `fleet-data.json` | Editable source copy of the fleet specification data |
@@ -51,17 +51,18 @@ Open http://localhost:8080. Serve the site over HTTP rather than opening the HTM
 
 The homepage currently embeds its fleet data in `script#fleet-data`. When changing `fleet-data.json`, update that embedded data too. The gallery markup is static; changes to its metadata file also need to be reflected in `dist/gallery/index.html`.
 
-## Logo intro
+## Logo intro and page transitions
 
-Every page includes `<link rel="stylesheet" href="/intro.css?v=1"><script src="/intro.js?v=1"></script>` directly after its `<title>`. Keep the script synchronous: it covers the page before the first paint.
+Every page includes `<link rel="stylesheet" href="/intro.css?v=2"><script src="/intro.js?v=2"></script>` directly after its `<title>`. Keep the script synchronous: it covers the page before the first paint.
 
-- Arriving on any page (typed URL, external link, reload) plays the 4-second intro, then fades into the page. Portrait screens get the mobile cut; wider screens get the desktop cut.
-- Clicking an internal link fades to the intro colour, navigates, and the next page opens with the intro. Same-page anchors, links opened in new tabs, downloads, media files and links whose click is already handled (gallery viewer) are left alone.
-- Visitors can skip with the SKIP button, a click or tap anywhere, or Escape, Enter or Space.
-- It is skipped for back/forward navigation, the reduced-motion preference, Save-Data, automated browsers (`navigator.webdriver`, so the existing browser checks are unaffected) and any URL containing `?nointro`.
-- If the video cannot start within 3.5 seconds, or autoplay is blocked (for example iPhone Low Power Mode), the page is shown straight away.
+- The first page of a visit (per browser tab session) plays the 4-second logo intro, then fades into the page. Visitors can skip it with the SKIP button, a click or tap anywhere, or Escape, Enter or Space.
+- Clicking an internal link fades to the intro colour, navigates, and the next page opens with the 0.9-second logo stamp: the finished logo pops in, snaps back and slides its depth out. Same-page anchors, links opened in new tabs, downloads, media files and links whose click is already handled (gallery viewer) are left alone.
+- Reloads, back/forward navigation and typing a URL later in the same visit show the page directly.
+- Portrait screens get the mobile cuts; wider screens get the desktop cuts. The stamp video is prefetched once the page has loaded.
+- Everything is skipped for the reduced-motion preference, Save-Data, automated browsers (`navigator.webdriver`, so the existing browser checks are unaffected) and any URL containing `?nointro`.
+- If a video cannot start quickly (3.5 s for the intro, 1.5 s for the stamp), or autoplay is blocked (for example iPhone Low Power Mode), the page is shown straight away.
 
-The background colour `#070408` in `intro.css` must match the videos. The videos are rendered in Blender from a separate motion-graphics project; replace the four files in `dist/assets/intro/` and bump `?v=` in each page to update them.
+The background colour `#070408` in `intro.css` must match the videos. The videos are rendered in Blender from a separate motion-graphics project; replace the files in `dist/assets/intro/` and bump `?v=` in each page to update them.
 
 ## Check scroll and vehicle motion
 

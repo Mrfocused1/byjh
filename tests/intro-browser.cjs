@@ -41,16 +41,28 @@ const introState = page => page.evaluate(() => ({
     await page.click('.menu-toggle');
     await sleep(300);
     await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.click('#menu nav a[href="/members/"]')]);
-    await sleep(800);
+    await sleep(300);
     state = await introState(page);
-    assert.ok(state.covering && state.overlays === 1, 'next page opens with the intro');
-    await page.mouse.click(700, 450);
-    await sleep(700);
-    assert.equal((await introState(page)).covering, false, 'click skips the intro');
+    assert.ok(state.covering && state.overlays === 1, 'next page opens with the logo stamp');
+    assert.match(state.source, /stamp-desktop\./);
+    await page.waitForFunction(() => !document.documentElement.classList.contains('byjh-intro-on'), { timeout: 4000 });
+
+    await page.goto(base + '/partners/', { waitUntil: 'domcontentloaded' });
+    await sleep(300);
+    assert.equal((await introState(page)).covering, false, 'the full intro plays once per visit');
 
     await page.goBack({ waitUntil: 'domcontentloaded' });
     await sleep(300);
     assert.equal((await introState(page)).covering, false, 'back navigation shows the page directly');
+
+    const fresh = await visitorPage();
+    await fresh.setViewport({ width: 1440, height: 900 });
+    await fresh.goto(base + '/contact/', { waitUntil: 'domcontentloaded' });
+    await sleep(800);
+    assert.ok((await introState(fresh)).covering, 'a new visit gets the full intro');
+    await fresh.mouse.click(700, 450);
+    await sleep(700);
+    assert.equal((await introState(fresh)).covering, false, 'click skips the intro');
 
     const mobile = await visitorPage();
     await mobile.emulate(puppeteer.KnownDevices['iPhone 14 Pro Max']);
