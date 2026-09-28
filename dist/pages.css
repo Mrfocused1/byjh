@@ -254,3 +254,9 @@ html, body {overscroll-behavior-y: none;}
   .contact-form .form-row {grid-template-columns:1fr; gap:25px;}
   .contact-form-heading > p:last-child {font-size:22px;}
 }
+
+/* Footer links wrap as a group instead of extending the page on narrow screens. */
+.footer-top {flex-wrap:wrap;}
+.footer-pages {flex-wrap:wrap;row-gap:16px;}
+.footer-pages a {white-space:nowrap;}
+@media(max-width:760px) {.footer-pages {gap:16px 20px;justify-content:flex-start;}}

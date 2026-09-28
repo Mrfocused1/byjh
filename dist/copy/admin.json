@@ -1,0 +1,1299 @@
+{
+  "ui.admin.17c46a93c4": {
+    "label": "Leave the editor and discard unsaved changes?",
+    "value": "Leave the editor and discard unsaved changes?",
+    "locations": [
+      "admin:67"
+    ]
+  },
+  "ui.admin.042c862e44": {
+    "label": "Try again",
+    "value": "Try again",
+    "locations": [
+      "admin:65"
+    ]
+  },
+  "ui.admin.786d09b6e3": {
+    "label": "Opening your workspace…",
+    "value": "Opening your workspace…",
+    "locations": [
+      "admin:65"
+    ]
+  },
+  "ui.admin.1de6d0816c": {
+    "label": "Password updated",
+    "value": "Password updated",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.e9983dc9ac": {
+    "label": "Profile saved",
+    "value": "Profile saved",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.eeb692087d": {
+    "label": "Full name",
+    "value": "Full name",
+    "locations": [
+      "admin:64",
+      "admin:19"
+    ]
+  },
+  "ui.admin.c94d3175a6": {
+    "label": "Email address",
+    "value": "Email address",
+    "locations": [
+      "admin:64",
+      "admin:19"
+    ]
+  },
+  "ui.admin.19dff4dad0": {
+    "label": "Current password",
+    "value": "Current password",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.d850ee188c": {
+    "label": "New password",
+    "value": "New password",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.ff4fc0276e": {
+    "label": "Profile",
+    "value": "Profile",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.f597c0e820": {
+    "label": "Save profile",
+    "value": "Save profile",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.8c684290ce": {
+    "label": "Change password",
+    "value": "Change password",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.99c0766bc6": {
+    "label": "Use at least 12 characters. Changing your password signs out other sessions.",
+    "value": "Use at least 12 characters. Changing your password signs out other sessions.",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.350c355e16": {
+    "label": "Update password",
+    "value": "Update password",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.e008fa77a9": {
+    "label": "Keep your administrator details and access up to date.",
+    "value": "Keep your administrator details and access up to date.",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.90ad346d41": {
+    "label": "Account & security.",
+    "value": "Account & security.",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.f6587bbc11": {
+    "label": "YOUR PRIVATE OFFICE",
+    "value": "YOUR PRIVATE OFFICE",
+    "locations": [
+      "admin:64"
+    ]
+  },
+  "ui.admin.7072139b28": {
+    "label": "Response saved",
+    "value": "Response saved",
+    "locations": [
+      "admin:62"
+    ]
+  },
+  "ui.admin.bae7d5be70": {
+    "label": "Status",
+    "value": "Status",
+    "locations": [
+      "admin:62"
+    ]
+  },
+  "ui.admin.3b490cbe01": {
+    "label": "Reply visible in their account",
+    "value": "Reply visible in their account",
+    "locations": [
+      "admin:62"
+    ]
+  },
+  "ui.admin.6414058f7c": {
+    "label": "Saved replies appear in the customer’s portal. No email is sent.",
+    "value": "Saved replies appear in the customer’s portal. No email is sent.",
+    "locations": [
+      "admin:62"
+    ]
+  },
+  "ui.admin.582b3efc24": {
+    "label": "Save response",
+    "value": "Save response",
+    "locations": [
+      "admin:62"
+    ]
+  },
+  "ui.admin.9a95b257ab": {
+    "label": "Manage request",
+    "value": "Manage request",
+    "locations": [
+      "admin:62",
+      "admin:61"
+    ]
+  },
+  "ui.admin.8ed598b104": {
+    "label": "Requests from approved members and partners will appear here.",
+    "value": "Requests from approved members and partners will appear here.",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.e8311ab9c0": {
+    "label": "At your service.",
+    "value": "At your service.",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.3c9c32fb9a": {
+    "label": "All requests",
+    "value": "All requests",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.2b01501f46": {
+    "label": "{length} open",
+    "value": "{length} open",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.18fdf0c37c": {
+    "label": "Manage requests and respond directly inside member and partner accounts.",
+    "value": "Manage requests and respond directly inside member and partner accounts.",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.b654d8da2e": {
+    "label": "The concierge desk.",
+    "value": "The concierge desk.",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.4d06c2cac8": {
+    "label": "PERSONAL SERVICE",
+    "value": "PERSONAL SERVICE",
+    "locations": [
+      "admin:61"
+    ]
+  },
+  "ui.admin.e4c0da5e39": {
+    "label": "Recorded public page loads",
+    "value": "Recorded public page loads",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.faee7ce2aa": {
+    "label": "Page views",
+    "value": "Page views",
+    "locations": [
+      "admin:58",
+      "admin:23"
+    ]
+  },
+  "ui.admin.9bc960c162": {
+    "label": "New members & partners",
+    "value": "New members & partners",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.76c74bd071": {
+    "label": "Applications",
+    "value": "Applications",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.b241175899": {
+    "label": "Distinct public pages",
+    "value": "Distinct public pages",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.94b7172dcf": {
+    "label": "Pages visited",
+    "value": "Pages visited",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.c340bc783f": {
+    "label": "Views on smaller screens",
+    "value": "Views on smaller screens",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.003b1c2373": {
+    "label": "Mobile views",
+    "value": "Mobile views",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.1cc1fc27cc": {
+    "label": "Page activity will appear after visitors browse your site.",
+    "value": "Page activity will appear after visitors browse your site.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.4eb9fc1376": {
+    "label": "Device categories will appear with recorded visits.",
+    "value": "Device categories will appear with recorded visits.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.b7450cfca6": {
+    "label": "Traffic sources will appear here.",
+    "value": "Traffic sources will appear here.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.a0351e1d59": {
+    "label": "Website activity",
+    "value": "Website activity",
+    "locations": [
+      "admin:58",
+      "admin:23"
+    ]
+  },
+  "ui.admin.f1cddf4d25": {
+    "label": "Daily page views · UTC",
+    "value": "Daily page views · UTC",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.5f81e56d41": {
+    "label": "Last {value1} days",
+    "value": "Last {value1} days",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.97606d900c": {
+    "label": "Most visited pages",
+    "value": "Most visited pages",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.df485c8713": {
+    "label": "Devices",
+    "value": "Devices",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.a149415039": {
+    "label": "Traffic sources",
+    "value": "Traffic sources",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.9c58da73aa": {
+    "label": "Administrator visits are excluded. Views count page loads, not unique people. Sources store referring …",
+    "value": "Administrator visits are excluded. Views count page loads, not unique people. Sources store referring domains only. Applications use their submission date.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.7f6db6ec3b": {
+    "label": "Analytics date range",
+    "value": "Analytics date range",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.df833fe88d": {
+    "label": "Last 7 days",
+    "value": "Last 7 days",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.6b32985251": {
+    "label": "Last 30 days",
+    "value": "Last 30 days",
+    "locations": [
+      "admin:58",
+      "admin:23"
+    ]
+  },
+  "ui.admin.c328508bad": {
+    "label": "Last 90 days",
+    "value": "Last 90 days",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.4a1255adda": {
+    "label": "Recorded website activity. No sample figures, cookies or personal visitor profiles.",
+    "value": "Recorded website activity. No sample figures, cookies or personal visitor profiles.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.f74d27d880": {
+    "label": "Analytics.",
+    "value": "Analytics.",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.30171527fb": {
+    "label": "UNDERSTAND YOUR AUDIENCE",
+    "value": "UNDERSTAND YOUR AUDIENCE",
+    "locations": [
+      "admin:58"
+    ]
+  },
+  "ui.admin.6959bb8a86": {
+    "label": "Original restored",
+    "value": "Original restored",
+    "locations": [
+      "admin:54"
+    ]
+  },
+  "ui.admin.ad53b04e25": {
+    "label": "Replacement published",
+    "value": "Replacement published",
+    "locations": [
+      "admin:53",
+      "admin:45"
+    ]
+  },
+  "ui.admin.926040d798": {
+    "label": "Choose a file or upload a replacement.",
+    "value": "Choose a file or upload a replacement.",
+    "locations": [
+      "admin:53"
+    ]
+  },
+  "ui.admin.46ec103073": {
+    "label": "Restore original",
+    "value": "Restore original",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.78793701b1": {
+    "label": "This replaces every use of this file across the website. Your original is preserved and can be restored.",
+    "value": "This replaces every use of this file across the website. Your original is preserved and can be restored.",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.907c076c19": {
+    "label": "Choose from your library",
+    "value": "Choose from your library",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.5b6852a913": {
+    "label": "Choose a replacement",
+    "value": "Choose a replacement",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.0639081c45": {
+    "label": "Or upload a new {type}",
+    "value": "Or upload a new {type}",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.348db000ed": {
+    "label": "Maximum 50 MB. Video replacements must retain the original format.",
+    "value": "Maximum 50 MB. Video replacements must retain the original format.",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.3f04b3c0c1": {
+    "label": "Publish replacement",
+    "value": "Publish replacement",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.2a00a82956": {
+    "label": "Replace website asset",
+    "value": "Replace website asset",
+    "locations": [
+      "admin:52"
+    ]
+  },
+  "ui.admin.1d94a95d1e": {
+    "label": "Choose a file smaller than 50 MB.",
+    "value": "Choose a file smaller than 50 MB.",
+    "locations": [
+      "admin:50"
+    ]
+  },
+  "ui.admin.c2786d4d68": {
+    "label": "Media uploaded",
+    "value": "Media uploaded",
+    "locations": [
+      "admin:48"
+    ]
+  },
+  "ui.admin.1e629b10cf": {
+    "label": "Try another filter or upload a file.",
+    "value": "Try another filter or upload a file.",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.065e17b72b": {
+    "label": "No assets found.",
+    "value": "No assets found.",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.f65556e3df": {
+    "label": "Website asset",
+    "value": "Website asset",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.e5e03f5a27": {
+    "label": "Uploaded file",
+    "value": "Uploaded file",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.3e31a7ee30": {
+    "label": "View file",
+    "value": "View file",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.c274aff719": {
+    "label": "Replace asset",
+    "value": "Replace asset",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.4a322dba31": {
+    "label": "{value1} MB · {value2}",
+    "value": "{value1} MB · {value2}",
+    "locations": [
+      "admin:45"
+    ]
+  },
+  "ui.admin.56b71e89fb": {
+    "label": "Videos",
+    "value": "Videos",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.09e871c98f": {
+    "label": "Images",
+    "value": "Images",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.eec908fddb": {
+    "label": "Replaced assets",
+    "value": "Replaced assets",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.9d75961e17": {
+    "label": "All assets",
+    "value": "All assets",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.d9fa3f48df": {
+    "label": "Search your library",
+    "value": "Search your library",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.c65d2d0cc9": {
+    "label": "Search media",
+    "value": "Search media",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.ef8a36f079": {
+    "label": "Upload media",
+    "value": "Upload media",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.3c1ec96091": {
+    "label": "Manage every image and video, including logos, gallery media and intro films.",
+    "value": "Manage every image and video, including logos, gallery media and intro films.",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.70e7e39fb3": {
+    "label": "Media library.",
+    "value": "Media library.",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.2d8db918a2": {
+    "label": "THE ASSET COLLECTION",
+    "value": "THE ASSET COLLECTION",
+    "locations": [
+      "admin:44"
+    ]
+  },
+  "ui.admin.ee982246b3": {
+    "label": "Leave this page and discard unsaved edits?",
+    "value": "Leave this page and discard unsaved edits?",
+    "locations": [
+      "admin:41"
+    ]
+  },
+  "ui.admin.054d6646b1": {
+    "label": "Draft discarded",
+    "value": "Draft discarded",
+    "locations": [
+      "admin:38"
+    ]
+  },
+  "ui.admin.9c454048c3": {
+    "label": "Discard saved and unsaved draft changes for this page?",
+    "value": "Discard saved and unsaved draft changes for this page?",
+    "locations": [
+      "admin:38"
+    ]
+  },
+  "ui.admin.420f7a6adf": {
+    "label": "Draft saved. Preview it before publishing.",
+    "value": "Draft saved. Preview it before publishing.",
+    "locations": [
+      "admin:36"
+    ]
+  },
+  "ui.admin.ebce6d23c0": {
+    "label": "Draft saved · ready to preview",
+    "value": "Draft saved · ready to preview",
+    "locations": [
+      "admin:36"
+    ]
+  },
+  "ui.admin.29267269c0": {
+    "label": "Unsaved changes",
+    "value": "Unsaved changes",
+    "locations": [
+      "admin:35"
+    ]
+  },
+  "ui.admin.87558f322c": {
+    "label": "Published content",
+    "value": "Published content",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.9092394dbd": {
+    "label": "Saved draft · not yet published",
+    "value": "Saved draft · not yet published",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.08691681d5": {
+    "label": "Preview saved draft",
+    "value": "Preview saved draft",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.121b08b6a9": {
+    "label": "Publish page",
+    "value": "Publish page",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.cdbebe23ee": {
+    "label": "Find text on this page",
+    "value": "Find text on this page",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.fcdf7307a5": {
+    "label": "Find text or a section",
+    "value": "Find text or a section",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.3a09ce0de1": {
+    "label": "Discard draft",
+    "value": "Discard draft",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.388e69fe5d": {
+    "label": "No matching fields. Try another search.",
+    "value": "No matching fields. Try another search.",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.72aa436531": {
+    "label": "Edits stay in draft until you publish. Images and videos are managed in the media library.",
+    "value": "Edits stay in draft until you publish. Images and videos are managed in the media library.",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.4f25637a5b": {
+    "label": "Save draft",
+    "value": "Save draft",
+    "locations": [
+      "admin:34"
+    ]
+  },
+  "ui.admin.9feb812df7": {
+    "label": "{length} editable fields",
+    "value": "{length} editable fields",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.6b5b31f42e": {
+    "label": "Website pages",
+    "value": "Website pages",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.1b1a024400": {
+    "label": "Manage images & videos ",
+    "value": "Manage images & videos ",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.97592356ed": {
+    "label": "Edit the text across your website. Save a draft, preview it, then publish.",
+    "value": "Edit the text across your website. Save a draft, preview it, then publish.",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.cbd952384b": {
+    "label": "Website content.",
+    "value": "Website content.",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.3a21d61e0b": {
+    "label": "MAKE IT YOURS",
+    "value": "MAKE IT YOURS",
+    "locations": [
+      "admin:32"
+    ]
+  },
+  "ui.admin.2a2ecc2e2b": {
+    "label": "Open application page ",
+    "value": "Open application page ",
+    "locations": [
+      "admin:27"
+    ]
+  },
+  "ui.admin.8d428fb9dd": {
+    "label": "The pinned application forms on the members and partners pages send applications directly here.",
+    "value": "The pinned application forms on the members and partners pages send applications directly here.",
+    "locations": [
+      "admin:27"
+    ]
+  },
+  "ui.admin.cc80739f43": {
+    "label": "Try a different search or status filter.",
+    "value": "Try a different search or status filter.",
+    "locations": [
+      "admin:27"
+    ]
+  },
+  "ui.admin.262e0b4f8e": {
+    "label": "Your next connection is on its way.",
+    "value": "Your next connection is on its way.",
+    "locations": [
+      "admin:27"
+    ]
+  },
+  "ui.admin.32d47a1d14": {
+    "label": "No matching records.",
+    "value": "No matching records.",
+    "locations": [
+      "admin:27"
+    ]
+  },
+  "ui.admin.4271f6d715": {
+    "label": "Every relationship",
+    "value": "Every relationship",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.aeb171a260": {
+    "label": "Approved accounts",
+    "value": "Approved accounts",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.a733b809d2": {
+    "label": "Active",
+    "value": "Active",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.af97277baa": {
+    "label": "Applications to consider",
+    "value": "Applications to consider",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.5a5a12dce6": {
+    "label": "Awaiting review",
+    "value": "Awaiting review",
+    "locations": [
+      "admin:26",
+      "admin:23"
+    ]
+  },
+  "ui.admin.aa58d4edc1": {
+    "label": "Declined or suspended",
+    "value": "Declined or suspended",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.df7fe3c2fa": {
+    "label": "Other statuses",
+    "value": "Other statuses",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.26d54d9fb7": {
+    "label": "Search name, company or email",
+    "value": "Search name, company or email",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.5755f9ac0a": {
+    "label": "Export CSV",
+    "value": "Export CSV",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.abaa4f9cfa": {
+    "label": "Manage applications and the people behind your partnerships.",
+    "value": "Manage applications and the people behind your partnerships.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.eea8c2c7b0": {
+    "label": "Thoughtful relationships, from the first introduction.",
+    "value": "Thoughtful relationships, from the first introduction.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.a7b02a0d7b": {
+    "label": "Review member and partner applications in one place.",
+    "value": "Review member and partner applications in one place.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.6d8f2d1eac": {
+    "label": "Partners.",
+    "value": "Partners.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.58cd9041b9": {
+    "label": "Members.",
+    "value": "Members.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.e2d9778da7": {
+    "label": "Applications.",
+    "value": "Applications.",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.f3bb38108f": {
+    "label": "YOUR NETWORK",
+    "value": "YOUR NETWORK",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.ecb45f2328": {
+    "label": "YOUR COMMUNITY",
+    "value": "YOUR COMMUNITY",
+    "locations": [
+      "admin:26"
+    ]
+  },
+  "ui.admin.28e3f36e52": {
+    "label": "Your members, partners and stories. All in one place.",
+    "value": "Your members, partners and stories. All in one place.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.aeee478d02": {
+    "label": "Your private community",
+    "value": "Your private community",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.1cb449c112": {
+    "label": "Members",
+    "value": "Members",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.b7d42ef8d4": {
+    "label": "Your extended network",
+    "value": "Your extended network",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.aa16f0e59d": {
+    "label": "Partners",
+    "value": "Partners",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.1868cd47b0": {
+    "label": "Member & partner applications",
+    "value": "Member & partner applications",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.1b69bbf84a": {
+    "label": "· recorded visits",
+    "value": "· recorded visits",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.da0aa24534": {
+    "label": "Your team’s changes will appear here.",
+    "value": "Your team’s changes will appear here.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.91fe01b7de": {
+    "label": "A fresh start.",
+    "value": "A fresh start.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.9cb978e4f5": {
+    "label": "BYJH / PRIVATE OFFICE",
+    "value": "BYJH / PRIVATE OFFICE",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.a16aa18afd": {
+    "label": "YOUR WEBSITE.",
+    "value": "YOUR WEBSITE.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.acfb0ac2e2": {
+    "label": "Manage your website",
+    "value": "Manage your website",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.d09d7b5217": {
+    "label": "BYJH",
+    "value": "BYJH",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.e4ad757dfc": {
+    "label": "Page views over the last 30 days",
+    "value": "Page views over the last 30 days",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.7ad9953fe8": {
+    "label": "View analytics",
+    "value": "View analytics",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.6dd6890649": {
+    "label": "total page views",
+    "value": "total page views",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.72d5617f3f": {
+    "label": "Recent activity",
+    "value": "Recent activity",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.4ca0a75c2b": {
+    "label": "Workspace",
+    "value": "Workspace",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.e569cf11eb": {
+    "label": "Latest applications",
+    "value": "Latest applications",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.35ed8be8e4": {
+    "label": "The next people to join your world",
+    "value": "The next people to join your world",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.931e1a4b15": {
+    "label": "View all",
+    "value": "View all",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.0e802acf2b": {
+    "label": "Manage applications ",
+    "value": "Manage applications ",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.2363779f22": {
+    "label": "A considered overview of your community and business.",
+    "value": "A considered overview of your community and business.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.cffe32ea2d": {
+    "label": "Your world.",
+    "value": "Your world.",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.b3994ed4a1": {
+    "label": "THE PRIVATE OFFICE",
+    "value": "THE PRIVATE OFFICE",
+    "locations": [
+      "admin:23"
+    ]
+  },
+  "ui.admin.31bd401a5e": {
+    "label": "Account updated",
+    "value": "Account updated",
+    "locations": [
+      "admin:20"
+    ]
+  },
+  "ui.admin.77064d5265": {
+    "label": "Phone",
+    "value": "Phone",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.7a1994999d": {
+    "label": "Company",
+    "value": "Company",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.caa910f2ea": {
+    "label": "Sector / interests",
+    "value": "Sector / interests",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.2e8a57cc5c": {
+    "label": "Website",
+    "value": "Website",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.8dd86c6d6c": {
+    "label": "Account status",
+    "value": "Account status",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.b291beb879": {
+    "label": "Application",
+    "value": "Application",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.50e6c92a52": {
+    "label": "Private team notes",
+    "value": "Private team notes",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.dfcbc03ca4": {
+    "label": "Applied {date} · {value1}",
+    "value": "Applied {date} · {value1}",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.495edc5065": {
+    "label": "Active accounts can submit requests. Pending, declined and suspended accounts can only see their statu…",
+    "value": "Active accounts can submit requests. Pending, declined and suspended accounts can only see their status and update their profile.",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.026b9b068a": {
+    "label": "These notes are visible only to administrators.",
+    "value": "These notes are visible only to administrators.",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.179359b39e": {
+    "label": "Save changes",
+    "value": "Save changes",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.180791b75d": {
+    "label": "Partner details",
+    "value": "Partner details",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.83f9b125a0": {
+    "label": "Member details",
+    "value": "Member details",
+    "locations": [
+      "admin:19"
+    ]
+  },
+  "ui.admin.649c3794d3": {
+    "label": "Applications will appear here when someone applies through your website.",
+    "value": "Applications will appear here when someone applies through your website.",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.b2dc9f735a": {
+    "label": "A new chapter starts here.",
+    "value": "A new chapter starts here.",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.e61898cee8": {
+    "label": "Manage {value1}",
+    "value": "Manage {value1}",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.a9d371451b": {
+    "label": "NAME",
+    "value": "NAME",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.6e9816a8e9": {
+    "label": "TYPE",
+    "value": "TYPE",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.7168833cc8": {
+    "label": "STATUS",
+    "value": "STATUS",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.5839687397": {
+    "label": "JOINED",
+    "value": "JOINED",
+    "locations": [
+      "admin:16"
+    ]
+  },
+  "ui.admin.27ba798936": {
+    "label": "Visits will appear here as people explore your site",
+    "value": "Visits will appear here as people explore your site",
+    "locations": [
+      "admin:14"
+    ]
+  },
+  "ui.admin.045b59b4e0": {
+    "label": "{views} page views across {value1} days",
+    "value": "{views} page views across {value1} days",
+    "locations": [
+      "admin:14"
+    ]
+  },
+  "ui.admin.d3b0902c8d": {
+    "label": "{value1} days ago",
+    "value": "{value1} days ago",
+    "locations": [
+      "admin:14"
+    ]
+  },
+  "ui.admin.24345a1437": {
+    "label": "Today",
+    "value": "Today",
+    "locations": [
+      "admin:14"
+    ]
+  },
+  "ui.admin.publishedToast": {
+    "label": "{page} published to your local website",
+    "value": "{page} published to your local website"
+  },
+  "ui.admin.loadError": {
+    "label": "Unable to open workspace: {error}",
+    "value": "Unable to open workspace: {error}"
+  },
+  "ui.admin.uploadProgress": {
+    "label": "Uploading {filename}…",
+    "value": "Uploading {filename}…"
+  },
+  "ui.admin.pendingOne": {
+    "label": "{count} application is waiting for your consideration.",
+    "value": "{count} application is waiting for your consideration."
+  },
+  "ui.admin.pendingMany": {
+    "label": "{count} applications are waiting for your consideration.",
+    "value": "{count} applications are waiting for your consideration."
+  },
+  "ui.admin.viewRolePage": {
+    "label": "View {role} page",
+    "value": "View {role} page"
+  },
+  "ui.admin.totalPeople": {
+    "label": "Total {type}",
+    "value": "Total {type}"
+  },
+  "ui.admin.searchPeople": {
+    "label": "Search {type}",
+    "value": "Search {type}"
+  },
+  "ui.admin.fileReadError": {
+    "label": "Upload / File could not be read",
+    "value": "This file could not be read. Please choose it again."
+  }
+}

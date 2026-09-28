@@ -1,6 +1,10 @@
+{
+  const B=window.BYJHCopy||{t:(_key,fallback,values={})=>fallback.replace(/\{([A-Za-z_][\w]*)\}/g,(match,key)=>key in values?String(values[key]):match),h(key,fallback,values){return this.t(key,fallback,values).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}};
 /* Shared BYJH navigation, media and the same scroll-led vehicle treatment. */
 (() => {
+
   'use strict';
+  const C=(key,fallback)=>(window.BYJH_COPY||{})[key]??fallback;
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -34,7 +38,7 @@
       container.classList.remove('image-pending');
       container.classList.add('image-failed');
       container.removeAttribute('aria-busy');
-      loader.textContent = 'Image unavailable';
+      loader.textContent = B.t("ui.public.f2cca83ab2","Image unavailable");
     }
     async function reveal() {
       if (settled || decoding) return;
@@ -52,6 +56,10 @@
     if (photo.complete) photo.naturalWidth ? reveal() : failed();
   });
 
+  // Supply names without changing the stable CMS field positions in page templates.
+  $('#menu')?.setAttribute('aria-label', B.t("ui.public.efd197f3fc","Main navigation"));
+  const cabinTitle = $('#cabin-dialog h2');
+  if (cabinTitle) { cabinTitle.id = 'cabin-title'; $('#cabin-dialog').setAttribute('aria-labelledby', cabinTitle.id); }
   const dialogs = $$('dialog');
   let previousOverflow = '', updateHero = () => {};
   function openDialog(dialog) {
@@ -86,10 +94,10 @@
       if (!vehicle) return;
       $('#vehicle-title').textContent = vehicle.name;
       $('#vehicle-kind').textContent = vehicle.model;
-      $('#vehicle-capacity').textContent = `${vehicle.seats} SEATER / ${vehicle.model.toUpperCase()}`;
+      $('#vehicle-capacity').textContent = B.t("ui.public.b21463b077","{seats} SEATER / {value1}",{"seats":vehicle.seats,"value1":vehicle.model.toUpperCase()});
       const photo = $('#vehicle-photo');
       photo.src = vehicle.image;
-      photo.alt = `${vehicle.name} — BYJH ${vehicle.model} interior`;
+      photo.alt = B.t("ui.public.vehicleAlt","{name} — BYJH {model} interior",{name:vehicle.name,model:vehicle.model});
       const specifications = $('#vehicle-specs');
       specifications.replaceChildren();
       Object.entries(vehicle.specifications).forEach(([title, items], index) => {
@@ -157,14 +165,27 @@
     }));
   }
 
+  if ($('#hero-film') && !$('#hero-play')) {
+    const controls = document.createElement('div'); controls.className = 'film-controls';
+    const button = document.createElement('button'); button.type = 'button'; button.id = 'hero-play';
+    button.textContent = B.t("ui.public.d4fcc5e448","PLAY FILM ▷"); controls.append(button); $('.cinema-bottom')?.append(controls);
+  }
+  const motionCaption = $('.drive-caption');
+  if (motionCaption) {
+    const toggle = document.createElement('button'); toggle.type = 'button';
+    toggle.className = 'pill outline motion-toggle'; toggle.dataset.motionToggle = '';
+    function syncMotion() { toggle.textContent = motion ? C('motion.pause','PAUSE MOTION Ⅱ') : C('motion.play','PLAY MOTION ▷'); toggle.setAttribute('aria-label', motion ? B.t("ui.public.0e430728f5","Pause partner animation") : B.t("ui.public.3fe190745f","Play partner animation")); }
+    toggle.addEventListener('click', () => setMotion(!motion));
+    window.addEventListener('byjh:motion', syncMotion); syncMotion(); motionCaption.append(toggle);
+  }
   const hero = $('#hero-film'), play = $('#hero-play');
   if (hero) {
     let manuallyPaused = false, explicitPlay = false, visible = true, playPending = false;
     hero.muted = true; hero.defaultMuted = true;
     function syncButton() {
       if (!play) return;
-      play.textContent = hero.paused ? 'PLAY FILM ▷' : 'PAUSE FILM Ⅱ';
-      play.setAttribute('aria-label', hero.paused ? 'Play background film' : 'Pause background film');
+      play.textContent = hero.paused ? C('film.play','PLAY FILM ▷') : C('film.pause','PAUSE FILM Ⅱ');
+      play.setAttribute('aria-label', hero.paused ? B.t("ui.public.db18a090d4","Play background film") : B.t("ui.public.11c353f0ce","Pause background film"));
     }
     updateHero = () => {
       const shouldPlay = (motion || explicitPlay) && !manuallyPaused && visible && !document.hidden && !dialogs.some(d => d.open);
@@ -275,3 +296,5 @@
   prepareSprites();
   setMotion(motion);
 })();
+
+}

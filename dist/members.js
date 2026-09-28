@@ -1,6 +1,9 @@
+{
+  const B=window.BYJHCopy||{t:(_key,fallback,values={})=>fallback.replace(/\{([A-Za-z_][\w]*)\}/g,(match,key)=>key in values?String(values[key]):match),h(key,fallback,values){return this.t(key,fallback,values).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}};
 /* Members: the homepage road winds down the page, switching sides between members.
    The van follows it on scroll and uncovers each member as it drives alongside. */
 (() => {
+
   'use strict';
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
@@ -25,7 +28,7 @@
   members.forEach((block, i) => { const no = $('.member-no span', block); if (no) no.textContent = `${pad(i + 1)} / ${pad(members.length)}`; });
   $$('.members-total').forEach(el => { el.textContent = members.length; });
   const labels = blocks.map((block, i) => block.classList.contains('member-open')
-    ? ['NEXT', 'YOUR NAME HERE']
+    ? [B.t("ui.public.1992d5e8d5","NEXT"), B.t("ui.public.978b4a6d83","YOUR NAME HERE")]
     : [pad(i + 1), $('.member-name', block).textContent.trim().toUpperCase()]);
   document.body.classList.add('members-ready');
 
@@ -148,3 +151,5 @@
   new ResizeObserver(() => { dirty = true; request(); }).observe(journey);
   request();
 })();
+
+}

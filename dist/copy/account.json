@@ -1,0 +1,426 @@
+{
+  "ui.account.1de6d0816c": {
+    "label": "Password updated",
+    "value": "Password updated",
+    "locations": [
+      "account:15"
+    ]
+  },
+  "ui.account.a7e0d73438": {
+    "label": "Your details are saved",
+    "value": "Your details are saved",
+    "locations": [
+      "account:15"
+    ]
+  },
+  "ui.account.c1c9cbe699": {
+    "label": "Your profile",
+    "value": "Your profile",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.c9669ddd31": {
+    "label": "Business & contact details",
+    "value": "Business & contact details",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.eeb692087d": {
+    "label": "Full name",
+    "value": "Full name",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.c94d3175a6": {
+    "label": "Email address",
+    "value": "Email address",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.8961d3bf56": {
+    "label": "Phone number",
+    "value": "Phone number",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.5a10c539e0": {
+    "label": "Company (optional)",
+    "value": "Company (optional)",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.1e5f7dc45c": {
+    "label": "Company name",
+    "value": "Company name",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.3fc5473287": {
+    "label": "Interests",
+    "value": "Interests",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.73e9d37caf": {
+    "label": "Business sector",
+    "value": "Business sector",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.e397cb2490": {
+    "label": "Website (optional)",
+    "value": "Website (optional)",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.19dff4dad0": {
+    "label": "Current password",
+    "value": "Current password",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.d850ee188c": {
+    "label": "New password",
+    "value": "New password",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.4706583df9": {
+    "label": "Save details",
+    "value": "Save details",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.9c45820151": {
+    "label": "Password & access",
+    "value": "Password & access",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.8ba7481d22": {
+    "label": "Use at least 12 characters. Other sessions will be signed out.",
+    "value": "Use at least 12 characters. Other sessions will be signed out.",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.350c355e16": {
+    "label": "Update password",
+    "value": "Update password",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.598c66b62a": {
+    "label": "Keep your contact details, preferences and account secure.",
+    "value": "Keep your contact details, preferences and account secure.",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.3ea2e21a30": {
+    "label": "Make yourself at home.",
+    "value": "Make yourself at home.",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.0a8c4d31d7": {
+    "label": "PERSONAL DETAILS",
+    "value": "PERSONAL DETAILS",
+    "locations": [
+      "account:14"
+    ]
+  },
+  "ui.account.dc6a0a08a9": {
+    "label": "Follow the details and responses to your requests.",
+    "value": "Follow the details and responses to your requests.",
+    "locations": [
+      "account:12"
+    ]
+  },
+  "ui.account.db6dfeee5d": {
+    "label": "Conversations, considered.",
+    "value": "Conversations, considered.",
+    "locations": [
+      "account:12"
+    ]
+  },
+  "ui.account.a670879458": {
+    "label": "YOUR CONCIERGE",
+    "value": "YOUR CONCIERGE",
+    "locations": [
+      "account:12"
+    ]
+  },
+  "ui.account.29980431f9": {
+    "label": "YOUR ACCOUNT",
+    "value": "YOUR ACCOUNT",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.2a217fa58a": {
+    "label": "YOUR BUSINESS",
+    "value": "YOUR BUSINESS",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.680f2dfa4d": {
+    "label": "Add your phone number in My account",
+    "value": "Add your phone number in My account",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.ccc8efd0f1": {
+    "label": "Your latest requests",
+    "value": "Your latest requests",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.931e1a4b15": {
+    "label": "View all",
+    "value": "View all",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.a6252b6690": {
+    "label": "Your details",
+    "value": "Your details",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.5301648dcf": {
+    "label": "Edit",
+    "value": "Edit",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.6d49a4303e": {
+    "label": "Joined {date}",
+    "value": "Joined {date}",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.78dadfdbec": {
+    "label": "Contact the team",
+    "value": "Contact the team",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.65fc7bc969": {
+    "label": "Application received. Your account has been created and is awaiting review.",
+    "value": "Application received. Your account has been created and is awaiting review.",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.bb06ceff34": {
+    "label": "Your connection to BYJH, all in one place.",
+    "value": "Your connection to BYJH, all in one place.",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.93f791a4f1": {
+    "label": "Welcome, {value1}.",
+    "value": "Welcome, {value1}.",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.cb6a30f5e0": {
+    "label": "THE PARTNER SPACE",
+    "value": "THE PARTNER SPACE",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.7224bba0f4": {
+    "label": "THE MEMBERS’ CLUB",
+    "value": "THE MEMBERS’ CLUB",
+    "locations": [
+      "account:11"
+    ]
+  },
+  "ui.account.8cf41ad171": {
+    "label": "You can still update your details and view previous requests. Contact the BYJH team for help with your…",
+    "value": "You can still update your details and view previous requests. Contact the BYJH team for help with your account.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.ff30016330": {
+    "label": "Your account is currently paused.",
+    "value": "Your account is currently paused.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.f094309234": {
+    "label": "Your application has not been approved at this time. Please contact the BYJH team if you would like to…",
+    "value": "Your application has not been approved at this time. Please contact the BYJH team if you would like to discuss it.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.f06be16107": {
+    "label": "An update on your application.",
+    "value": "An update on your application.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.3e3fa09aa4": {
+    "label": "Your account is active. Share your next idea or journey with the BYJH team, and we’ll take care of the…",
+    "value": "Your account is active. Share your next idea or journey with the BYJH team, and we’ll take care of the details.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.89806a10ce": {
+    "label": "You’re part of our world.",
+    "value": "You’re part of our world.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.758c5d5ba3": {
+    "label": "Thank you for your introduction. Our team will review your application. You can check its status here …",
+    "value": "Thank you for your introduction. Our team will review your application. You can check its status here and keep your details up to date.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.604b516ec3": {
+    "label": "Your application is with us.",
+    "value": "Your application is with us.",
+    "locations": [
+      "account:10"
+    ]
+  },
+  "ui.account.8a371430e7": {
+    "label": "New request",
+    "value": "New request",
+    "locations": [
+      "account:8"
+    ]
+  },
+  "ui.account.b85a11f08c": {
+    "label": "Once your account is approved, send a request and follow its progress here.",
+    "value": "Once your account is approved, send a request and follow its progress here.",
+    "locations": [
+      "account:7"
+    ]
+  },
+  "ui.account.e3997d2100": {
+    "label": "Every detail starts with a conversation.",
+    "value": "Every detail starts with a conversation.",
+    "locations": [
+      "account:7"
+    ]
+  },
+  "ui.account.cde6663347": {
+    "label": "Your request is with the team. Responses will appear here.",
+    "value": "Your request is with the team. Responses will appear here.",
+    "locations": [
+      "account:7"
+    ]
+  },
+  "ui.account.a57c445e07": {
+    "label": "FROM YOUR BYJH TEAM",
+    "value": "FROM YOUR BYJH TEAM",
+    "locations": [
+      "account:7"
+    ]
+  },
+  "ui.account.9a20559a90": {
+    "label": "Your request is with the team",
+    "value": "Your request is with the team",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.d996154734": {
+    "label": "How can we help?",
+    "value": "How can we help?",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.8d183dbdce": {
+    "label": "Subject",
+    "value": "Subject",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.23c4c2c6e6": {
+    "label": "Dates, destinations, preferences — tell us what you have in mind.",
+    "value": "Dates, destinations, preferences — tell us what you have in mind.",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.839ac4f959": {
+    "label": "The details",
+    "value": "The details",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.80f971bda5": {
+    "label": "Share the details and our team will respond here in your account.",
+    "value": "Share the details and our team will respond here in your account.",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.a89d641794": {
+    "label": "Send request",
+    "value": "Send request",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.59655212dc": {
+    "label": "Your next journey",
+    "value": "Your next journey",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.244c20ea94": {
+    "label": "Start a conversation",
+    "value": "Start a conversation",
+    "locations": [
+      "account:6"
+    ]
+  },
+  "ui.account.loadError": {
+    "label": "Unable to load your account: {error}",
+    "value": "Unable to load your account: {error}"
+  }
+}

@@ -1,0 +1,545 @@
+{
+  "ui.shared.da438028f7": {
+    "label": "BYJH · Bespoke lifestyle management",
+    "value": "BYJH · Bespoke lifestyle management",
+    "locations": [
+      "workspace:46"
+    ]
+  },
+  "ui.shared.e440f18daa": {
+    "label": "A little more considered. Every detail.",
+    "value": "A little more considered. Every detail.",
+    "locations": [
+      "workspace:46"
+    ]
+  },
+  "ui.shared.917c4cbbc5": {
+    "label": "Close navigation",
+    "value": "Close navigation",
+    "locations": [
+      "workspace:32"
+    ]
+  },
+  "ui.shared.d27cf1135e": {
+    "label": "BYJH workspace",
+    "value": "BYJH workspace",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.d5a0ece881": {
+    "label": "Members’ club",
+    "value": "Members’ club",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.f174b4f227": {
+    "label": "Partner space",
+    "value": "Partner space",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.703988282e": {
+    "label": "WORKSPACE",
+    "value": "WORKSPACE",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.4eec17e649": {
+    "label": "YOUR WORLD",
+    "value": "YOUR WORLD",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.8a8a472032": {
+    "label": "Account & security",
+    "value": "Account & security",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.1eda23758b": {
+    "label": "Administrator",
+    "value": "Administrator",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.4ca0a75c2b": {
+    "label": "Workspace",
+    "value": "Workspace",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.4ab2910209": {
+    "label": "Your account",
+    "value": "Your account",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.c7f73bb54d": {
+    "label": "Settings",
+    "value": "Settings",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.6caab273e6": {
+    "label": "Local workspace",
+    "value": "Local workspace",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.57361a5ee9": {
+    "label": "Private access",
+    "value": "Private access",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.1a0823d0dd": {
+    "label": "Close sidebar",
+    "value": "Close sidebar",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.d09d7b5217": {
+    "label": "BYJH",
+    "value": "BYJH",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.6d8f820fa3": {
+    "label": "BESPOKE LIFESTYLE",
+    "value": "BESPOKE LIFESTYLE",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.441be3eac6": {
+    "label": "MANAGEMENT",
+    "value": "MANAGEMENT",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.7942420429": {
+    "label": "QUICK LINKS",
+    "value": "QUICK LINKS",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.bb573060be": {
+    "label": "View website",
+    "value": "View website",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.dc1649a16c": {
+    "label": "Sign out",
+    "value": "Sign out",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.8b9b1bbd66": {
+    "label": "Toggle sidebar",
+    "value": "Toggle sidebar",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.2e1f56f571": {
+    "label": "Visit website",
+    "value": "Visit website",
+    "locations": [
+      "workspace:27"
+    ]
+  },
+  "ui.shared.25bc962957": {
+    "label": "Analytics",
+    "value": "Analytics",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.b9c58450ba": {
+    "label": "Media library",
+    "value": "Media library",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.cba0dcf95c": {
+    "label": "Website content",
+    "value": "Website content",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.f7194e6a0d": {
+    "label": "Requests",
+    "value": "Requests",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.aa16f0e59d": {
+    "label": "Partners",
+    "value": "Partners",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.1cb449c112": {
+    "label": "Members",
+    "value": "Members",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.76c74bd071": {
+    "label": "Applications",
+    "value": "Applications",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.0efc2e6be4": {
+    "label": "Overview",
+    "value": "Overview",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.f6d188f91b": {
+    "label": "My requests",
+    "value": "My requests",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.619098172f": {
+    "label": "My account",
+    "value": "My account",
+    "locations": [
+      "workspace:26"
+    ]
+  },
+  "ui.shared.fa0b7b3ac0": {
+    "label": "Close panel",
+    "value": "Close panel",
+    "locations": [
+      "workspace:24"
+    ]
+  },
+  "ui.shared.56a2285c5b": {
+    "label": "Saving…",
+    "value": "Saving…",
+    "locations": [
+      "workspace:23"
+    ]
+  },
+  "ui.shared.9a3ea0598e": {
+    "label": "Something went wrong. Please try again.",
+    "value": "Something went wrong. Please try again.",
+    "locations": [
+      "workspace:10"
+    ]
+  },
+  "ui.shared.enum.status.pending": {
+    "label": "Pending",
+    "value": "Pending"
+  },
+  "ui.shared.enum.status.active": {
+    "label": "Active",
+    "value": "Active"
+  },
+  "ui.shared.enum.status.declined": {
+    "label": "Declined",
+    "value": "Declined"
+  },
+  "ui.shared.enum.status.suspended": {
+    "label": "Suspended",
+    "value": "Suspended"
+  },
+  "ui.shared.enum.status.new": {
+    "label": "New",
+    "value": "New"
+  },
+  "ui.shared.enum.status.in-progress": {
+    "label": "In progress",
+    "value": "In progress"
+  },
+  "ui.shared.enum.status.closed": {
+    "label": "Closed",
+    "value": "Closed"
+  },
+  "ui.shared.enum.role.admin": {
+    "label": "Administrator",
+    "value": "Administrator"
+  },
+  "ui.shared.enum.role.member": {
+    "label": "Member",
+    "value": "Member"
+  },
+  "ui.shared.enum.role.partner": {
+    "label": "Partner",
+    "value": "Partner"
+  },
+  "ui.shared.enum.rolePlural.member": {
+    "label": "Members",
+    "value": "Members"
+  },
+  "ui.shared.enum.rolePlural.partner": {
+    "label": "Partners",
+    "value": "Partners"
+  },
+  "ui.shared.enum.rolePlural.application": {
+    "label": "Applications",
+    "value": "Applications"
+  },
+  "ui.shared.enum.media.image": {
+    "label": "Image",
+    "value": "Image"
+  },
+  "ui.shared.enum.media.video": {
+    "label": "Video",
+    "value": "Video"
+  },
+  "ui.shared.enum.device.mobile": {
+    "label": "Mobile",
+    "value": "Mobile"
+  },
+  "ui.shared.enum.device.tablet": {
+    "label": "Tablet",
+    "value": "Tablet"
+  },
+  "ui.shared.enum.device.desktop": {
+    "label": "Desktop",
+    "value": "Desktop"
+  },
+  "ui.shared.enum.source.Direct": {
+    "label": "Direct",
+    "value": "Direct"
+  },
+  "ui.shared.enum.source.Internal": {
+    "label": "Internal",
+    "value": "Internal"
+  },
+  "ui.shared.enum.filter.all": {
+    "label": "All",
+    "value": "All"
+  },
+  "ui.shared.enum.filter.pending": {
+    "label": "Awaiting review",
+    "value": "Awaiting review"
+  },
+  "ui.shared.enum.filter.active": {
+    "label": "Active",
+    "value": "Active"
+  },
+  "ui.shared.enum.filter.suspended": {
+    "label": "Suspended",
+    "value": "Suspended"
+  },
+  "ui.shared.enum.filter.declined": {
+    "label": "Declined",
+    "value": "Declined"
+  },
+  "ui.shared.enum.sector.Chauffeur services": {
+    "label": "Chauffeur services",
+    "value": "Chauffeur services"
+  },
+  "ui.shared.enum.sector.Lifestyle & concierge": {
+    "label": "Lifestyle & concierge",
+    "value": "Lifestyle & concierge"
+  },
+  "ui.shared.enum.sector.Events & touring": {
+    "label": "Events & touring",
+    "value": "Events & touring"
+  },
+  "ui.shared.enum.sector.Custom builds": {
+    "label": "Custom builds",
+    "value": "Custom builds"
+  },
+  "ui.shared.enum.sector.Other": {
+    "label": "Other",
+    "value": "Other"
+  },
+  "ui.shared.enum.sector.Hospitality": {
+    "label": "Hospitality",
+    "value": "Hospitality"
+  },
+  "ui.shared.enum.sector.Travel & transport": {
+    "label": "Travel & transport",
+    "value": "Travel & transport"
+  },
+  "ui.shared.enum.sector.Sport": {
+    "label": "Sport",
+    "value": "Sport"
+  },
+  "ui.shared.enum.sector.Fashion & lifestyle": {
+    "label": "Fashion & lifestyle",
+    "value": "Fashion & lifestyle"
+  },
+  "ui.shared.enum.sector.Events": {
+    "label": "Events",
+    "value": "Events"
+  },
+  "ui.shared.accountRole": {
+    "label": "{role} account",
+    "value": "{role} account"
+  },
+  "ui.shared.documentTitle": {
+    "label": "{title} — BYJH",
+    "value": "{title} — BYJH"
+  },
+  "ui.shared.enum.field.name": {
+    "label": "Name",
+    "value": "Name"
+  },
+  "ui.shared.enum.field.email": {
+    "label": "Email",
+    "value": "Email"
+  },
+  "ui.shared.enum.field.phone": {
+    "label": "Phone",
+    "value": "Phone"
+  },
+  "ui.shared.enum.field.company": {
+    "label": "Company",
+    "value": "Company"
+  },
+  "ui.shared.enum.field.sector": {
+    "label": "Sector",
+    "value": "Sector"
+  },
+  "ui.shared.enum.field.status": {
+    "label": "Status",
+    "value": "Status"
+  },
+  "ui.shared.enum.field.created": {
+    "label": "Joined",
+    "value": "Joined"
+  },
+  "ui.shared.enum.field.website": {
+    "label": "Website",
+    "value": "Website"
+  },
+  "ui.shared.enum.field.message": {
+    "label": "Message",
+    "value": "Message"
+  },
+  "ui.shared.enum.field.notes": {
+    "label": "Notes",
+    "value": "Notes"
+  },
+  "ui.shared.enum.field.subject": {
+    "label": "Subject",
+    "value": "Subject"
+  },
+  "ui.shared.enum.field.reply": {
+    "label": "Reply",
+    "value": "Reply"
+  },
+  "ui.shared.enum.field.page": {
+    "label": "Page",
+    "value": "Page"
+  },
+  "ui.shared.enum.field.device": {
+    "label": "Device",
+    "value": "Device"
+  },
+  "ui.shared.enum.field.referrer": {
+    "label": "Referrer",
+    "value": "Referrer"
+  },
+  "ui.shared.enum.field.current": {
+    "label": "Current password",
+    "value": "Current password"
+  },
+  "ui.shared.enum.field.password": {
+    "label": "Password",
+    "value": "Password"
+  },
+  "ui.shared.field.required": {
+    "label": "Please complete {field}.",
+    "value": "Please complete {field}."
+  },
+  "ui.shared.field.email": {
+    "label": "Please enter a valid email address.",
+    "value": "Please enter a valid email address."
+  },
+  "ui.shared.field.url": {
+    "label": "Please enter a complete website address.",
+    "value": "Please enter a complete website address."
+  },
+  "ui.shared.field.short": {
+    "label": "Use at least {minimum} characters.",
+    "value": "Use at least {minimum} characters."
+  },
+  "ui.shared.field.long": {
+    "label": "Use no more than {maximum} characters.",
+    "value": "Use no more than {maximum} characters."
+  },
+  "ui.shared.field.range": {
+    "label": "Please enter a value from {minimum} to {maximum}.",
+    "value": "Please enter a value from {minimum} to {maximum}."
+  },
+  "ui.shared.field.invalid": {
+    "label": "Please check this value.",
+    "value": "Please check this value."
+  },
+  "ui.shared.preview.banner": {
+    "label": "Draft preview — changes are not submitted from this view.",
+    "value": "Draft preview — changes are not submitted from this view."
+  },
+  "ui.shared.editor.parameters": {
+    "label": "Keep these placeholders: {parameters}.",
+    "value": "Keep these placeholders: {parameters}."
+  },
+  "ui.shared.editor.reset": {
+    "label": "Reset to default",
+    "value": "Reset to default"
+  },
+  "ui.shared.editor.published": {
+    "label": "Published wording changes appear after the page is refreshed.",
+    "value": "Published wording changes appear after the page is refreshed."
+  },
+  "ui.shared.preview.member": {
+    "label": "Member preview",
+    "value": "Member preview"
+  },
+  "ui.shared.preview.partner": {
+    "label": "Partner preview",
+    "value": "Partner preview"
+  },
+  "ui.shared.preview.controls": {
+    "label": "Preview account state",
+    "value": "Preview account state"
+  },
+  "ui.shared.networkError": {
+    "label": "Connection error",
+    "value": "Unable to connect. Check your connection and try again."
+  },
+  "ui.shared.responseError": {
+    "label": "Response error",
+    "value": "Unable to read the response. Please refresh and try again."
+  },
+  "ui.shared.enum.field.path": {
+    "label": "Field name / Page path",
+    "value": "page path"
+  }
+}

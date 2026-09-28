@@ -5,10 +5,16 @@
 .member {position:relative; min-height:max(560px, 72svh); display:flex; flex-direction:column; justify-content:center; padding-top:60px; padding-bottom:60px;}
 .member-reveal {max-width:760px;}
 .path-clear-left .member-reveal {margin-left:auto; text-align:right;}
+/* Portrait on the road side, name on the outside. Names size to their column so the longest still fits. */
+.member:not(.member-open) .member-reveal {--photo:clamp(220px, 24vw, 360px); width:100%; max-width:1140px; display:grid; grid-template:"copy photo" / minmax(0, 1fr) var(--photo); gap:clamp(32px, 4.5vw, 72px); align-items:center;}
+.path-clear-left:not(.member-open) .member-reveal {grid-template:"photo copy" / var(--photo) minmax(0, 1fr);}
+.member-copy {grid-area:copy; container-type:inline-size;}
+.member-photo {grid-area:photo; margin:0; aspect-ratio:4 / 5; overflow:hidden; background:#e6e6e2;}
+.member-photo img {width:100%; height:100%; object-fit:cover; object-position:var(--focus, 50% 30%);}
 .member-no {color:var(--muted);}
 .member-name {font-size:clamp(48px, 7.2vw, 112px); margin:24px 0 22px; text-transform:uppercase;}
+.member-copy .member-name {font-size:min(clamp(48px, 7.2vw, 112px), 11.6cqi);}
 .member-sector {color:var(--muted);}
-.member-since {display:inline-block; margin-top:28px; padding:12px 0; border-top:1px solid var(--line); min-width:min(100%, 320px); font-size:12px; letter-spacing:.16em; text-transform:uppercase;}
 .member-open .pill {margin-top:34px;}
 .member-open .member-name {margin-top:28px;}
 .road-exit {height:320px;}
@@ -17,11 +23,18 @@
 .members-ready .member-reveal {clip-path:inset(0 0 calc(100% - var(--reveal, 0) * 100%) 0); opacity:calc(.15 + var(--reveal, 0) * .85); transform:translateY(calc((1 - var(--reveal, 0)) * 18px));}
 .members-ready.motion-off .member-reveal {clip-path:none; opacity:1; transform:none;}
 
+/* Tablet and phone: photo above the name, so the name keeps the full column. */
+@media (max-width:1024px) {
+  .member:not(.member-open) .member-reveal, .path-clear-left:not(.member-open) .member-reveal {--photo:min(100%, 300px); grid-template:"photo" "copy" / minmax(0, 1fr); gap:10px;}
+  .member-photo {width:var(--photo);}
+  .path-clear-left .member-photo {justify-self:end;}
+}
+
 @media (max-width:760px) {
   .members-intro {display:block; padding-bottom:20px;}
   .members-journey {padding-top:100px;}
   .member {min-height:max(460px, 64svh);}
   .member-name {font-size:clamp(33px, 10vw, 64px); margin:20px 0 16px; letter-spacing:-.058em; overflow-wrap:anywhere;}
-  .member-since {font-size:10px; margin-top:20px;}
+  .member-copy .member-name {font-size:min(clamp(33px, 10vw, 64px), 11.6cqi);}
   .road-exit {height:220px;}
 }

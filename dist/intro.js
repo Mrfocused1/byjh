@@ -79,8 +79,8 @@
       const skip = document.createElement('button');
       skip.type = 'button';
       skip.className = 'byjh-intro-skip';
-      skip.textContent = 'SKIP';
-      skip.setAttribute('aria-label', 'Skip intro');
+      skip.textContent = (window.BYJH_COPY||{})['intro.skip']??'SKIP';
+      skip.setAttribute('aria-label', (window.BYJH_COPY||{})['intro.skipLabel']??'Skip intro');
       overlay.append(skip);
     }
     overlay.addEventListener('click', finish);

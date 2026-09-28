@@ -1,0 +1,374 @@
+{
+  "member.apply.first": {
+    "label": "Member application / Heading first line",
+    "value": "BECOME A"
+  },
+  "member.apply.second": {
+    "label": "Member application / Heading second line",
+    "value": "MEMBER."
+  },
+  "member.login.first": {
+    "label": "Member login / Heading first line",
+    "value": "MEMBER"
+  },
+  "member.login.second": {
+    "label": "Member login / Heading second line",
+    "value": "ACCESS."
+  },
+  "member.apply.description": {
+    "label": "Member application / Introduction",
+    "value": "Apply to join the BYJH community. Tell us a little about yourself and we’ll consider your application."
+  },
+  "member.login.description": {
+    "label": "Member login / Introduction",
+    "value": "Sign in to your member account. Every detail, taken care of."
+  },
+  "member.join": {
+    "label": "Member / Pinned button",
+    "value": "Become a member"
+  },
+  "member.signin": {
+    "label": "Member / Pinned sign-in link",
+    "value": "Already a member? Sign in"
+  },
+  "member.access": {
+    "label": "Member / Header login link",
+    "value": "MEMBER LOGIN"
+  },
+  "partner.apply.first": {
+    "label": "Partner application / Heading first line",
+    "value": "BECOME A"
+  },
+  "partner.apply.second": {
+    "label": "Partner application / Heading second line",
+    "value": "PARTNER."
+  },
+  "partner.login.first": {
+    "label": "Partner login / Heading first line",
+    "value": "PARTNER"
+  },
+  "partner.login.second": {
+    "label": "Partner login / Heading second line",
+    "value": "ACCESS."
+  },
+  "partner.apply.description": {
+    "label": "Partner application / Introduction",
+    "value": "Introduce your business. Our team will review your application and explore how we can work together."
+  },
+  "partner.login.description": {
+    "label": "Partner login / Introduction",
+    "value": "Sign in to your partner account. Every detail, taken care of."
+  },
+  "partner.join": {
+    "label": "Partner / Pinned button",
+    "value": "Become a partner"
+  },
+  "partner.signin": {
+    "label": "Partner / Pinned sign-in link",
+    "value": "Already a partner? Sign in"
+  },
+  "partner.access": {
+    "label": "Partner / Header login link",
+    "value": "PARTNER LOGIN"
+  },
+  "brand": {
+    "label": "Brand descriptor",
+    "value": "BESPOKE LIFESTYLE\nMANAGEMENT"
+  },
+  "quote.eyebrow": {
+    "label": "Login image / Eyebrow",
+    "value": "THE ART OF EVERY JOURNEY"
+  },
+  "quote.first": {
+    "label": "Login image / Heading first line",
+    "value": "OUR FLEET."
+  },
+  "quote.second": {
+    "label": "Login image / Heading second line",
+    "value": "YOUR WORLD."
+  },
+  "quote.body": {
+    "label": "Login image / Description",
+    "value": "Bespoke lifestyle management.\nEvery journey. BYJH."
+  },
+  "quote.alt": {
+    "label": "Login image / Alternative text",
+    "value": "A beautifully appointed BYJH private cabin"
+  },
+  "tagline": {
+    "label": "Access pages / Footer tagline",
+    "value": "Discreet. Personal. Considered."
+  },
+  "back": {
+    "label": "Access pages / Back link",
+    "value": "← Back to BYJH"
+  },
+  "intro.skip": {
+    "label": "Intro / Skip label",
+    "value": "SKIP"
+  },
+  "intro.skipLabel": {
+    "label": "Intro / Accessible skip label",
+    "value": "Skip intro"
+  },
+  "film.play": {
+    "label": "Homepage / Play label",
+    "value": "PLAY FILM ▷"
+  },
+  "film.pause": {
+    "label": "Homepage / Pause label",
+    "value": "PAUSE FILM Ⅱ"
+  },
+  "motion.play": {
+    "label": "Partners / Play label",
+    "value": "PLAY MOTION ▷"
+  },
+  "motion.pause": {
+    "label": "Partners / Pause label",
+    "value": "PAUSE MOTION Ⅱ"
+  },
+  "form.submit": {
+    "label": "Application / Submit button",
+    "value": "Submit application"
+  },
+  "form.signin": {
+    "label": "Login / Submit button",
+    "value": "Sign in"
+  },
+  "form.consent": {
+    "label": "Application / Consent",
+    "value": "I agree that BYJH can use these details to review my application and manage my account."
+  },
+  "form.passwordHint": {
+    "label": "Application / Password hint",
+    "value": "At least 12 characters. You’ll use this to access your account."
+  },
+  "form.already": {
+    "label": "Application / Existing account prompt",
+    "value": "Already part of our world?"
+  },
+  "form.apply": {
+    "label": "Login / Apply link",
+    "value": "Apply to join"
+  },
+  "form.help": {
+    "label": "Login / Help prompt",
+    "value": "Need help signing in?"
+  },
+  "form.contact": {
+    "label": "Login / Help link",
+    "value": "Contact the team"
+  },
+  "form.name": {
+    "label": "Form / Name label",
+    "value": "Full name"
+  },
+  "form.company": {
+    "label": "Form / Company label",
+    "value": "Company name"
+  },
+  "form.email": {
+    "label": "Form / Email label",
+    "value": "Email address"
+  },
+  "form.phone": {
+    "label": "Form / Phone label",
+    "value": "Phone number (optional)"
+  },
+  "form.website": {
+    "label": "Form / Website label",
+    "value": "Business website (optional)"
+  },
+  "form.memberMessage": {
+    "label": "Form / Member message label",
+    "value": "What would you like us to know? (optional)"
+  },
+  "form.partnerMessage": {
+    "label": "Form / Partner message label",
+    "value": "Tell us about your business (optional)"
+  },
+  "form.createPassword": {
+    "label": "Form / Create password label",
+    "value": "Create a password"
+  },
+  "form.password": {
+    "label": "Form / Password label",
+    "value": "Password"
+  },
+  "form.memberSector": {
+    "label": "Form / Member interests label",
+    "value": "Your interests"
+  },
+  "form.partnerSector": {
+    "label": "Form / Partner sector label",
+    "value": "Business sector"
+  },
+  "ui.access.afa5ebf8ae": {
+    "label": "Unable to connect to the local workspace. Please reload the page.",
+    "value": "Unable to connect to the local workspace. Please reload the page.",
+    "locations": [
+      "auth:18"
+    ]
+  },
+  "ui.access.34d8b60fe2": {
+    "label": "Hide",
+    "value": "Hide",
+    "locations": [
+      "auth:16"
+    ]
+  },
+  "ui.access.d97d1ee339": {
+    "label": "Show",
+    "value": "Show",
+    "locations": [
+      "auth:16",
+      "auth:14"
+    ]
+  },
+  "ui.access.b3994ed4a1": {
+    "label": "THE PRIVATE OFFICE",
+    "value": "THE PRIVATE OFFICE",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.ebe3bf167b": {
+    "label": "WELCOME TO BYJH",
+    "value": "WELCOME TO BYJH",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.144b49b7c5": {
+    "label": "Account type",
+    "value": "Account type",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.1cb449c112": {
+    "label": "Members",
+    "value": "Members",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.aa16f0e59d": {
+    "label": "Partners",
+    "value": "Partners",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.a9a13761cc": {
+    "label": "https://",
+    "value": "https://",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.137bd6ea96": {
+    "label": "Create admin account",
+    "value": "Create admin account",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.95836fa0d4": {
+    "label": "Looking for member access?",
+    "value": "Looking for member access?",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.319137ca1e": {
+    "label": "This account will manage the website, members and partners.",
+    "value": "This account will manage the website, members and partners.",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.d09d7b5217": {
+    "label": "BYJH",
+    "value": "BYJH",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.044b852f30": {
+    "label": "Show password",
+    "value": "Show password",
+    "locations": [
+      "auth:14"
+    ]
+  },
+  "ui.access.e7892b0be2": {
+    "label": "Sign in to your private office. Every detail, taken care of.",
+    "value": "Sign in to your private office. Every detail, taken care of.",
+    "locations": [
+      "auth:13"
+    ]
+  },
+  "ui.access.9fa6ecbd46": {
+    "label": "Create the owner account for your local BYJH workspace.",
+    "value": "Create the owner account for your local BYJH workspace.",
+    "locations": [
+      "auth:13"
+    ]
+  },
+  "ui.access.24b61d9aa8": {
+    "label": "BECOME A",
+    "value": "BECOME A",
+    "locations": [
+      "auth:12"
+    ]
+  },
+  "ui.access.d24a52a590": {
+    "label": "ACCESS.",
+    "value": "ACCESS.",
+    "locations": [
+      "auth:12"
+    ]
+  },
+  "ui.access.b521caa6e1": {
+    "label": "ADMIN",
+    "value": "ADMIN",
+    "locations": [
+      "auth:12"
+    ]
+  },
+  "ui.access.44f8ed00b3": {
+    "label": "YOUR",
+    "value": "YOUR",
+    "locations": [
+      "auth:12"
+    ]
+  },
+  "ui.access.562eb1dd73": {
+    "label": "PRIVATE OFFICE.",
+    "value": "PRIVATE OFFICE.",
+    "locations": [
+      "auth:12"
+    ]
+  },
+  "ui.access.applicationEyebrow": {
+    "label": "{role} APPLICATION",
+    "value": "{role} APPLICATION"
+  },
+  "ui.access.accessEyebrow": {
+    "label": "{role} ACCESS",
+    "value": "{role} ACCESS"
+  },
+  "ui.access.notMember": {
+    "label": "Not yet a member?",
+    "value": "Not yet a member?"
+  },
+  "ui.access.notPartner": {
+    "label": "Not yet a partner?",
+    "value": "Not yet a partner?"
+  },
+  "ui.access.hidePassword": {
+    "label": "Hide password",
+    "value": "Hide password"
+  }
+}

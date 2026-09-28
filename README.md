@@ -4,13 +4,15 @@ Complete source and assets for the approved BYJH website, exported on 6 Septembe
 
 ## Run locally
 
-This is a static HTML, CSS, and JavaScript site. No dependency installation or build step is required.
+The website now includes a persistent admin CMS/CRM, applications, and member/partner accounts. Start the local backend:
 
 ```sh
-python3 -m http.server 8080 --directory dist
+python3 server.py
 ```
 
-Open http://localhost:8080. Serve the site over HTTP rather than opening the HTML files directly.
+Open http://127.0.0.1:8080. Open http://127.0.0.1:8080/admin/ to create your owner account on first use. You can also double-click **Start BYJH.command**.
+
+See [WORKSPACE.md](WORKSPACE.md) for account workflows, editing, data storage, tests and the scope of this local implementation. The original static-only hosting instructions below describe the public design export; they do not deploy the new backend.
 
 ## Pages and features
 

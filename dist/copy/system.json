@@ -1,0 +1,352 @@
+{
+  "error.d2306dd897": {
+    "label": "Please enter a valid email address.",
+    "value": "Please enter a valid email address.",
+    "kind": "error"
+  },
+  "error.45dff287f6": {
+    "label": "Use a password with 12–128 characters.",
+    "value": "Use a password with 12–128 characters.",
+    "kind": "error"
+  },
+  "error.1649a7a0a2": {
+    "label": "Please enter your password.",
+    "value": "Please enter your password.",
+    "kind": "error"
+  },
+  "error.f1124044fb": {
+    "label": "Not found.",
+    "value": "Not found.",
+    "kind": "error"
+  },
+  "error.b131870c3d": {
+    "label": "Too many attempts. Please try again in 15 minutes.",
+    "value": "Too many attempts. Please try again in 15 minutes.",
+    "kind": "error"
+  },
+  "error.7d7e2286ee": {
+    "label": "Local access only.",
+    "value": "Local access only.",
+    "kind": "error"
+  },
+  "error.08913d8528": {
+    "label": "Please sign in to continue.",
+    "value": "Please sign in to continue.",
+    "kind": "error"
+  },
+  "error.0f9f92c7b0": {
+    "label": "Administrator access required.",
+    "value": "Administrator access required.",
+    "kind": "error"
+  },
+  "error.ec248e4d63": {
+    "label": "Request origin not allowed.",
+    "value": "Request origin not allowed.",
+    "kind": "error"
+  },
+  "error.4aa5c2d8ff": {
+    "label": "Invalid request.",
+    "value": "Invalid request.",
+    "kind": "error"
+  },
+  "error.496edfcd6e": {
+    "label": "Choose member or partner.",
+    "value": "Choose member or partner.",
+    "kind": "error"
+  },
+  "error.610fdaab94": {
+    "label": "Please confirm we can use your details to review this application.",
+    "value": "Please confirm we can use your details to review this application.",
+    "kind": "error"
+  },
+  "error.9b752e9120": {
+    "label": "Invalid page",
+    "value": "Invalid page",
+    "kind": "error"
+  },
+  "error.4d7a3a35fe": {
+    "label": "Invalid device",
+    "value": "Invalid device",
+    "kind": "error"
+  },
+  "error.1938de6a9e": {
+    "label": "Invalid account status.",
+    "value": "Invalid account status.",
+    "kind": "error"
+  },
+  "error.6e56cd27bc": {
+    "label": "Invalid request status.",
+    "value": "Invalid request status.",
+    "kind": "error"
+  },
+  "error.1900504983": {
+    "label": "Invalid page.",
+    "value": "Invalid page.",
+    "kind": "error"
+  },
+  "error.0721653874": {
+    "label": "Files must be smaller than 50 MB.",
+    "value": "Files must be smaller than 50 MB.",
+    "kind": "error"
+  },
+  "error.17d6e77eae": {
+    "label": "Upload a valid JPG, PNG, GIF, WebP, MP4 or WebM file.",
+    "value": "Upload a valid JPG, PNG, GIF, WebP, MP4 or WebM file.",
+    "kind": "error"
+  },
+  "error.ff623ac92e": {
+    "label": "Choose an existing site asset and a library file.",
+    "value": "Choose an existing site asset and a library file.",
+    "kind": "error"
+  },
+  "error.9c0568f9d4": {
+    "label": "Replace an image with an image, or a video with a video.",
+    "value": "Replace an image with an image, or a video with a video.",
+    "kind": "error"
+  },
+  "error.71c6e65e4e": {
+    "label": "Use the same video format to preserve playback support.",
+    "value": "Use the same video format to preserve playback support.",
+    "kind": "error"
+  },
+  "error.1e0e68bd1f": {
+    "label": "Choose an original or uploaded file, not another replaced asset.",
+    "value": "Choose an original or uploaded file, not another replaced asset.",
+    "kind": "error"
+  },
+  "error.1c6de46f08": {
+    "label": "This original is used by another replacement. Restore that replacement first, or upload a separate file.",
+    "value": "This original is used by another replacement. Restore that replacement first, or upload a separate file.",
+    "kind": "error"
+  },
+  "error.427d5c89b5": {
+    "label": "Request is too large or empty.",
+    "value": "Request is too large or empty.",
+    "kind": "error"
+  },
+  "error.34182782f9": {
+    "label": "An account with that email already exists. Please sign in.",
+    "value": "An account with that email already exists. Please sign in.",
+    "kind": "error"
+  },
+  "error.0e65acd622": {
+    "label": "Admin account is already configured.",
+    "value": "Admin account is already configured.",
+    "kind": "error"
+  },
+  "error.73ea9a3917": {
+    "label": "Email or password is incorrect for this portal.",
+    "value": "Email or password is incorrect for this portal.",
+    "kind": "error"
+  },
+  "error.3ae433e5e7": {
+    "label": "Current password is incorrect.",
+    "value": "Current password is incorrect.",
+    "kind": "error"
+  },
+  "error.0c9b4c4e2a": {
+    "label": "Requests are available after your account is approved.",
+    "value": "Requests are available after your account is approved.",
+    "kind": "error"
+  },
+  "error.fe6e398aaf": {
+    "label": "Record not found.",
+    "value": "Record not found.",
+    "kind": "error"
+  },
+  "error.b83a68f5a8": {
+    "label": "Request not found.",
+    "value": "Request not found.",
+    "kind": "error"
+  },
+  "error.f5a8dc85e9": {
+    "label": "This page changed in another session. Reload before saving.",
+    "value": "This page changed in another session. Reload before saving.",
+    "kind": "error"
+  },
+  "error.170405dd61": {
+    "label": "Invalid content.",
+    "value": "Invalid content.",
+    "kind": "error"
+  },
+  "error.5828231167": {
+    "label": "Invalid file.",
+    "value": "Invalid file.",
+    "kind": "error"
+  },
+  "error.db2a7e6a98": {
+    "label": "Invalid content field.",
+    "value": "Invalid content field.",
+    "kind": "error"
+  },
+  "error.66c3bce223": {
+    "label": "Seat count must be between 1 and 100.",
+    "value": "Seat count must be between 1 and 100.",
+    "kind": "error"
+  },
+  "error.f2cf24b868": {
+    "label": "Fleet category headings must be non-empty and unique within each vehicle.",
+    "value": "Fleet category headings must be non-empty and unique within each vehicle.",
+    "kind": "error"
+  },
+  "error.invalidField": {
+    "label": "Invalid {field}.",
+    "value": "Invalid {field}.",
+    "kind": "error"
+  },
+  "error.requiredField": {
+    "label": "Please provide a valid {field}.",
+    "value": "Please provide a valid {field}.",
+    "kind": "error"
+  },
+  "error.copyPlaceholders": {
+    "label": "Keep the original placeholders in this wording.",
+    "value": "Keep the original placeholders in this wording.",
+    "kind": "error"
+  },
+  "error.previewReadOnly": {
+    "label": "This is a draft preview. Open the live workspace to make changes.",
+    "value": "This is a draft preview. Open the live workspace to make changes.",
+    "kind": "error"
+  },
+  "error.pageNotFound": {
+    "label": "This page could not be found.",
+    "value": "This page could not be found.",
+    "kind": "error"
+  },
+  "error.pageNotFoundTitle": {
+    "label": "Page not found.",
+    "value": "Page not found.",
+    "kind": "error"
+  },
+  "error.pageNotFoundLink": {
+    "label": "Back to BYJH",
+    "value": "Back to BYJH",
+    "kind": "error"
+  },
+  "error.generic": {
+    "label": "Something went wrong. Please try again.",
+    "value": "Something went wrong. Please try again.",
+    "kind": "error"
+  },
+  "activity.workspaceCreated": {
+    "label": "Created the workspace",
+    "value": "Created the workspace"
+  },
+  "activity.applicationSubmitted": {
+    "label": "Submitted a {role} application",
+    "value": "Submitted a {role} application"
+  },
+  "activity.accountUpdated": {
+    "label": "Updated account details",
+    "value": "Updated account details"
+  },
+  "activity.requestSent": {
+    "label": "Sent a {role} request",
+    "value": "Sent a {role} request"
+  },
+  "activity.personUpdated": {
+    "label": "Updated {name} · {status}",
+    "value": "Updated {name} · {status}"
+  },
+  "activity.requestUpdated": {
+    "label": "Updated a concierge request",
+    "value": "Updated a concierge request"
+  },
+  "activity.draftSaved": {
+    "label": "Saved a draft for {page}",
+    "value": "Saved a draft for {page}"
+  },
+  "activity.pagePublished": {
+    "label": "Published {page}",
+    "value": "Published {page}"
+  },
+  "activity.draftDiscarded": {
+    "label": "Discarded draft changes for {page}",
+    "value": "Discarded draft changes for {page}"
+  },
+  "activity.uploaded": {
+    "label": "Uploaded {filename}",
+    "value": "Uploaded {filename}"
+  },
+  "activity.mediaUpdated": {
+    "label": "Updated media · {filename}",
+    "value": "Updated media · {filename}"
+  },
+  "page.home": {
+    "label": "Home",
+    "value": "Home"
+  },
+  "page.members": {
+    "label": "Members",
+    "value": "Members"
+  },
+  "page.partners": {
+    "label": "Partners",
+    "value": "Partners"
+  },
+  "page.gallery": {
+    "label": "Gallery",
+    "value": "Gallery"
+  },
+  "page.contact": {
+    "label": "Contact",
+    "value": "Contact"
+  },
+  "page.interface": {
+    "label": "Forms & access",
+    "value": "Forms & access"
+  },
+  "page.copy-shared": {
+    "label": "Navigation & controls",
+    "value": "Navigation & controls"
+  },
+  "page.copy-admin": {
+    "label": "Admin workspace",
+    "value": "Admin workspace"
+  },
+  "page.copy-account": {
+    "label": "Member & partner accounts",
+    "value": "Member & partner accounts"
+  },
+  "page.copy-public": {
+    "label": "Public interactions",
+    "value": "Public interactions"
+  },
+  "page.copy-system": {
+    "label": "System messages",
+    "value": "System messages"
+  },
+  "document.admin": {
+    "label": "Page title / Private office — BYJH",
+    "value": "Private office — BYJH"
+  },
+  "document.memberLogin": {
+    "label": "Page title / Member access — BYJH",
+    "value": "Member access — BYJH"
+  },
+  "document.partnerLogin": {
+    "label": "Page title / Partner access — BYJH",
+    "value": "Partner access — BYJH"
+  },
+  "document.account": {
+    "label": "Page title / Your account — BYJH",
+    "value": "Your account — BYJH"
+  },
+  "document.apply": {
+    "label": "Page title / Application",
+    "value": "Your introduction — BYJH"
+  },
+  "loading.open": {
+    "label": "Initial page loading message",
+    "value": "Opening BYJH…"
+  },
+  "document.adminLogin": {
+    "label": "Page title / Admin access",
+    "value": "Admin access — BYJH"
+  },
+  "document.login": {
+    "label": "Page title / Account access",
+    "value": "Account access — BYJH"
+  }
+}

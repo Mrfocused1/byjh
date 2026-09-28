@@ -1,0 +1,232 @@
+{
+  "ui.public.d4133ad73b": {
+    "label": "Member login",
+    "value": "Member login",
+    "locations": [
+      "connect:15"
+    ]
+  },
+  "ui.public.babff0f460": {
+    "label": "Partner login",
+    "value": "Partner login",
+    "locations": [
+      "connect:15"
+    ]
+  },
+  "ui.public.63a139fe57": {
+    "label": "Private office",
+    "value": "Private office",
+    "locations": [
+      "connect:15"
+    ]
+  },
+  "ui.public.1051a26d96": {
+    "label": " LOGIN",
+    "value": " LOGIN",
+    "locations": [
+      "connect:14"
+    ]
+  },
+  "ui.public.b69e28ef14": {
+    "label": "Close application",
+    "value": "Close application",
+    "locations": [
+      "connect:10"
+    ]
+  },
+  "ui.public.2553aa056c": {
+    "label": "BYJH application form",
+    "value": "BYJH application form",
+    "locations": [
+      "connect:10"
+    ]
+  },
+  "ui.public.93a509f5ef": {
+    "label": "BYJH application",
+    "value": "BYJH application",
+    "locations": [
+      "connect:10"
+    ]
+  },
+  "ui.public.11c353f0ce": {
+    "label": "Pause background film",
+    "value": "Pause background film",
+    "locations": [
+      "common:185"
+    ]
+  },
+  "ui.public.db18a090d4": {
+    "label": "Play background film",
+    "value": "Play background film",
+    "locations": [
+      "common:185"
+    ]
+  },
+  "ui.public.3fe190745f": {
+    "label": "Play partner animation",
+    "value": "Play partner animation",
+    "locations": [
+      "common:174"
+    ]
+  },
+  "ui.public.0e430728f5": {
+    "label": "Pause partner animation",
+    "value": "Pause partner animation",
+    "locations": [
+      "common:174"
+    ]
+  },
+  "ui.public.d4fcc5e448": {
+    "label": "PLAY FILM ▷",
+    "value": "PLAY FILM ▷",
+    "locations": [
+      "common:168"
+    ]
+  },
+  "ui.public.b21463b077": {
+    "label": "{seats} SEATER / {value1}",
+    "value": "{seats} SEATER / {value1}",
+    "locations": [
+      "common:94"
+    ]
+  },
+  "ui.public.efd197f3fc": {
+    "label": "Main navigation",
+    "value": "Main navigation",
+    "locations": [
+      "common:57"
+    ]
+  },
+  "ui.public.f2cca83ab2": {
+    "label": "Image unavailable",
+    "value": "Image unavailable",
+    "locations": [
+      "common:38"
+    ]
+  },
+  "ui.public.ec58d0c7ae": {
+    "label": "Select and copy your enquiry above.",
+    "value": "Select and copy your enquiry above.",
+    "locations": [
+      "contact:70"
+    ]
+  },
+  "ui.public.aeae243d69": {
+    "label": "Enquiry copied to your clipboard.",
+    "value": "Enquiry copied to your clipboard.",
+    "locations": [
+      "contact:67"
+    ]
+  },
+  "ui.public.64c3e86b8e": {
+    "label": "Your email app should now be open. Press send there to complete your enquiry.",
+    "value": "Your email app should now be open. Press send there to complete your enquiry.",
+    "locations": [
+      "contact:62"
+    ]
+  },
+  "ui.public.7a159b62f0": {
+    "label": "BYJH enquiry — {textContent}",
+    "value": "BYJH enquiry — {textContent}",
+    "locations": [
+      "contact:60"
+    ]
+  },
+  "ui.public.9e029599e5": {
+    "label": "Message:",
+    "value": "Message:",
+    "locations": [
+      "contact:46"
+    ]
+  },
+  "ui.public.4efd6f827c": {
+    "label": "To be confirmed",
+    "value": "To be confirmed",
+    "locations": [
+      "contact:44",
+      "contact:43",
+      "contact:42"
+    ]
+  },
+  "ui.public.2b4b82c8bb": {
+    "label": "Duration: {value1}",
+    "value": "Duration: {value1}",
+    "locations": [
+      "contact:44"
+    ]
+  },
+  "ui.public.9a0d1c2269": {
+    "label": "Starting location: {value1}",
+    "value": "Starting location: {value1}",
+    "locations": [
+      "contact:43"
+    ]
+  },
+  "ui.public.ef6fdbb200": {
+    "label": "Date: {value1}",
+    "value": "Date: {value1}",
+    "locations": [
+      "contact:42"
+    ]
+  },
+  "ui.public.7ae8f76282": {
+    "label": "Vehicle: {textContent}",
+    "value": "Vehicle: {textContent}",
+    "locations": [
+      "contact:41"
+    ]
+  },
+  "ui.public.20a0418296": {
+    "label": "Not provided",
+    "value": "Not provided",
+    "locations": [
+      "contact:38"
+    ]
+  },
+  "ui.public.a6f67a777b": {
+    "label": "Phone: {value1}",
+    "value": "Phone: {value1}",
+    "locations": [
+      "contact:38"
+    ]
+  },
+  "ui.public.cad2e05287": {
+    "label": "Email: {value1}",
+    "value": "Email: {value1}",
+    "locations": [
+      "contact:37"
+    ]
+  },
+  "ui.public.a1f37535e2": {
+    "label": "Name: {value1}",
+    "value": "Name: {value1}",
+    "locations": [
+      "contact:36"
+    ]
+  },
+  "ui.public.5416951f64": {
+    "label": "BYJH — {textContent}",
+    "value": "BYJH — {textContent}",
+    "locations": [
+      "contact:34"
+    ]
+  },
+  "ui.public.978b4a6d83": {
+    "label": "YOUR NAME HERE",
+    "value": "YOUR NAME HERE",
+    "locations": [
+      "members:28"
+    ]
+  },
+  "ui.public.1992d5e8d5": {
+    "label": "NEXT",
+    "value": "NEXT",
+    "locations": [
+      "members:28"
+    ]
+  },
+  "ui.public.vehicleAlt": {
+    "label": "{name} — BYJH {model} interior",
+    "value": "{name} — BYJH {model} interior"
+  }
+}
