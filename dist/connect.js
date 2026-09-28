@@ -2,6 +2,8 @@
   const B=window.BYJHCopy||{t:(_key,fallback,values={})=>fallback.replace(/\{([A-Za-z_][\w]*)\}/g,(match,key)=>key in values?String(values[key]):match),h(key,fallback,values){return this.t(key,fallback,values).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}};
 /* Public membership and partnership entry points; persisted by the local server. */
 (()=>{
+  // Accounts need server.py, which injects BYJH_COPY into every page. Static hosting has no backend, so show no entry points there.
+  if(!window.BYJH_COPY)return;
 
   const C=(key,fallback)=>(window.BYJH_COPY||{})[key]??fallback;
   const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

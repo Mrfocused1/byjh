@@ -1,4 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/(admin|account|apply|login|copy|members/login|partners/login)(/.*)?", "destination": "/", "permanent": false }
+  ]
 }
