@@ -8,7 +8,7 @@ const {ContentPage,InterfaceCopy,escapeHtml,GROUPS,ITEM_ID}=require('./_lib/cms'
 const store=require('./_lib/store');
 const assets=require('./_lib/assets.json');
 
-const AUTH_DISABLED=true;
+const AUTH_DISABLED=false;
 const DIST=path.join(__dirname,'..','dist');
 const COPY_PAGES={
   'interface':['Forms & access','site-copy.json'],
