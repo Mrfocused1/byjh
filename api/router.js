@@ -36,7 +36,7 @@ const SCHEMAS=Object.fromEntries(Object.entries(COPY_PAGES).map(([k,[,file]])=>[
 const DEFAULTS={};for(const s of Object.values(SCHEMAS))for(const [k,v] of Object.entries(s))DEFAULTS[k]=v.value;
 const TOKEN=/\{([A-Za-z_]\w*)\}/g;
 const now=()=>new Date().toISOString().replace(/\.\d+Z$/,'+00:00');
-const parse=(page,values)=>page in COPY_PAGES?new InterfaceCopy(read(PAGES[page][1]),values):new ContentPage(read(PAGES[page][1]),values,{group:GROUPS[page]});
+const parse=(page,values)=>page in COPY_PAGES?new InterfaceCopy(read(PAGES[page][1]),values):new ContentPage(read(PAGES[page][1]),values,{groups:GROUPS[page]});
 // The admin only shows wording a visitor can see; alt text, aria-labels, tab titles and meta descriptions are hidden.
 const HIDDEN=/ \/ (alt|aria-label|title|content)$/;
 const cap=t=>t.replace(/(^|\s)\S/g,c=>c.toUpperCase());
@@ -44,12 +44,14 @@ const ROLE={
   members:{'member-name':'Name','member-sector':'What they do'},
   partners:{span:'Name'},
   gallery:{span:'Title'},
+  features:{h3:'Title',p:'Text'},
 };
 function friendlyFields(fields,page){
   const visible=fields.filter(f=>!HIDDEN.test(f.label)&&f.original!=='Skip to content');
   const counts={},seen={},labels=visible.map(f=>{
     if(f.item){
       if(f.type==='image')return 'Picture';
+      if(f.type==='video')return 'Video';
       const roles=ROLE[f.group]||{};
       return roles[(f.cls||'').split(/\s+/).find(c=>roles[c])||f.tag]||'Text';
     }
@@ -58,11 +60,12 @@ function friendlyFields(fields,page){
       const [,vehicle,kind,cat]=parts;
       const v=cap(vehicle||'Fleet');
       if(f.type==='image')return `${v} · Picture`;
+      if(f.item)return `${v} · ${cat}`;
       if(kind==='specifications'){return / heading$/.test(f.label)?`${v} · ${(cat||'').replace(/ heading$/,'')} (section title)`:`${v} · ${cat} · detail`;}
       return `${v} · ${{name:'Name',model:'Model',seats:'Number of seats'}[kind]||cap(kind||'')}`;
     }
     const base=parts[0]==='Page'?'Top of page':cap(parts[0]);
-    return f.type==='image'?base+' · Picture':base;
+    return f.type==='image'?base+' · Picture':f.type==='video'?base+' · Video':base;
   });
   visible.forEach((f,i)=>{if(!f.item)counts[labels[i]]=(counts[labels[i]]||0)+1;});
   return visible.map((f,i)=>{
@@ -119,6 +122,13 @@ async function api(req,res,route,query){
     const status=['pending','active','declined','suspended'].includes(query.status)?query.status:'pending';
     return send(res,200,{preview:true,user:{id:'preview',name:role==='member'?'Member preview':'Partner preview',email:'preview@example.invalid',role,status,company:'',phone:'',website:'',sector:'',created:now()},requests:[]});
   }
+  if(route==='upload-token'){
+    const {handleUpload}=require('@vercel/blob/client');
+    const json=await handleUpload({body:data,request:req,
+      onBeforeGenerateToken:async()=>({allowedContentTypes:['video/mp4','video/webm','image/jpeg','image/png','image/webp','image/gif'],maximumSizeInBytes:300*1024*1024,addRandomSuffix:true}),
+      onUploadCompleted:async()=>{}});
+    return send(res,200,json);
+  }
   if(['account','password','admin/person','admin/request','requests','login','setup','apply'].includes(route))
     throw fail('Not available in test mode.',501);
   const state=await store.load();
@@ -149,21 +159,28 @@ async function api(req,res,route,query){
       const fields=data.fields;
       if(!fields||typeof fields!=='object'||Array.isArray(fields))throw fail('Invalid content.');
       let items=data.items;
-      if(page in GROUPS){
-        const group=GROUPS[page],original=parse(page,{}).groups[0];
-        if(items===undefined)items=(row.draft.__items||{});
+      const groupDefs=page in GROUPS?parse(page,{}).groups:[];
+      if(groupDefs.length){
+        if(items===undefined)items=row.draft.__items||{};
         if(typeof items!=='object'||items===null||Array.isArray(items))throw fail('Invalid content.');
-        const list=items[group.id];
-        if(list!==undefined){
+        const clean={};
+        for(const g of groupDefs){
+          const list=items[g.id];if(list===undefined)continue;
           if(!Array.isArray(list)||list.length>500||new Set(list).size!==list.length)throw fail('Invalid content.');
-          for(const id of list)if(typeof id!=='string'||!ITEM_ID.test(id)||(/^i/.test(id)&&+id.slice(1)>=original.items.length))throw fail('Invalid content.');
+          for(const id of list){
+            if(typeof id!=='string'||!ITEM_ID.test(id))throw fail('Invalid content.');
+            if(id[0]===g.code&&!(+id.slice(1)<g.count))throw fail('Invalid content.');
+            if(id[0]!==g.code&&id[0]!=='n')throw fail('Invalid content.');
+          }
+          clean[g.id]=list;
         }
-        items={[group.id]:list};
+        items=clean;
       }else items=undefined;
       const allowed=Object.fromEntries(parse(page,items?{__items:items}:{}).fields.map(f=>[f.id,f]));
       for(const [key,value] of Object.entries(fields)){
         if(!(key in allowed)||typeof value!=='string'||value.length>10000)throw fail('Invalid content field.');
         if(allowed[key].type==='image'&&!/^(\/assets\/|\/uploads\/|https:\/\/[a-z0-9.-]+\.blob\.vercel-storage\.com\/|data:image\/)/.test(value))throw fail('Invalid picture.');
+        if(allowed[key].type==='video'&&!/^(\/assets\/[^?#]+\.(mp4|webm)|https:\/\/[a-z0-9.-]+\.blob\.vercel-storage\.com\/)/.test(value))throw fail('Invalid video.');
         if(page in COPY_PAGES){
           const names=t=>[...new Set([...t.matchAll(TOKEN)].map(m=>m[1]))].sort().join();
           if(names(allowed[key].original)!==names(value)||/[{}]/.test(value.replace(TOKEN,'')))throw fail('Keep the original placeholders in this wording.');
@@ -227,9 +244,19 @@ async function page(req,res,name,query){
   send(res,200,markup,'text/html; charset=utf-8');
 }
 
+// JS and CSS that mention /assets/ are served here so Media-library replacements (intro films, logos) apply to them too.
+const TEXT_ASSETS={'intro.js':'text/javascript; charset=utf-8','common.js':'text/javascript; charset=utf-8','style.css':'text/css; charset=utf-8','byjh.css':'text/css; charset=utf-8'};
+async function textAsset(req,res,name){
+  if(!TEXT_ASSETS[name])return send(res,404,'Not found','text/plain');
+  const state=await store.load();
+  const body=replaceMedia(read(name),state);
+  res.statusCode=200;res.setHeader('Content-Type',TEXT_ASSETS[name]);res.setHeader('Cache-Control','public, max-age=0, s-maxage=5, stale-while-revalidate=30');res.end(body);
+}
+
 module.exports=async(req,res)=>{
   const url=new URL(req.url,'http://x');const query=Object.fromEntries(url.searchParams);
   try{
+    if(query.asset)return await textAsset(req,res,query.asset);
     if(query.page)return await page(req,res,query.page,query);
     return await api(req,res,String(query.route||'').replace(/^\/+|\/+$/g,''),query);
   }catch(e){

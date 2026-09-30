@@ -221,3 +221,8 @@ h1:focus{outline:none}
 .item-card{border:1px solid #d2d2ce;border-radius:8px;padding:18px;margin-bottom:16px;background:#fafaf8}
 .item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .item-body{display:grid;gap:14px}.add-item{margin-top:4px}
+
+.video-field .thumb{width:160px;height:110px;background:#000}
+.compact-group .items{display:grid;gap:8px}
+.item-card.compact{display:flex;align-items:center;gap:12px;padding:8px 12px;margin:0}
+.item-card.compact .item-body{flex:1;display:block}.item-card.compact .content-field{margin:0}.item-card.compact textarea{min-height:0;height:40px}

@@ -39,13 +39,15 @@
     const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
     const textField=f=>`<div class="content-field" data-search="${esc((f.label+' '+f.value).toLowerCase())}"><label for="cms-${esc(f.id)}">${esc(f.label)}</label>${f.type==='number'?`<input type="number" min="1" max="100" required id="cms-${esc(f.id)}" name="${esc(f.id)}" value="${esc(f.value)}">`:`<textarea id="cms-${esc(f.id)}" name="${esc(f.id)}" maxlength="10000" rows="${f.value.length>120?3:2}">${esc(f.value)}</textarea>`}</div>`;
     const imageField=f=>`<div class="content-field image-field" data-search="${esc(f.label.toLowerCase())}"><label>${esc(f.label)}</label><div class="image-row"><img class="thumb" src="${esc(f.value)}" alt=""><input type="hidden" name="${esc(f.id)}" value="${esc(f.value)}"><button type="button" class="btn small change-image">Change picture</button></div></div>`;
-    const fieldHTML=f=>f.type==='image'?imageField(f):textField(f);
+    const videoField=f=>`<div class="content-field image-field video-field" data-search="${esc(f.label.toLowerCase())}"><label>${esc(f.label)}</label><div class="image-row"><video class="thumb" src="${esc(f.value)}" muted preload="metadata" playsinline></video><input type="hidden" name="${esc(f.id)}" value="${esc(f.value)}"><button type="button" class="btn small change-video">Change video</button></div></div>`;
+    const fieldHTML=f=>f.type==='image'?imageField(f):f.type==='video'?videoField(f):textField(f);
     const itemTemplates={};
-    const itemHTML=(fields,id,g,n)=>`<div class="item-card" data-item="${esc(id)}"><div class="item-head"><strong class="item-num">${esc(cap(g.noun))} ${n+1}</strong><button type="button" class="btn link small delete-item">Delete</button></div><div class="item-body">${fields.map(fieldHTML).join('')}</div></div>`;
-    function groupHTML(p,g){const cards=g.items.map((id,n)=>{const fields=p.fields.filter(f=>f.item===id);if(!itemTemplates[g.id]&&fields.length)itemTemplates[g.id]={id,fields};return itemHTML(fields,id,g,n);}).join('');return `<div class="item-group" data-group="${esc(g.id)}" data-noun="${esc(g.noun)}"><h3 class="group-title">${esc(g.label)}</h3><div class="items">${cards}</div><button type="button" class="btn small add-item">+ Add a ${esc(g.noun)}</button></div>`;}
+    const itemHTML=(fields,id,g,n)=>g.compact?`<div class="item-card compact" data-item="${esc(id)}"><div class="item-body">${fields.map(f=>textField({...f,label:''})).join('')}</div><button type="button" class="btn link small delete-item">Delete</button></div>`:`<div class="item-card" data-item="${esc(id)}"><div class="item-head"><strong class="item-num">${esc(cap(g.noun))} ${n+1}</strong><button type="button" class="btn link small delete-item">Delete</button></div><div class="item-body">${fields.map(fieldHTML).join('')}</div></div>`;
+    function groupHTML(p,g){const cards=g.items.map((id,n)=>{const fields=p.fields.filter(f=>f.item===id);if(!itemTemplates[g.id]&&fields.length)itemTemplates[g.id]={id,fields};return itemHTML(fields,id,g,n);}).join('');return `<div class="item-group${g.compact?' compact-group':''}" data-group="${esc(g.id)}" data-noun="${esc(g.noun)}" data-compact="${g.compact?1:''}"><h3 class="group-title">${esc(g.label)}</h3><div class="items">${cards}</div><button type="button" class="btn small add-item">+ Add a ${esc(g.noun)}</button></div>`;}
     function blocks(p){let html='';const done=new Set();for(const f of p.fields){if(f.group){if(done.has(f.group))continue;done.add(f.group);html+=groupHTML(p,p.groups.find(g=>g.id===f.group));}else html+=fieldHTML(f);}for(const g of p.groups||[])if(!done.has(g.id))html+=groupHTML(p,g);return html;}
     const newId=()=>'n'+Math.random().toString(36).slice(2,10).padEnd(8,'0');
-    const renumber=()=>el.querySelectorAll('.item-group').forEach(gr=>gr.querySelectorAll('.item-card').forEach((c,i)=>c.querySelector('.item-num').textContent=cap(gr.dataset.noun)+' '+(i+1)));
+    const renumber=()=>el.querySelectorAll('.item-group').forEach(gr=>gr.querySelectorAll('.item-card').forEach((c,i)=>{const n=c.querySelector('.item-num');if(n)n.textContent=cap(gr.dataset.noun)+' '+(i+1);}));
+    const reId=(text,old,id)=>text.replace(new RegExp('(^|[:,/])'+old+'\\.','g'),(m,lead)=>lead+id+'.');
     async function shrink(file){
       if(file.type==='image/svg+xml'||file.type==='image/gif')return file;
       const bitmap=await createImageBitmap(file),max=1800,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
@@ -68,14 +70,26 @@
         }catch(e){toast(e.message,true);}finally{button.disabled=false;button.textContent=old;}};
       input.click();
     }
+    function pickVideo(row){
+      const input=document.createElement('input');input.type='file';input.accept='video/mp4,video/webm';
+      input.onchange=async()=>{const file=input.files[0];if(!file)return;const button=row.querySelector('.change-video'),old=button.textContent;button.disabled=true;
+        try{if(file.size>300*1024*1024)throw new Error('That video is too large. Please choose one under 300 MB.');
+          button.textContent='Uploading…';
+          const {upload}=await import('https://esm.sh/@vercel/blob@2.8.0/client');
+          const done=await upload('videos/'+file.name.replace(/[^\w.-]+/g,'-'),file,{access:'public',handleUploadUrl:'/api/upload-token',multipart:file.size>8*1024*1024,onUploadProgress:e=>{button.textContent='Uploading… '+Math.round(e.percentage)+'%';}});
+          row.querySelector('input[type=hidden]').value=done.url;const v=row.querySelector('video');v.src=done.url;editorDirty=true;
+          el.querySelector('#draft-state').textContent=B.t("ui.admin.29267269c0","Changes not published yet");
+        }catch(e){toast(e.message||'Upload failed. Please try again.',true);}finally{button.disabled=false;button.textContent=old;}};
+      input.click();
+    }
     function addItem(group){
       const cards=group.querySelectorAll('.item-card'),last=cards[cards.length-1],id=newId(),box=group.querySelector('.items');
       let card;
       if(last){const old=last.dataset.item;card=last.cloneNode(true);const sources=[...last.querySelectorAll('textarea,input')];
-        [...card.querySelectorAll('textarea,input')].forEach((x,i)=>{x.name=x.name.split(old+'.').join(id+'.');x.id=x.id?x.id.split(old+'.').join(id+'.'):x.id;x.value=sources[i].value;});
-        card.querySelectorAll('label[for]').forEach(l=>l.htmlFor=l.htmlFor.split(old+'.').join(id+'.'));card.dataset.item=id;}
-      else{const t=itemTemplates[group.dataset.group];if(!t)return;const tmp=document.createElement('div');const g={noun:group.dataset.noun};
-        tmp.innerHTML=itemHTML(t.fields,t.id,g,0).split(t.id+'.').join(id+'.').replace(`data-item="${t.id}"`,`data-item="${id}"`);card=tmp.firstElementChild;}
+        [...card.querySelectorAll('textarea,input')].forEach((x,i)=>{x.name=reId(x.name,old,id);x.id=x.id?x.id.replace(old+'.',id+'.'):x.id;x.value=sources[i].value;});
+        card.querySelectorAll('label[for]').forEach(l=>l.htmlFor=l.htmlFor.replace(old+'.',id+'.'));card.dataset.item=id;}
+      else{const t=itemTemplates[group.dataset.group];if(!t)return;const tmp=document.createElement('div');const g={noun:group.dataset.noun,compact:!!group.dataset.compact};
+        tmp.innerHTML=itemHTML(t.fields.map(f=>({...f,id:reId(f.id,t.id,id)})),id,g,0);card=tmp.firstElementChild;}
       box.appendChild(card);renumber();editorDirty=true;el.querySelector('#draft-state').textContent=B.t("ui.admin.29267269c0","Changes not published yet");
       card.scrollIntoView({behavior:'smooth',block:'center'});const first=card.querySelector('textarea');if(first)first.focus();
     }
@@ -84,6 +98,7 @@
       form.onsubmit=e=>e.preventDefault();
       form.addEventListener('click',e=>{
         const change=e.target.closest('.change-image');if(change){pickPicture(change.closest('.image-field'));return;}
+        const video=e.target.closest('.change-video');if(video){pickVideo(video.closest('.video-field'));return;}
         const add=e.target.closest('.add-item');if(add){addItem(add.closest('.item-group'));return;}
         const del=e.target.closest('.delete-item');if(del){const card=del.closest('.item-card'),noun=card.closest('.item-group').dataset.noun;if(!confirm('Delete this '+noun+'? It will be removed from the website when you press Publish.'))return;card.remove();renumber();editorDirty=true;el.querySelector('#draft-state').textContent=B.t("ui.admin.29267269c0","Changes not published yet");}
       });

@@ -5,12 +5,14 @@ const DYNAMIC_CLASSES=new Set(['member-no','members-total','partners-total','cha
 const NAMED={amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:'\u00a0',mdash:'—',ndash:'–',hellip:'…',rsquo:'’',lsquo:'‘',rdquo:'”',ldquo:'“',copy:'©',middot:'·',reg:'®',times:'×',bull:'•',eacute:'é'};
 // Repeating blocks the admin can add to and delete from.
 const GROUPS={
-  members:{id:'members',label:'Members',noun:'member',re:/<article class="member(?! member-open)[^"]*">[\s\S]*?<\/article>/g},
-  partners:{id:'partners',label:'Partners',noun:'partner',re:/<li class="partner"[^>]*>[\s\S]*?<\/li>/g},
-  gallery:{id:'gallery',label:'Gallery',noun:'photo or film',re:/<a class="gallery-item[^"]*"[^>]*>[\s\S]*?<\/a>/g,renumber:true},
+  home:[{id:'features',code:'f',label:'Highlights',noun:'highlight',re:/<div class="feature-row">[\s\S]*?<\/p><\/div><\/div>/g}],
+  members:[{id:'members',code:'m',label:'Members',noun:'member',re:/<article class="member(?! member-open)[^"]*">[\s\S]*?<\/article>/g}],
+  partners:[{id:'partners',code:'p',label:'Partners',noun:'partner',re:/<li class="partner"[^>]*>[\s\S]*?<\/li>/g}],
+  gallery:[{id:'gallery',code:'g',label:'Gallery',noun:'photo or film',re:/<a class="gallery-item[^"]*"[^>]*>[\s\S]*?<\/a>/g,renumber:true}],
 };
-const ITEM_ID=/^(i\d{1,4}|n[a-z0-9]{6,20})$/;
+const ITEM_ID=/^([a-z]\d{1,4}|n[a-z0-9]{6,20})$/;
 const skipImage=(src,attrs)=>!src||/\/assets\/byjh\/(logo|favicon)/.test(src)||/(^|\s)heading-logo(\s|$)/.test(attrs.class||'');
+const cap=t=>t.replace(/(^|\s)\S/g,c=>c.toUpperCase());
 const unescapeHtml=s=>s.replace(/&(#[xX][0-9a-fA-F]+|#[0-9]+|[a-zA-Z][a-zA-Z0-9]*);?/g,(m,n)=>{
   if(n[0]==='#'){const c=n[1]==='x'||n[1]==='X'?parseInt(n.slice(2),16):parseInt(n.slice(1),10);return c>0&&c<=0x10ffff?String.fromCodePoint(c):m;}
   return n in NAMED?NAMED[n]:m;});
@@ -67,7 +69,7 @@ class ContentPage{
     this.values=values||{};this.fields=[];this.output=[];this.stack=[];this.pending=[];this.groups=[];
     this.prefix=opts.prefix||'';this.opts=opts;this.imageChanges=[];
     this.counter=opts.counter||0;this.element=opts.element||0;this.section=opts.section||'Page';
-    if(opts.group&&!opts.prefix)return this.groupedParse(source,opts.group);
+    if(opts.groups&&opts.groups.length&&!opts.prefix)return this.groupedParse(source,opts.groups);
     this.run(source);
   }
   run(source){
@@ -82,19 +84,20 @@ class ContentPage{
     }
     this.flush();
   }
-  groupedParse(source,group){
+  groupedParse(source,groups){
+    const group=groups[0],rest=groups.slice(1);
     const masked=source.replace(/<!--[\s\S]*?-->/g,m=>' '.repeat(m.length));
     const found=[...masked.matchAll(group.re)].map(m=>({start:m.index,end:m.index+m[0].length}));
-    if(!found.length){this.run(source);return;}
-    const pre=new ContentPage(source.slice(0,found[0].start),this.values,{section:this.section});
+    if(!found.length){if(rest.length)this.groupedParse(source,rest);else this.run(source);return;}
+    const pre=new ContentPage(source.slice(0,found[0].start),this.values,{section:this.section,groups:rest,counter:this.counter,element:this.element});
     const templates=found.map(f=>source.slice(f.start,f.end));
     const gaps=found.map((f,i)=>source.slice(f.end,i+1<found.length?found[i+1].start:f.end));
     const saved=this.values.__items&&this.values.__items[group.id];
-    const order=Array.isArray(saved)?saved:found.map((_,i)=>'i'+i);
-    this.fields.push(...pre.fields);this.output.push(...pre.output);
+    const order=Array.isArray(saved)?saved:found.map((_,i)=>group.code+i);
+    this.fields.push(...pre.fields);this.output.push(...pre.output);this.groups.push(...pre.groups);
     const ids=[];
     order.forEach((id,pos)=>{
-      const index=/^i\d+$/.test(id)?+id.slice(1):-1;
+      const index=id[0]===group.code&&/^\d+$/.test(id.slice(1))?+id.slice(1):-1;
       const tpl=templates[index>=0&&index<templates.length?index:0];
       const sub=new ContentPage(tpl,this.values,{prefix:id+'.',section:group.label,group});
       let out=sub.rendered;
@@ -104,9 +107,10 @@ class ContentPage{
       this.output.push(out,gaps[Math.min(index>=0?index:0,gaps.length-1)]||'');
       ids.push(id);
     });
-    this.groups.push({id:group.id,label:group.label,noun:group.noun,items:ids});
-    const post=new ContentPage(source.slice(found[found.length-1].end),this.values,{counter:pre.counter,element:pre.element,section:pre.section});
-    this.fields.push(...post.fields);this.output.push(...post.output);
+    this.groups.push({id:group.id,code:group.code,label:group.label,noun:group.noun,items:ids,count:found.length});
+    const post=new ContentPage(source.slice(found[found.length-1].end),this.values,{counter:pre.counter,element:pre.element,section:pre.section,groups:rest});
+    this.fields.push(...post.fields);this.output.push(...post.output);this.groups.push(...post.groups);
+    this.counter=post.counter;this.element=post.element;this.section=post.section;
   }
   field(value,kind='text',label=null,key=null,expose=true){
     if(key===null){key='f'+this.counter;this.counter++;}
@@ -166,6 +170,18 @@ class ContentPage{
         if(value!==val)changes[attr]=String(value);
       }
     }
+    if(tag==='source'&&/\.(mp4|webm)(\?|$)/i.test(ad.src||'')){
+      const value=this.field(ad.src,'video',this.section+' / video',`video:${this.element}`);
+      if(value!==ad.src)changes.src=String(value);
+    }
+    if(tag==='a'&&ad['data-media']==='video'&&ad.href){
+      const value=this.field(ad.href,'video',this.section+' / video',`video:${this.element}`);
+      if(value!==ad.href)changes.href=String(value);
+    }
+    if(tag==='video'&&ad.poster){
+      const value=this.field(ad.poster,'image',this.section+' / cover picture',`poster:${this.element}`);
+      if(value!==ad.poster)changes.poster=String(value);
+    }
     if(tag==='img'&&!skipImage(ad.src,ad)){
       const value=this.field(ad.src,'image',this.section+' / image',`img:${this.element}`);
       if(value!==ad.src){changes.src=String(value);this.imageChanges.push([ad.src,String(value)]);}
@@ -187,6 +203,22 @@ class ContentPage{
     const [tag,attrs]=this.stack.length?this.stack[this.stack.length-1]:['',{}];
     if(tag==='script'&&attrs.id==='fleet-data'){
       const walk=(value,path)=>{
+        if(Array.isArray(value)&&path.length>=3&&path[path.length-2]==='specifications'&&value.every(v=>typeof v==='string')){
+          const groupKey='spec:'+path[0]+':'+path[path.length-1];
+          const saved=this.values.__items&&this.values.__items[groupKey];
+          const order=Array.isArray(saved)?saved:value.map((_,i)=>'s'+i);
+          const ids=[],out=[];
+          for(const id of order){
+            const index=id[0]==='s'&&/^\d+$/.test(id.slice(1))?+id.slice(1):-1;
+            const orig=value[index>=0&&index<value.length?index:value.length-1];
+            const before=this.fields.length;
+            out.push(this.field(orig,'text','Fleet / '+path.join(' / '),id+'.'+groupKey.replace(/[.]/g,'_')));
+            ids.push(id);
+            if(this.fields.length>before)Object.assign(this.fields[this.fields.length-1],{item:id,group:groupKey});
+          }
+          this.groups.push({id:groupKey,code:'s',label:cap(path[0])+' · '+path[path.length-1],noun:'detail',items:ids,count:value.length,compact:true});
+          return out;
+        }
         if(Array.isArray(value))return value.map((v,i)=>walk(v,[...path,String(i+1)]));
         if(value&&typeof value==='object'){
           const result={};
