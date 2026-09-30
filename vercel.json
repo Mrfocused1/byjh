@@ -1,7 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "dist",
-  "redirects": [
-    { "source": "/(admin|account|apply|login|copy|members/login|partners/login)(/.*)?", "destination": "/", "permanent": false }
+  "functions": {
+    "api/router.js": { "includeFiles": "dist/**/*.{html,json}", "maxDuration": 30 }
+  },
+  "routes": [
+    { "src": "^/(account|apply|login|copy|members/login|partners/login)(/.*)?$", "status": 302, "headers": { "Location": "/" } },
+    { "src": "^/admin/login/?$", "status": 302, "headers": { "Location": "/admin/" } },
+    { "src": "^/api/(.*)$", "dest": "/api/router?route=$1" },
+    { "src": "^/admin/?$", "dest": "/api/router?page=admin" },
+    { "src": "^/(?:index\\.html)?$", "dest": "/api/router?page=home" },
+    { "src": "^/(members|partners|gallery|contact)(?:/(?:index\\.html)?)?$", "dest": "/api/router?page=$1" },
+    { "handle": "filesystem" }
   ]
 }
