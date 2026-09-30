@@ -88,6 +88,7 @@ async function api(req,res,route,query){
   if(['account','password','admin/person','admin/request','requests','login','setup','apply'].includes(route))
     throw fail('Not available in test mode.',501);
   const state=await store.load();
+  if(route==='debug-state'){const {list}=require('@vercel/blob');const l=await list({prefix:'byjh/'});return send(res,200,{blobs:l.blobs.map(b=>[b.pathname,b.url,b.uploadedAt]),rev:Object.fromEntries(Object.entries(state.content).map(([k,r])=>[k,r.revision]))});}
   if(route==='admin/overview')return send(res,200,{counts:{member:0,partner:0,pending:0,requests:0},recent:[],activity:[],analytics:emptyAnalytics(30)});
   if(route==='admin/people')return send(res,200,{people:[]});
   if(route==='admin/requests')return send(res,200,{requests:[]});
