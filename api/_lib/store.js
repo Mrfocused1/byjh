@@ -10,12 +10,11 @@ async function load(){
     try{return {...empty(),...JSON.parse(fs.readFileSync(process.env.BYJH_LOCAL_STATE,'utf8'))};}catch{return empty();}
   }
   if(!process.env.BLOB_READ_WRITE_TOKEN)throw new Error('Storage is not connected. Add a Vercel Blob store to this project (Storage tab) and redeploy.');
-  const {head}=require('@vercel/blob');
-  let meta;
-  try{meta=await head(KEY);}catch(e){if(e&&(e.name==='BlobNotFoundError'||/does not exist|not found/i.test(e.message||'')))return empty();throw e;}
-  const res=await fetch(meta.url+(meta.url.includes('?')?'&':'?')+'t='+Date.now(),{cache:'no-store'});
-  if(!res.ok)throw new Error('Unable to read saved content.');
-  return {...empty(),...(await res.json())};
+  const {get}=require('@vercel/blob');
+  // useCache:false reads origin storage; the CDN otherwise serves a stale copy for a while after a save.
+  const result=await get(KEY,{access:ACCESS,useCache:false});
+  if(!result)return empty();
+  return {...empty(),...JSON.parse(await new Response(result.stream).text())};
 }
 async function save(state){
   if(process.env.BYJH_LOCAL_STATE){fs.writeFileSync(process.env.BYJH_LOCAL_STATE,JSON.stringify(state));return;}
