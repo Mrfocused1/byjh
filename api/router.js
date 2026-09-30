@@ -37,6 +37,27 @@ const DEFAULTS={};for(const s of Object.values(SCHEMAS))for(const [k,v] of Objec
 const TOKEN=/\{([A-Za-z_]\w*)\}/g;
 const now=()=>new Date().toISOString().replace(/\.\d+Z$/,'+00:00');
 const parse=(page,values)=>page in COPY_PAGES?new InterfaceCopy(read(PAGES[page][1]),values):new ContentPage(read(PAGES[page][1]),values);
+// The admin only shows wording a visitor can see; alt text, aria-labels, tab titles and meta descriptions are hidden.
+const HIDDEN=/ \/ (alt|aria-label|title|content)$/;
+const cap=t=>t.replace(/(^|\s)\S/g,c=>c.toUpperCase());
+function friendlyFields(fields){
+  const visible=fields.filter(f=>!HIDDEN.test(f.label)&&f.original!=='Skip to content');
+  const counts={},seen={};
+  const base=f=>{
+    const parts=f.label.split(' / ');
+    if(parts[0]==='Fleet'){
+      const [,vehicle,kind,cat,item]=parts.concat([]);
+      const v=cap(vehicle||'Fleet');
+      if(kind==='specifications'){const heading=/ heading$/.test(f.label);return heading?`${v} · ${(cat||'').replace(/ heading$/,'')} (section title)`:`${v} · ${cat} · detail`;}
+      return `${v} · ${{name:'Name',model:'Model',seats:'Number of seats'}[kind]||cap(kind||'')}`;
+    }
+    return parts[0]==='Page'?'Top of page':cap(parts[0]);
+  };
+  const labels=visible.map(base);
+  labels.forEach(l=>counts[l]=(counts[l]||0)+1);
+  return visible.map((f,i)=>{const l=labels[i];seen[l]=(seen[l]||0)+1;return {...f,label:counts[l]>1?`${l} (${seen[l]})`:l};});
+}
+const page_is_copy=k=>k in COPY_PAGES;
 const entry=(state,page)=>state.content[page]||(state.content[page]={draft:{},published:{},revision:0,updated:null});
 
 function copyValues(state,preview){
@@ -102,7 +123,7 @@ async function api(req,res,route,query){
     const copy=copyValues(state,true);
     const pages=Object.entries(PAGES).map(([key,[label,,url]])=>{
       const row=entry(state,key),parsed=parse(key,row.draft);
-      return {id:key,title:copyText(copy,'page.'+key,label),url,revision:row.revision,updated:row.updated,dirty:JSON.stringify(row.draft)!==JSON.stringify(row.published),fields:parsed.fields,copyGroup:key in COPY_PAGES};
+      return {id:key,title:copyText(copy,'page.'+key,label),url,revision:row.revision,updated:row.updated,dirty:JSON.stringify(row.draft)!==JSON.stringify(row.published),fields:page_is_copy(key)?parsed.fields:friendlyFields(parsed.fields),copyGroup:key in COPY_PAGES};
     });
     return send(res,200,{pages});
   }

@@ -637,22 +637,22 @@
     ]
   },
   "ui.admin.29267269c0": {
-    "label": "Unsaved changes",
-    "value": "Unsaved changes",
+    "label": "Changes not published yet",
+    "value": "Changes not published yet",
     "locations": [
       "admin:35"
     ]
   },
   "ui.admin.87558f322c": {
-    "label": "Published content",
-    "value": "Published content",
+    "label": "Live on your website",
+    "value": "Live on your website",
     "locations": [
       "admin:34"
     ]
   },
   "ui.admin.9092394dbd": {
-    "label": "Saved draft · not yet published",
-    "value": "Saved draft · not yet published",
+    "label": "Changes not published yet",
+    "value": "Changes not published yet",
     "locations": [
       "admin:34"
     ]
@@ -700,8 +700,8 @@
     ]
   },
   "ui.admin.72aa436531": {
-    "label": "Edits stay in draft until you publish. Images and videos are managed in the media library.",
-    "value": "Edits stay in draft until you publish. Images and videos are managed in the media library.",
+    "label": "Changes go live when you press Publish. To change pictures and videos, use Media.",
+    "value": "Changes go live when you press Publish. To change pictures and videos, use Media.",
     "locations": [
       "admin:34"
     ]
@@ -735,8 +735,8 @@
     ]
   },
   "ui.admin.97592356ed": {
-    "label": "Edit the text across your website. Save a draft, preview it, then publish.",
-    "value": "Edit the text across your website. Save a draft, preview it, then publish.",
+    "label": "Change the wording on your website, then press Publish. It goes live straight away.",
+    "value": "Change the wording on your website, then press Publish. It goes live straight away.",
     "locations": [
       "admin:32"
     ]
@@ -1261,8 +1261,8 @@
     ]
   },
   "ui.admin.publishedToast": {
-    "label": "{page} published to your local website",
-    "value": "{page} published to your local website"
+    "label": "{page} is now live",
+    "value": "{page} is now live"
   },
   "ui.admin.loadError": {
     "label": "Unable to open workspace: {error}",
