@@ -12,7 +12,7 @@ async function load(){
   if(!process.env.BLOB_READ_WRITE_TOKEN)throw new Error('Storage is not connected. Add a Vercel Blob store to this project (Storage tab) and redeploy.');
   const {head}=require('@vercel/blob');
   let meta;
-  try{meta=await head(KEY);}catch(e){if(e&&e.name==='BlobNotFoundError')return empty();throw e;}
+  try{meta=await head(KEY);}catch(e){if(e&&(e.name==='BlobNotFoundError'||/does not exist|not found/i.test(e.message||'')))return empty();throw e;}
   const res=await fetch(meta.url+(meta.url.includes('?')?'&':'?')+'t='+Date.now(),{cache:'no-store'});
   if(!res.ok)throw new Error('Unable to read saved content.');
   return {...empty(),...(await res.json())};
