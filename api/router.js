@@ -4,7 +4,7 @@
 const fs=require('fs');
 const path=require('path');
 const crypto=require('crypto');
-const {ContentPage,InterfaceCopy,escapeHtml}=require('./_lib/cms');
+const {ContentPage,InterfaceCopy,escapeHtml,GROUPS,ITEM_ID}=require('./_lib/cms');
 const store=require('./_lib/store');
 const assets=require('./_lib/assets.json');
 
@@ -36,26 +36,39 @@ const SCHEMAS=Object.fromEntries(Object.entries(COPY_PAGES).map(([k,[,file]])=>[
 const DEFAULTS={};for(const s of Object.values(SCHEMAS))for(const [k,v] of Object.entries(s))DEFAULTS[k]=v.value;
 const TOKEN=/\{([A-Za-z_]\w*)\}/g;
 const now=()=>new Date().toISOString().replace(/\.\d+Z$/,'+00:00');
-const parse=(page,values)=>page in COPY_PAGES?new InterfaceCopy(read(PAGES[page][1]),values):new ContentPage(read(PAGES[page][1]),values);
+const parse=(page,values)=>page in COPY_PAGES?new InterfaceCopy(read(PAGES[page][1]),values):new ContentPage(read(PAGES[page][1]),values,{group:GROUPS[page]});
 // The admin only shows wording a visitor can see; alt text, aria-labels, tab titles and meta descriptions are hidden.
 const HIDDEN=/ \/ (alt|aria-label|title|content)$/;
 const cap=t=>t.replace(/(^|\s)\S/g,c=>c.toUpperCase());
-function friendlyFields(fields){
+const ROLE={
+  members:{'member-name':'Name','member-sector':'What they do'},
+  partners:{span:'Name'},
+  gallery:{span:'Title'},
+};
+function friendlyFields(fields,page){
   const visible=fields.filter(f=>!HIDDEN.test(f.label)&&f.original!=='Skip to content');
-  const counts={},seen={};
-  const base=f=>{
+  const counts={},seen={},labels=visible.map(f=>{
+    if(f.item){
+      if(f.type==='image')return 'Picture';
+      const roles=ROLE[f.group]||{};
+      return roles[(f.cls||'').split(/\s+/).find(c=>roles[c])||f.tag]||'Text';
+    }
     const parts=f.label.split(' / ');
     if(parts[0]==='Fleet'){
-      const [,vehicle,kind,cat,item]=parts.concat([]);
+      const [,vehicle,kind,cat]=parts;
       const v=cap(vehicle||'Fleet');
-      if(kind==='specifications'){const heading=/ heading$/.test(f.label);return heading?`${v} · ${(cat||'').replace(/ heading$/,'')} (section title)`:`${v} · ${cat} · detail`;}
+      if(f.type==='image')return `${v} · Picture`;
+      if(kind==='specifications'){return / heading$/.test(f.label)?`${v} · ${(cat||'').replace(/ heading$/,'')} (section title)`:`${v} · ${cat} · detail`;}
       return `${v} · ${{name:'Name',model:'Model',seats:'Number of seats'}[kind]||cap(kind||'')}`;
     }
-    return parts[0]==='Page'?'Top of page':cap(parts[0]);
-  };
-  const labels=visible.map(base);
-  labels.forEach(l=>counts[l]=(counts[l]||0)+1);
-  return visible.map((f,i)=>{const l=labels[i];seen[l]=(seen[l]||0)+1;return {...f,label:counts[l]>1?`${l} (${seen[l]})`:l};});
+    const base=parts[0]==='Page'?'Top of page':cap(parts[0]);
+    return f.type==='image'?base+' · Picture':base;
+  });
+  visible.forEach((f,i)=>{if(!f.item)counts[labels[i]]=(counts[labels[i]]||0)+1;});
+  return visible.map((f,i)=>{
+    const l=labels[i];if(f.item)return {...f,label:l};
+    seen[l]=(seen[l]||0)+1;return {...f,label:counts[l]>1?`${l} (${seen[l]})`:l};
+  });
 }
 const page_is_copy=k=>k in COPY_PAGES;
 const entry=(state,page)=>state.content[page]||(state.content[page]={draft:{},published:{},revision:0,updated:null});
@@ -123,7 +136,7 @@ async function api(req,res,route,query){
     const copy=copyValues(state,true);
     const pages=Object.entries(PAGES).map(([key,[label,,url]])=>{
       const row=entry(state,key),parsed=parse(key,row.draft);
-      return {id:key,title:copyText(copy,'page.'+key,label),url,revision:row.revision,updated:row.updated,dirty:JSON.stringify(row.draft)!==JSON.stringify(row.published),fields:page_is_copy(key)?parsed.fields:friendlyFields(parsed.fields),copyGroup:key in COPY_PAGES};
+      return {id:key,title:copyText(copy,'page.'+key,label),url,revision:row.revision,updated:row.updated,dirty:JSON.stringify(row.draft)!==JSON.stringify(row.published),fields:page_is_copy(key)?parsed.fields:friendlyFields(parsed.fields,key),groups:parsed.groups||[],copyGroup:key in COPY_PAGES};
     });
     return send(res,200,{pages});
   }
@@ -135,17 +148,30 @@ async function api(req,res,route,query){
     if(route==='admin/content'){
       const fields=data.fields;
       if(!fields||typeof fields!=='object'||Array.isArray(fields))throw fail('Invalid content.');
-      const allowed=Object.fromEntries(parse(page).fields.map(f=>[f.id,f]));
+      let items=data.items;
+      if(page in GROUPS){
+        const group=GROUPS[page],original=parse(page,{}).groups[0];
+        if(items===undefined)items=(row.draft.__items||{});
+        if(typeof items!=='object'||items===null||Array.isArray(items))throw fail('Invalid content.');
+        const list=items[group.id];
+        if(list!==undefined){
+          if(!Array.isArray(list)||list.length>500||new Set(list).size!==list.length)throw fail('Invalid content.');
+          for(const id of list)if(typeof id!=='string'||!ITEM_ID.test(id)||(/^i/.test(id)&&+id.slice(1)>=original.items.length))throw fail('Invalid content.');
+        }
+        items={[group.id]:list};
+      }else items=undefined;
+      const allowed=Object.fromEntries(parse(page,items?{__items:items}:{}).fields.map(f=>[f.id,f]));
       for(const [key,value] of Object.entries(fields)){
         if(!(key in allowed)||typeof value!=='string'||value.length>10000)throw fail('Invalid content field.');
+        if(allowed[key].type==='image'&&!/^(\/assets\/|\/uploads\/|https:\/\/[a-z0-9.-]+\.blob\.vercel-storage\.com\/|data:image\/)/.test(value))throw fail('Invalid picture.');
         if(page in COPY_PAGES){
           const names=t=>[...new Set([...t.matchAll(TOKEN)].map(m=>m[1]))].sort().join();
           if(names(allowed[key].original)!==names(value)||/[{}]/.test(value.replace(TOKEN,'')))throw fail('Keep the original placeholders in this wording.');
         }
         if(allowed[key].type==='number'&&!(/^\d+$/.test(value)&&+value>=1&&+value<=100))throw fail('Seat count must be between 1 and 100.');
       }
-      try{parse(page,fields).rendered;}catch(e){throw fail(e.message);}
-      row.draft=fields;
+      try{parse(page,items?{...fields,__items:items}:fields).rendered;}catch(e){throw fail(e.message);}
+      row.draft=items?{...fields,__items:items}:fields;
     }else if(route==='admin/publish')row.published=row.draft;
     else row.draft=row.published;
     row.revision++;row.updated=now();
@@ -159,9 +185,9 @@ async function api(req,res,route,query){
     let raw;try{raw=Buffer.from(String(data.data||''),'base64');}catch{throw fail('Invalid file.');}
     if(!raw.length)throw fail('Invalid file.');
     if(raw.length>3*1024*1024)throw fail('On this hosting, uploads are limited to 3 MB. Use a smaller file.');
-    const magic={'.jpg':raw.subarray(0,3).equals(Buffer.from([0xff,0xd8,0xff])),'.jpeg':raw.subarray(0,3).equals(Buffer.from([0xff,0xd8,0xff])),'.png':raw.subarray(0,8).equals(Buffer.from([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a])),'.gif':/^GIF8[79]a/.test(raw.subarray(0,6).toString('latin1')),'.webp':raw.subarray(0,4).toString('latin1')==='RIFF'&&raw.subarray(8,12).toString('latin1')==='WEBP','.mp4':raw.subarray(4,8).toString('latin1')==='ftyp','.webm':raw.subarray(0,4).equals(Buffer.from([0x1a,0x45,0xdf,0xa3]))};
-    if(!magic[ext])throw fail('Upload a valid JPG, PNG, GIF, WebP, MP4 or WebM file.');
-    const types={'.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.gif':'image/gif','.webp':'image/webp','.mp4':'video/mp4','.webm':'video/webm'};
+    const magic={'.jpg':raw.subarray(0,3).equals(Buffer.from([0xff,0xd8,0xff])),'.jpeg':raw.subarray(0,3).equals(Buffer.from([0xff,0xd8,0xff])),'.png':raw.subarray(0,8).equals(Buffer.from([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a])),'.gif':/^GIF8[79]a/.test(raw.subarray(0,6).toString('latin1')),'.webp':raw.subarray(0,4).toString('latin1')==='RIFF'&&raw.subarray(8,12).toString('latin1')==='WEBP','.mp4':raw.subarray(4,8).toString('latin1')==='ftyp','.webm':raw.subarray(0,4).equals(Buffer.from([0x1a,0x45,0xdf,0xa3])),'.svg':/<svg[\s>]/.test(raw.subarray(0,1000).toString('utf8'))};
+    if(!magic[ext])throw fail('Upload a valid JPG, PNG, GIF, WebP, SVG, MP4 or WebM file.');
+    const types={'.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.gif':'image/gif','.webp':'image/webp','.mp4':'video/mp4','.webm':'video/webm','.svg':'image/svg+xml'};
     const url=await store.putFile(crypto.randomBytes(8).toString('hex')+ext,raw,types[ext]);
     state.uploads.push({url,name,size:raw.length,created:now(),type:['.mp4','.webm'].includes(ext)?'video':'image'});
     await store.save(state);
