@@ -1,6 +1,6 @@
 /* BYJH logo intro and page transitions. Loaded synchronously in <head> so the
    page is covered before its first paint.
-   - First page of a visit: the full logo intro (4s, skippable).
+   - First page of a visit: the full logo intro (8.4s "Route" film, skippable).
    - Following an internal link: the page fades to the intro colour, navigates,
      and the next page opens with the short logo stamp (0.9s).
    - Anything else (reload, back/forward, typing a URL mid-visit): no animation.
@@ -11,7 +11,7 @@
   const MEDIA = '/assets/intro/';
   const SEEN = 'byjh-intro-seen', TRANSITION = 'byjh-transition';
   const CUTS = {
-    intro: { skippable: true, startWithin: 3500, maxLength: 9000 },
+    intro: { skippable: true, startWithin: 3500, maxLength: 13000 },
     stamp: { skippable: false, startWithin: 1500, maxLength: 3000 }
   };
   const root = document.documentElement;

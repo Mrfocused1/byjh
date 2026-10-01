@@ -8,7 +8,8 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const introState = page => page.evaluate(() => ({
   covering: document.documentElement.classList.contains('byjh-intro-on'),
   overlays: document.querySelectorAll('.byjh-intro').length,
-  source: document.querySelector('.byjh-intro video')?.currentSrc || ''
+  source: document.querySelector('.byjh-intro video')?.currentSrc || '',
+  played: window.__introsShown || []
 }));
 
 (async () => {
@@ -17,7 +18,14 @@ const introState = page => page.evaluate(() => ({
   async function visitorPage() {
     const page = await browser.newPage();
     // The intro deliberately skips automated browsers; present as a normal visitor here.
-    await page.evaluateOnNewDocument(() => Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false }));
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false });
+      // Record every overlay as it appears: a slow page load can let the short stamp finish before a snapshot.
+      const shown = window.__introsShown = [];
+      new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+        if (node.classList && node.classList.contains('byjh-intro')) shown.push(node.className + ' ' + (node.querySelector('video')?.src || ''));
+      }))).observe(document, { childList: true, subtree: true });
+    });
     page.on('pageerror', error => errors.push(error.message));
     return page;
   }
@@ -29,7 +37,7 @@ const introState = page => page.evaluate(() => ({
     let state = await introState(page);
     assert.ok(state.covering && state.overlays === 1, 'intro plays on arrival');
     assert.match(state.source, /intro-desktop\./);
-    await page.waitForFunction(() => !document.documentElement.classList.contains('byjh-intro-on'), { timeout: 10000 });
+    await page.waitForFunction(() => !document.documentElement.classList.contains('byjh-intro-on'), { timeout: 15000 });
     await sleep(700);
     assert.equal((await introState(page)).overlays, 0, 'intro removes itself');
 
@@ -43,8 +51,8 @@ const introState = page => page.evaluate(() => ({
     await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.click('#menu nav a[href="/members/"]')]);
     await sleep(300);
     state = await introState(page);
-    assert.ok(state.covering && state.overlays === 1, 'next page opens with the logo stamp');
-    assert.match(state.source, /stamp-desktop\./);
+    assert.equal(state.played.length, 1, 'next page opens with the logo stamp');
+    assert.match(state.played[0], /byjh-intro--stamp .*stamp-desktop\./);
     await page.waitForFunction(() => !document.documentElement.classList.contains('byjh-intro-on'), { timeout: 4000 });
 
     await page.goto(base + '/partners/', { waitUntil: 'domcontentloaded' });
