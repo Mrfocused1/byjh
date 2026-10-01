@@ -5,8 +5,10 @@
     "api/router.js": { "includeFiles": "dist/**/*.{html,json,js,css}", "maxDuration": 30 }
   },
   "routes": [
-    { "src": "^/(admin|account|apply|login|copy|members/login|partners/login)(/.*)?$", "status": 302, "headers": { "Location": "/" } },
+    { "src": "^/(account|apply|login|copy|members/login|partners/login)(/.*)?$", "status": 302, "headers": { "Location": "/" } },
     { "src": "^/api/(.*)$", "dest": "/api/router?route=$1" },
+    { "src": "^/admin/login/?$", "dest": "/api/router?page=admin-login" },
+    { "src": "^/admin/?$", "dest": "/api/router?page=admin" },
     { "src": "^/(intro\\.js|common\\.js|style\\.css|byjh\\.css)$", "dest": "/api/router?asset=$1" },
     { "src": "^/(?:index\\.html)?$", "dest": "/api/router?page=home" },
     { "src": "^/(members|partners|gallery|contact)(?:/(?:index\\.html)?)?$", "dest": "/api/router?page=$1" },

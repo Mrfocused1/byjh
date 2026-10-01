@@ -32,4 +32,25 @@ async function putFile(name,buffer,contentType){
   const r=await put('byjh/uploads/'+name,buffer,{access:'public',addRandomSuffix:true,contentType});
   return r.url;
 }
-module.exports={load,save,putFile};
+// Empty marker blobs for sign-in rate limits. mark() is atomic: it returns false when the name is already taken.
+const AUTH='byjh/auth/';
+const localMarks=new Map();
+async function mark(name){
+  if(process.env.BYJH_LOCAL_STATE){if(localMarks.has(name))return false;localMarks.set(name,name);return true;}
+  const {put}=require('@vercel/blob');
+  try{await put(AUTH+name,'1',{access:ACCESS,addRandomSuffix:false,allowOverwrite:false,contentType:'text/plain'});return true;}
+  catch(e){if(/already exists/i.test(e.message))return false;throw e;}
+}
+async function marks(){
+  if(process.env.BYJH_LOCAL_STATE)return [...localMarks.keys()].map(name=>({name,url:name}));
+  const {list}=require('@vercel/blob');
+  const out=[];let cursor;
+  do{const r=await list({prefix:AUTH,cursor});out.push(...r.blobs.map(b=>({name:b.pathname.slice(AUTH.length),url:b.url})));cursor=r.hasMore?r.cursor:null;}while(cursor);
+  return out;
+}
+async function unmark(items){
+  if(process.env.BYJH_LOCAL_STATE){items.forEach(m=>localMarks.delete(m.name));return;}
+  const {del}=require('@vercel/blob');
+  await del(items.map(m=>m.url));
+}
+module.exports={load,save,putFile,mark,marks,unmark};

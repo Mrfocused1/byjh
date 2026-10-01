@@ -1,14 +1,13 @@
 // Vercel function serving (1) the public pages with admin edits applied and (2) the /api/* admin endpoints.
-// TEMPORARY TEST MODE: there is no login. Anyone who opens /admin can edit the site.
-// To restore access control, set AUTH_DISABLED=false and implement a real session() below.
+// Admin access is an emailed 6-digit code (see _lib/auth.js).
 const fs=require('fs');
 const path=require('path');
 const crypto=require('crypto');
 const {ContentPage,InterfaceCopy,escapeHtml,GROUPS,ITEM_ID}=require('./_lib/cms');
 const store=require('./_lib/store');
+const auth=require('./_lib/auth');
 const assets=require('./_lib/assets.json');
 
-const AUTH_DISABLED=false;
 const DIST=path.join(__dirname,'..','dist');
 const COPY_PAGES={
   'interface':['Forms & access','site-copy.json'],
@@ -114,9 +113,12 @@ async function api(req,res,route,query){
   const post=req.method==='POST';
   const data=post?(typeof req.body==='string'?JSON.parse(req.body||'{}'):req.body||{}):{};
   const preview=query.preview==='1'||req.headers['x-byjh-preview']==='1';
-  if(route==='session')return send(res,200,{user:AUTH_DISABLED?ADMIN_USER:null,needsSetup:false});
-  if(!AUTH_DISABLED)return send(res,401,{error:'Please sign in to continue.'});
-  if(route==='track'||route==='logout')return send(res,200,{ok:true});
+  if(route==='session'){const email=auth.user(req);return send(res,200,{user:email?{...ADMIN_USER,email}:null,needsSetup:false});}
+  if(route==='login/send'&&post)return send(res,200,await auth.sendCode(req,res,data.email));
+  if(route==='login/verify'&&post)return send(res,200,await auth.verifyCode(req,res,data.code));
+  if(route==='logout')return send(res,200,auth.logout(req,res));
+  if(route==='track')return send(res,200,{ok:true});
+  if(!auth.user(req))return send(res,401,{error:'Please sign in to continue.'});
   if(route==='account'&&!post){
     const role=['member','partner'].includes(query.role)?query.role:'member';
     const status=['pending','active','declined','suspended'].includes(query.status)?query.status:'pending';
@@ -125,12 +127,11 @@ async function api(req,res,route,query){
   if(route==='upload-token'){
     const {handleUpload}=require('@vercel/blob/client');
     const json=await handleUpload({body:data,request:req,
-      onBeforeGenerateToken:async()=>({allowedContentTypes:['video/mp4','video/webm','image/jpeg','image/png','image/webp','image/gif'],maximumSizeInBytes:300*1024*1024,addRandomSuffix:true}),
-      onUploadCompleted:async()=>{}});
+      onBeforeGenerateToken:async()=>({allowedContentTypes:['video/mp4','video/webm','image/jpeg','image/png','image/webp','image/gif'],maximumSizeInBytes:300*1024*1024,addRandomSuffix:true})});
     return send(res,200,json);
   }
   if(['account','password','admin/person','admin/request','requests','login','setup','apply'].includes(route))
-    throw fail('Not available in test mode.',501);
+    throw fail('Not available on this site.',501);
   const state=await store.load();
   if(route==='admin/overview')return send(res,200,{counts:{member:0,partner:0,pending:0,requests:0},recent:[],activity:[],analytics:emptyAnalytics(30)});
   if(route==='admin/people')return send(res,200,{people:[]});
@@ -227,12 +228,13 @@ async function api(req,res,route,query){
 }
 
 const STATIC_PAGES={
-  admin:'admin/index.html','admin-login':'admin/index.html',account:'account/index.html',apply:'apply/index.html',login:'login/index.html',
+  admin:'admin/index.html','admin-login':'admin/login/index.html',account:'account/index.html',apply:'apply/index.html',login:'login/index.html',
   'members-login':'members/login/index.html','partners-login':'partners/login/index.html',
 };
 async function page(req,res,name,query){
   const state=await store.load();
-  const preview=query.preview==='1';
+  // Unpublished drafts are only shown to a signed-in admin.
+  const preview=query.preview==='1'&&!!auth.user(req);
   const copy=copyValues(state,preview);
   let markup,isStatic=false;
   if(name in PAGES&&!(name in COPY_PAGES)){
