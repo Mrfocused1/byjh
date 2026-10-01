@@ -50,3 +50,8 @@
   .byjh-brand span {font-size: 6px;}
   .horizontal-enabled .fleet-panel h3 {font-size: 25px;}
 }
+
+/* Numbered section labels ("02 / THE EXPERIENCE" etc.) are not shown on the home page. Hidden rather than removed so
+   the admin's field positions stay the same; the sideways section's label keeps its space so the scroll hint stays right. */
+.home-page .experience-heading>.eyebrow,.home-page .occasion .path-clear-left>.eyebrow{display:none}
+.home-page #horizontal-chapter{visibility:hidden!important}

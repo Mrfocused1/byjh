@@ -57,7 +57,7 @@ small,figcaption,.form-note,.gallery-caption,.contact-number,.footer-bottom,.foo
 .header-pages a,.footer-pages a,.world-links a{font-weight:500;font-size:14px;letter-spacing:-0.006em;color:var(--text)}
 .menu-dialog nav a{font-weight:600;font-size:25px;line-height:1.18;letter-spacing:-0.02em;color:var(--text)}
 /* Buttons */
-.pill,.text-link,.text-button,.contact-action,.rail-book,.film-controls button,.byjh-join-dock>button,.btn,.byjh-footer-access a{
+.pill,.text-link,.text-button,.contact-action,.rail-book,.byjh-join-dock>button,.btn,.byjh-footer-access a{
   font-weight:600!important;font-size:15px!important;line-height:1!important;letter-spacing:-0.006em!important;text-transform:none!important}
 .pill span,.text-link span{font-size:18px;line-height:1}
 .pill,.pill.dark,.pill.light,.btn.primary,.byjh-join-dock>button{background:var(--text-app);color:#111;border-color:var(--text-app);border-radius:999px}
@@ -65,6 +65,10 @@ small,figcaption,.form-note,.gallery-caption,.contact-number,.footer-bottom,.foo
 .pill.outline,.btn:not(.primary){background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.16);border-radius:999px}
 .pill.outline:hover,.btn:not(.primary):hover{background:var(--card-2);color:var(--text)}
 .text-link,.text-button{color:var(--text)}
+/* The hero film's pause/play control stays quiet: a small muted label that brightens on hover */
+.film-controls button{font-weight:500;font-size:11px;line-height:1;letter-spacing:0.12em;color:var(--text-2);gap:8px;transition:color .2s var(--ease-out)}
+.film-controls button:hover,.film-controls button:focus-visible{color:var(--text)}
+.film-controls button span{font-size:10px;opacity:0.8}
 /* Chips and tags */
 .partner span,.passing-name{font-weight:600;font-size:12px;letter-spacing:0;color:var(--text-2)}
 .badge,.tag{font-weight:700;font-size:11px;letter-spacing:0;color:var(--mint);background:var(--mint-tint);border:0;border-radius:999px;padding:3px 9px}
