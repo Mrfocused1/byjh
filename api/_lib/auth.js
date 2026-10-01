@@ -1,7 +1,8 @@
 // Email-code sign-in for /admin: a 6-digit code is emailed through Resend, then a signed cookie keeps the session until sign-out.
-// Env: RESEND_API_KEY, AUTH_SECRET (32+ random chars), optional ADMIN_EMAILS (comma-separated) and MAIL_FROM.
+// Env: AUTH_SECRET (32+ random chars), optional ADMIN_EMAILS (comma-separated) and MAIL_FROM.
 const crypto=require('crypto');
 const store=require('./store');
+const {sendEmail}=require('./mail');
 
 const ADMINS=(process.env.ADMIN_EMAILS||'cozeebyjh@gmail.com').split(',').map(e=>e.trim().toLowerCase()).filter(Boolean);
 const FROM=process.env.MAIL_FROM||'BYJH <login@byjh.co.uk>';
@@ -47,33 +48,20 @@ async function sendCode(req,res,raw){
   const email=String(raw||'').trim().toLowerCase();
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))throw fail('Enter a valid email address.');
   if(!ADMINS.includes(email))throw fail('This email address doesn’t have access to the admin.',403);
-  if(!process.env.RESEND_API_KEY)throw fail('Email sending is not set up yet. Please contact your web team.',503);
   secret();
-  // At most one code per minute (an atomic marker per minute) and DAILY_CODES per day; markers older than a day are tidied up.
-  const minute=Math.floor(Date.now()/60000);
-  const marks=await store.marks(),stamp=m=>+m.name.split(/[/-]/)[1];
-  const old=marks.filter(m=>m.name.startsWith('sent/')?stamp(m)<minute-1440:stamp(m)<Date.now()/1000);
-  if(old.length)await store.unmark(old).catch(()=>{});
-  if(marks.filter(m=>m.name.startsWith('sent/')&&!old.includes(m)).length>=DAILY_CODES)throw fail('Too many codes requested today. Please try again tomorrow.',429);
-  if(!await store.mark('sent/'+minute))throw fail('A code was just sent. Please wait a minute before asking for another.',429);
+  // At most one code per minute (one marker per minute, created atomically) and DAILY_CODES per day.
+  if((await store.liveMarks('sent/')).length>=DAILY_CODES)throw fail('Too many codes requested today. Please try again tomorrow.',429);
+  if(!await store.mark('sent/'+store.dayAfterThisMinute()))throw fail('A code was just sent. Please wait a minute before asking for another.',429);
 
   const code=String(crypto.randomInt(0,1e6)).padStart(6,'0');
   const nonce=crypto.randomBytes(12).toString('base64url');
   const x=Math.floor(Date.now()/1000)+CODE_MINUTES*60;
-  const response=await fetch('https://api.resend.com/emails',{
-    method:'POST',
-    headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'byjh-login-'+nonce},
-    body:JSON.stringify({
-      from:FROM,to:[email],
-      subject:`${code} is your BYJH sign-in code`,
-      text:`Your BYJH admin sign-in code is ${code}\n\nIt expires in ${CODE_MINUTES} minutes. If you didn’t ask for it, you can ignore this email.`,
-      html:`<div style="font-family:Arial,Helvetica,sans-serif;color:#111;max-width:420px;margin:0 auto;padding:32px 24px"><p style="font-size:12px;letter-spacing:.2em;color:#666;margin:0 0 24px">BYJH · PRIVATE OFFICE</p><p style="font-size:16px;margin:0 0 16px">Your sign-in code is</p><p style="font-size:36px;font-weight:bold;letter-spacing:.3em;margin:0 0 24px">${code}</p><p style="font-size:14px;color:#555;margin:0">It expires in ${CODE_MINUTES} minutes. If you didn’t ask for it, you can ignore this email.</p></div>`,
-    }),
+  await sendEmail({
+    key:'byjh-login-'+nonce,from:FROM,to:[email],
+    subject:`${code} is your BYJH sign-in code`,
+    text:`Your BYJH admin sign-in code is ${code}\n\nIt expires in ${CODE_MINUTES} minutes. If you didn’t ask for it, you can ignore this email.`,
+    html:`<div style="font-family:Arial,Helvetica,sans-serif;color:#111;max-width:420px;margin:0 auto;padding:32px 24px"><p style="font-size:12px;letter-spacing:.2em;color:#666;margin:0 0 24px">BYJH · PRIVATE OFFICE</p><p style="font-size:16px;margin:0 0 16px">Your sign-in code is</p><p style="font-size:36px;font-weight:bold;letter-spacing:.3em;margin:0 0 24px">${code}</p><p style="font-size:14px;color:#555;margin:0">It expires in ${CODE_MINUTES} minutes. If you didn’t ask for it, you can ignore this email.</p></div>`,
   });
-  if(!response.ok){
-    console.error('Resend error',response.status,await response.text().catch(()=>''));
-    throw fail('We couldn’t send the email just now. Please try again in a minute.',502);
-  }
   setCookie(req,res,CHALLENGE,sign({t:'c',e:email,n:nonce,x,h:mac('code:'+nonce+':'+code)}),CODE_MINUTES*60,'/api/login');
   return {ok:true,email};
 }

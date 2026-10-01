@@ -1,6 +1,6 @@
 {
   const B=window.BYJHCopy||{t:(_key,fallback,values={})=>fallback.replace(/\{([A-Za-z_][\w]*)\}/g,(match,key)=>key in values?String(values[key]):match),h(key,fallback,values){return this.t(key,fallback,values).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}};
-/* Enquiry review; sending opens the visitor's email app addressed to BYJH. */
+/* Enquiry review; sending emails it to the BYJH team through /api/contact. */
 (() => {
 
   'use strict';
@@ -14,7 +14,6 @@
   const summary = document.querySelector('#contact-summary');
   const status = document.querySelector('#contact-status');
   const send = document.querySelector('#send-enquiry');
-  const RECIPIENTS = ['info@byjh.co.uk', 'remmie@byjh.co.uk'];
   const today = new Date();
   date.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
@@ -59,10 +58,26 @@
     document.querySelector('#contact-name').focus({ preventScroll: true });
     form.scrollIntoView({ behavior: window.BYJH.motion ? 'smooth' : 'instant', block: 'start' });
   });
-  send.addEventListener('click', () => {
-    const subject = B.t("ui.public.7a159b62f0","BYJH enquiry — {textContent}",{"textContent":type.selectedOptions[0].textContent});
-    location.href = `mailto:${RECIPIENTS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary.value)}`;
-    status.textContent = B.t("ui.public.64c3e86b8e","Your email app should now be open. Press send there to complete your enquiry.");
+  send.addEventListener('click', async () => {
+    if (send.disabled) return;
+    const data = new FormData(form);
+    send.disabled = true;
+    status.textContent = B.t("ui.public.sendingEnquiry","Sending your enquiry…");
+    try {
+      let response, result = {};
+      try {
+        response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ topic: type.selectedOptions[0].textContent, name: data.get('name'), email: data.get('email'), summary: summary.value }) });
+        result = await response.json().catch(() => ({}));
+      } catch { throw new Error(B.t("ui.public.enquiryOffline","We couldn’t reach our server. Check your connection and try again.")); }
+      if (!response.ok) throw new Error(result.error || B.t("ui.public.enquiryFailed","We couldn’t send your enquiry. Please try again, or email info@byjh.co.uk."));
+      send.remove();
+      document.querySelector('#edit-enquiry').remove();
+      document.querySelector('#review-note').textContent = B.t("ui.public.enquirySentNote","Your enquiry has been sent to our team.");
+      status.textContent = B.t("ui.public.enquirySent","Thank you. We’ve received your enquiry and will be in touch shortly.");
+    } catch (error) {
+      status.textContent = error.message;
+      send.disabled = false;
+    }
   });
   document.querySelector('#copy-enquiry').addEventListener('click', async () => {
     try {

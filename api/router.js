@@ -6,6 +6,7 @@ const crypto=require('crypto');
 const {ContentPage,InterfaceCopy,escapeHtml,GROUPS,ITEM_ID}=require('./_lib/cms');
 const store=require('./_lib/store');
 const auth=require('./_lib/auth');
+const contact=require('./_lib/contact');
 const assets=require('./_lib/assets.json');
 
 const DIST=path.join(__dirname,'..','dist');
@@ -118,6 +119,7 @@ async function api(req,res,route,query){
   if(route==='login/verify'&&post)return send(res,200,await auth.verifyCode(req,res,data.code));
   if(route==='logout')return send(res,200,auth.logout(req,res));
   if(route==='track')return send(res,200,{ok:true});
+  if(route==='contact'&&post)return send(res,200,await contact.sendEnquiry(req,data));
   if(!auth.user(req))return send(res,401,{error:'Please sign in to continue.'});
   if(route==='account'&&!post){
     const role=['member','partner'].includes(query.role)?query.role:'member';
