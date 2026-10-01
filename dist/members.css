@@ -38,3 +38,6 @@
   .member-copy .member-name {font-size:min(clamp(33px, 10vw, 64px), 11.6cqi);}
   .road-exit {height:220px;}
 }
+
+/* The "MEMBER 01 / 38" counter is not shown on any member (kept in the markup so admin field positions stay stable). */
+.member-no{display:none}
