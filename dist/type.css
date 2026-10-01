@@ -89,6 +89,8 @@ dialog::backdrop{background:rgba(7,4,8,0.72)}
 .byjh-application,.byjh-application-close{background:var(--card);color:var(--text)}
 .chapter-indicator{background:rgba(24,24,27,0.88);border:1px solid var(--hairline);color:var(--text-2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .chapter-indicator i{background:rgba(255,255,255,0.2)}
+/* Logos are white on the dark palette (partner logos still show their own colours on hover, from partners.css) */
+.brand img,.byjh-brand img,.auth-brand img,.heading-logo,.world-copy .heading-logo,.partner img{filter:brightness(0) invert(1)}
 /* Cards */
 .contact-option,.fleet-panel,.horizontal-panel,.service{background:var(--card);border:1px solid var(--hairline);border-radius:20px}
 .contact-option,.fleet-panel{padding:24px}
