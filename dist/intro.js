@@ -19,6 +19,7 @@
   const disabled = matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver ||
     (navigator.connection && navigator.connection.saveData) || /[?&]nointro\b/.test(location.search);
   if (disabled) return;
+  window.BYJHIntro = true; // blurtext.js leaves page departures to this script
 
   const store = {
     get(key) { try { return sessionStorage.getItem(key); } catch { return null; } },
@@ -137,6 +138,7 @@
   }
 
   // ---- Departure: cover the page, then navigate ---------------------------
+  let departing = false;
   function transitionTarget(event) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return null;
     const link = event.target.closest && event.target.closest('a[href]');
@@ -155,17 +157,25 @@
     finish();
     document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close());
     store.set(TRANSITION, '1');
-    const el = createOverlay('cover');
-    el.classList.add('is-entering');
-    overlay = el;
-    setTheme(true);
-    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
-    setTimeout(() => { location.href = url.href; }, 220);
+    if (departing) return;
+    departing = true;
+    // Text on screen blurs out first (blurtext.js), capped so leaving never drags; then the cover comes down.
+    const textOut = window.BYJHMotion ? Promise.race([window.BYJHMotion.blurOutAll(), new Promise(r => setTimeout(r, 450))]) : Promise.resolve();
+    const cover = () => {
+      const el = createOverlay('cover');
+      el.classList.add('is-entering');
+      overlay = el;
+      setTheme(true);
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
+      setTimeout(() => { location.href = url.href; }, 220);
+    };
+    textOut.then(cover, cover);
   });
 
   // Coming back through the back/forward cache: drop any cover left from leaving.
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
+    departing = false;
     store.take(TRANSITION);
     root.classList.remove('byjh-intro-on');
     setTheme(false);

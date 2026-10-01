@@ -1,0 +1,139 @@
+/* BYJH typography and colour system, shared with the BYJH app: Manrope everywhere, Uber-style hierarchy on Apple-style
+   dark colours. Loaded last on every page so it overrides the older styles. Text motion lives in blurtext.js. */
+@font-face{font-family:"Manrope";src:url("/fonts/Manrope-Variable.woff2") format("woff2");font-weight:200 800;font-display:swap}
+
+:root{
+  --font:"Manrope","Helvetica Neue",Arial,sans-serif;
+  --text:#f5f5f7;--text-app:#f4f4f2;--text-2:#86868b;--text-ui:#8e8e93;--text-3:#6e6e73;--text-body:#9a9aa0;
+  --mint:#9fe3b8;--on-mint:#0d2117;--mint-tint:rgba(159,227,184,0.14);
+  --bg:#0b0b0c;--bg-deep:#070408;--card:#18181b;--card-2:#202024;--hairline:rgba(255,255,255,0.07);
+  --glow:radial-gradient(120% 70% at 50% 18%,#1d1d21 0%,#0b0b0c 62%);
+  --ease-out:cubic-bezier(0.22,1,0.36,1);--ease-in-out:cubic-bezier(0.65,0,0.35,1);
+  /* the older public and admin stylesheets read these */
+  --paper:#0b0b0c;--ink:#f5f5f7;--muted:#86868b;--line:rgba(255,255,255,0.07);--surface:#202024;--inverse:#111;
+  color-scheme:dark;
+}
+html{background:var(--bg)}
+body{background:var(--glow) var(--bg) no-repeat;background-attachment:fixed;color:var(--text);
+  font:500 16px/1.45 var(--font);letter-spacing:-0.006em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-optical-sizing:auto}
+body,button,input,select,textarea,.service-symbol,.byjh-join-dock,#journey-summary,.copy-preview-banner,.chart text{font-family:var(--font)}
+h1,h2,h3,h4{text-wrap:balance}
+p,li,dd,blockquote,figcaption{text-wrap:pretty}
+.bw{display:inline-block;white-space:pre}
+html.bt-wait :is(main,header,footer){visibility:hidden;animation:bt-failsafe 0s 2.5s forwards}
+@keyframes bt-failsafe{to{visibility:visible}}
+
+/* ---------------------------------------------------------------- type scale */
+/* Brand / screen name */
+.brand strong,.byjh-brand strong{font-weight:800;font-size:30px;letter-spacing:-0.03em;color:var(--text-app)}
+.byjh-join-dock>a{font-weight:500;font-size:13px;letter-spacing:0;color:var(--text-2)}
+.brand span,.byjh-brand span{font-weight:600;font-size:12px;letter-spacing:0.12em;color:var(--text-ui)}
+/* Hero line */
+h1,.hero h1,.page-intro h1,.cinema-copy h1,.contact-heading h1,.member-name,.member-copy .member-name{font-weight:600;font-size:26px;line-height:1.15;letter-spacing:-0.02em;color:var(--text)}
+h1 span,.hero h1 span,.page-intro h1 span,.contact-heading h1 span{font-size:inherit;line-height:inherit;letter-spacing:inherit;font-weight:inherit}
+/* Title */
+h2,.world-copy h2,.perspective-heading h2,.experience h2,.occasion h2,.journey-intro h2,.contact-image-strip h2,.contact-review h2,
+.vehicle-modal-content h2,.booking-dialog h2,.cabin-dialog h2,.collection-heading h2,.contact-option h2,.partners-list .list-head h2{
+  font-weight:600;font-size:25px;line-height:1.18;letter-spacing:-0.02em;color:var(--text)}
+:is(h2,h1) span{font-size:inherit;line-height:inherit;letter-spacing:inherit}
+.journey-intro h2 span{color:var(--text-2)}
+/* Card heading */
+h3,.service h3,.horizontal-panel h3,.fleet-panel h3,.horizontal-enabled .fleet-panel h3{font-weight:650;font-size:19px;line-height:1.25;letter-spacing:-0.01em;color:var(--text-app)}
+/* Body */
+p,li,.body-copy,p.body-copy,.hero-subtitle,.cinema-description,.contact-lead,.intro-aside p,.occasion-note p,.service summary p,.service-detail p,
+.feature-row p,.horizontal-panel p:not(.eyebrow),.contact-option p,.gallery-end p,.partners-end p,#journey-result>p{
+  font-weight:500;font-size:14px;line-height:1.5;letter-spacing:-0.002em;color:var(--text-body)}
+/* Small / secondary */
+small,figcaption,.form-note,.gallery-caption,.contact-number,.footer-bottom,.footer-bottom *,.cabin-caption,.perspective-bottom,.scroll-invitation,
+.media-bottom p,.contact-form .optional,#contact-status,.member-sector,.member-no,.drive-caption .eyebrow,.horizontal-hint,.route-label,.film-label{
+  font-weight:500;font-size:13px;line-height:1.45;letter-spacing:0;color:var(--text-2)}
+/* Eyebrow (above a title) */
+.eyebrow,.cinema-copy>.eyebrow,.page-intro .eyebrow,.horizontal-panel .eyebrow,.profile-labels .eyebrow,.fleet-panel .eyebrow,
+.vehicle-modal-content>.eyebrow,.vehicle-modal-top>.eyebrow,.eyebrow-w{font-weight:600;font-size:12px;line-height:1.3;letter-spacing:0.01em;color:var(--mint)}
+/* Section label */
+.nav-label,.feature-row h3,.contact-form legend,.collection-heading>span,.chapter-indicator,.menu-dialog nav small,.menu-toggle b{
+  font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-ui)}
+/* Navigation */
+.header-pages a,.footer-pages a,.world-links a{font-weight:500;font-size:14px;letter-spacing:-0.006em;color:var(--text)}
+.menu-dialog nav a{font-weight:600;font-size:25px;line-height:1.18;letter-spacing:-0.02em;color:var(--text)}
+/* Buttons */
+.pill,.text-link,.text-button,.contact-action,.rail-book,.film-controls button,.byjh-join-dock>button,.btn,.byjh-footer-access a{
+  font-weight:600!important;font-size:15px!important;line-height:1!important;letter-spacing:-0.006em!important;text-transform:none!important}
+.pill span,.text-link span{font-size:18px;line-height:1}
+.pill,.pill.dark,.pill.light,.btn.primary,.byjh-join-dock>button{background:var(--text-app);color:#111;border-color:var(--text-app);border-radius:999px}
+.pill:hover,.pill.dark:hover,.pill.light:hover,.btn.primary:hover,.byjh-join-dock>button:hover{background:#deded8;color:#111}
+.pill.outline,.btn:not(.primary){background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.16);border-radius:999px}
+.pill.outline:hover,.btn:not(.primary):hover{background:var(--card-2);color:var(--text)}
+.text-link,.text-button{color:var(--text)}
+/* Chips and tags */
+.partner span,.passing-name{font-weight:600;font-size:12px;letter-spacing:0;color:var(--text-2)}
+.badge,.tag{font-weight:700;font-size:11px;letter-spacing:0;color:var(--mint);background:var(--mint-tint);border:0;border-radius:999px;padding:3px 9px}
+.badge.pending,.badge.draft{color:var(--text-2);background:rgba(255,255,255,0.06)}
+/* Numbers that change or line up */
+#horizontal-count,.member-no,.member-no span,.members-total,.partners-total,.chapter-indicator,.contact-number,.metric strong,.bar-label span:last-child,td{font-variant-numeric:tabular-nums}
+
+/* ---------------------------------------------------------------- dark surfaces (public site) */
+.skip-link{background:var(--text-app);color:#111}
+dialog,.menu-dialog,.booking-dialog,.cabin-dialog,.vehicle-modal,.media-dialog{background:var(--card);color:var(--text);border:1px solid var(--hairline);border-radius:20px}
+dialog::backdrop{background:rgba(7,4,8,0.72)}
+.horizontal-sticky,body.horizontal-enabled .horizontal-story{background:var(--bg)}
+.horizontal-meter i{background:rgba(255,255,255,0.12)}
+.member-photo{background:var(--card-2)}
+.services,footer,.side-ground,.perspective-bottom,.gallery-collection,.horizontal-content,.horizontal-controls,.drive-road,.vehicle-modal-top{background:var(--bg)}
+.cinema-hero{background:var(--bg-deep)}
+.cinema-film,.gallery-image-wrap,.fleet-image,.image-loading,.contact-image-strip{background:var(--card)}
+.byjh-application,.byjh-application-close{background:var(--card);color:var(--text)}
+.chapter-indicator{background:rgba(24,24,27,0.88);border:1px solid var(--hairline);color:var(--text-2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.chapter-indicator i{background:rgba(255,255,255,0.2)}
+/* Cards */
+.contact-option,.fleet-panel,.horizontal-panel,.service{background:var(--card);border:1px solid var(--hairline);border-radius:20px}
+.contact-option,.fleet-panel{padding:24px}
+.gallery-image-wrap{border-radius:20px;overflow:hidden}
+/* Forms */
+input,select,textarea{background:var(--card);color:var(--text);border:1px solid var(--hairline);border-radius:12px;font:500 15px/1.4 var(--font);letter-spacing:-0.006em}
+input::placeholder,textarea::placeholder{color:var(--text-3)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
+form label,.contact-form label{font-weight:500;font-size:13px;line-height:1.45;color:var(--text-2)}
+a{color:inherit}
+
+/* ---------------------------------------------------------------- admin and sign-in */
+.shell,.main-wrap,.page,.auth-layout,.auth-left{background:var(--glow) var(--bg) no-repeat;color:var(--text-app)}
+.sidebar{background:var(--bg-deep);border-right:1px solid var(--hairline)}
+.topbar{background:rgba(11,11,12,0.86);border-bottom:1px solid var(--hairline);backdrop-filter:blur(14px)}
+.card,.item-card,.drawer{background:var(--card);border:1px solid var(--hairline);border-radius:20px}
+.card-head{border-bottom:1px solid var(--hairline)}
+.card-head h2,.drawer h2{font-weight:650;font-size:19px;line-height:1.25;letter-spacing:-0.01em;color:var(--text-app)}
+.page-heading h1,.heading h1,.auth-box h1{font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-0.03em;color:var(--text-app)}
+.auth-box h1 span,.heading h1 span{color:var(--text-2)}
+.auth-quote h2{font-weight:600;font-size:26px;line-height:1.15;letter-spacing:-0.02em;color:var(--text)}
+.auth-quote .eyebrow-w{color:var(--mint)}
+.auth-quote p{font-weight:500;font-size:14px;line-height:1.5;color:#c7c7cc}
+.sub,.page-heading p,.heading p,.note,.auth-small{font-weight:500;font-size:13px;line-height:1.45;letter-spacing:0;color:var(--text-2)}
+.field label{font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-ui)}
+.nav-item{font-weight:500;font-size:14px;letter-spacing:-0.006em;text-transform:none;color:var(--text-ui);border:0;border-radius:12px}
+.card>.card-head,.card>.card-body,.metric{padding-left:24px;padding-right:24px}
+.metric{padding-top:20px;padding-bottom:20px}
+.metric b,.metric-label b,.card-head b{color:var(--text-app)}
+.field :is(input,textarea,select),.content-field :is(input,textarea,select){padding:12px 14px}
+.metric:first-child{padding-left:24px}
+.card .edit-fields{padding-left:24px;padding-right:24px}
+.metric-label{font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-ui)}
+.nav-item.active,.nav-item:hover{color:var(--text-app);background:rgba(255,255,255,0.06)}
+.nav-item.active svg{color:var(--mint)}
+.avatar,.media-thumb,.image-row .thumb{background:var(--card-2);color:var(--text-app)}
+tbody tr:hover{background:var(--card-2)}
+.message{background:var(--card-2);color:var(--text-app);border-color:var(--mint);border-radius:12px}
+.message.error{background:rgba(255,105,97,0.12);color:#ff9f99;border-color:#ff6961}
+.bar-track{background:rgba(255,255,255,0.08)}
+.bar-fill{background:var(--mint)}
+.reply{background:var(--card-2)}
+.welcome{background:var(--card);border:1px solid var(--hairline);border-radius:20px}
+.welcome .btn{background:var(--text-app);color:#111}
+.metric{background:var(--card);border:1px solid var(--hairline);border-radius:20px}
+.metric strong{font-weight:700;color:var(--text-app);letter-spacing:-0.02em}
+.chart line{stroke:rgba(255,255,255,0.08)}
+.chart text{fill:var(--text-2)}
+.live-dot{color:var(--text-2)}
+.copy-preview-banner{background:var(--mint);color:var(--on-mint)}
+.auth-image img{filter:brightness(0.8)}
+

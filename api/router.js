@@ -259,6 +259,10 @@ const STATIC_PAGES={
 };
 // Vercel Web Analytics (enabled on the project); counts public page views only.
 const ANALYTICS='<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script><script defer src="/_vercel/insights/script.js"></script>';
+// Shared typography (Manrope, dark palette) and blur-in text motion, loaded last on every page. bt-wait keeps text
+// hidden until blurtext.js has prepared it (type.css reveals it anyway after 2.5s if the script never runs).
+const DESIGN='<link rel="preload" href="/fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/type.css">'+
+  '<script>if(Element.prototype.animate)document.documentElement.classList.add("bt-wait")</script><script src="/blurtext.js" defer></script>';
 async function page(req,res,name,query){
   // Unpublished drafts are only shown to a signed-in admin.
   const preview=query.preview==='1'&&!!auth.user(req);
@@ -272,6 +276,7 @@ async function page(req,res,name,query){
   else return send(res,404,'Not found','text/plain');
   markup=injectCopy(replaceMedia(markup,state),copy,preview,isStatic);
   if(!isStatic&&!preview)markup=markup.replace('</head>',()=>ANALYTICS+'</head>');
+  markup=markup.replace('</head>',()=>DESIGN+'</head>');
   // Published pages are cached briefly at Vercel's edge; previews depend on the sign-in cookie, so never.
   res.statusCode=200;res.setHeader('Content-Type','text/html; charset=utf-8');
   res.setHeader('Cache-Control',query.preview?'no-store':'public, max-age=0, s-maxage=30, stale-while-revalidate=300');
