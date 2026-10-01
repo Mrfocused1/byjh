@@ -102,7 +102,31 @@ function injectCopy(markup,copy,preview,isStatic){
 }
 
 const ADMIN_USER={id:'admin',email:'admin@byjh.local',role:'admin',name:'BYJH Admin',phone:'',company:'',sector:'',website:'',message:'',status:'active',notes:'',created:'2026-01-01T00:00:00+00:00'};
-const emptyAnalytics=days=>({days,views:0,applications:0,daily:[],pages:[],devices:[],sources:[]});
+const emptyAnalytics=days=>({days,views:0,visitors:0,applications:0,daily:[],pages:[],devices:[],sources:[]});
+// Visits come from Vercel Web Analytics, which keeps the latest 31 days on the free plan.
+// Env: VERCEL_API_TOKEN, a Vercel access token scoped to the team that owns this project.
+const VERCEL_TEAM='team_vlF3qG9KvqYnk24KKbqrRChO',VERCEL_PROJECT='prj_XvqI3alFD4DLIUosXJc3XXoshx7i';
+async function siteAnalytics(requested){
+  const days=Math.min(31,Math.max(1,requested||30));
+  if(!process.env.VERCEL_API_TOKEN)return {...emptyAnalytics(days),notice:'Visitor analytics is not connected yet.'};
+  const since=new Date();since.setUTCHours(0,0,0,0);since.setUTCDate(since.getUTCDate()-(days-1));
+  const query=async(kind,by)=>{
+    const params=new URLSearchParams({teamId:VERCEL_TEAM,projectId:VERCEL_PROJECT,since:since.toISOString(),until:new Date().toISOString()});
+    if(by){params.set('by',by);params.set('limit','20');}
+    const r=await fetch('https://api.vercel.com/v1/query/web-analytics/visits/'+kind+'?'+params,{headers:{Authorization:'Bearer '+process.env.VERCEL_API_TOKEN}});
+    const body=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(body.error?.code==='web_analytics_not_enabled'?'Web Analytics is not switched on in Vercel yet.':'Visitor analytics could not be loaded just now.');
+    return body.data;
+  };
+  // Breakdowns arrive unsorted with an "Others" bucket; show them busiest first with Other last.
+  const rows=(list,key,name=v=>v)=>list.filter(x=>x.pageviews>0).map(x=>({label:x[key]==='Others'?'Other':name(x[key]),count:x.pageviews})).sort((a,b)=>(a.label==='Other')-(b.label==='Other')||b.count-a.count);
+  try{
+    const [total,daily,pages,devices,sources]=await Promise.all([query('count'),query('aggregate','day'),query('aggregate','requestPath'),query('aggregate','deviceType'),query('aggregate','referrerHostname')]);
+    return {days,views:total.pageviews,visitors:total.visitors,applications:0,
+      daily:daily.map(x=>({day:x.timestamp.slice(0,10),count:x.pageviews})),
+      pages:rows(pages,'requestPath'),devices:rows(devices,'deviceType'),sources:rows(sources,'referrerHostname',v=>v||'Direct')};
+  }catch(e){console.error('Analytics',e.message);return {...emptyAnalytics(days),notice:e.message};}
+}
 
 function send(res,status,body,type='application/json; charset=utf-8'){
   res.statusCode=status;res.setHeader('Content-Type',type);res.setHeader('Cache-Control','no-store');
@@ -135,10 +159,10 @@ async function api(req,res,route,query){
   if(['account','password','admin/person','admin/request','requests','login','setup','apply'].includes(route))
     throw fail('Not available on this site.',501);
   const state=await store.load();
-  if(route==='admin/overview')return send(res,200,{counts:{member:0,partner:0,pending:0,requests:0},recent:[],activity:[],analytics:emptyAnalytics(30)});
+  if(route==='admin/overview')return send(res,200,{counts:{member:0,partner:0,pending:0,requests:0},recent:[],activity:[],analytics:await siteAnalytics(30)});
   if(route==='admin/people')return send(res,200,{people:[]});
   if(route==='admin/requests')return send(res,200,{requests:[]});
-  if(route==='admin/analytics')return send(res,200,emptyAnalytics(Math.min(90,Math.max(1,parseInt(query.days||'30',10)||30))));
+  if(route==='admin/analytics')return send(res,200,await siteAnalytics(parseInt(query.days||'30',10)||30));
   const mediaList=()=>{
     const list=assets.map(a=>({...a,current:state.media[a.url]?state.media[a.url].target:a.url,replaced:!!state.media[a.url]}));
     for(const u of [...state.uploads].reverse())list.push({...u,current:u.url,replaced:false});
@@ -233,10 +257,12 @@ const STATIC_PAGES={
   admin:'admin/index.html','admin-login':'admin/login/index.html',account:'account/index.html',apply:'apply/index.html',login:'login/index.html',
   'members-login':'members/login/index.html','partners-login':'partners/login/index.html',
 };
+// Vercel Web Analytics (enabled on the project); counts public page views only.
+const ANALYTICS='<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script><script defer src="/_vercel/insights/script.js"></script>';
 async function page(req,res,name,query){
-  const state=await store.load();
   // Unpublished drafts are only shown to a signed-in admin.
   const preview=query.preview==='1'&&!!auth.user(req);
+  const state=preview?await store.load():await store.loadPublic();
   const copy=copyValues(state,preview);
   let markup,isStatic=false;
   if(name in PAGES&&!(name in COPY_PAGES)){
@@ -245,16 +271,20 @@ async function page(req,res,name,query){
   }else if(STATIC_PAGES[name]){markup=read(STATIC_PAGES[name]);isStatic=true;}
   else return send(res,404,'Not found','text/plain');
   markup=injectCopy(replaceMedia(markup,state),copy,preview,isStatic);
-  send(res,200,markup,'text/html; charset=utf-8');
+  if(!isStatic&&!preview)markup=markup.replace('</head>',()=>ANALYTICS+'</head>');
+  // Published pages are cached briefly at Vercel's edge; previews depend on the sign-in cookie, so never.
+  res.statusCode=200;res.setHeader('Content-Type','text/html; charset=utf-8');
+  res.setHeader('Cache-Control',query.preview?'no-store':'public, max-age=0, s-maxage=30, stale-while-revalidate=300');
+  res.end(markup);
 }
 
 // JS and CSS that mention /assets/ are served here so Media-library replacements (intro films, logos) apply to them too.
 const TEXT_ASSETS={'intro.js':'text/javascript; charset=utf-8','common.js':'text/javascript; charset=utf-8','style.css':'text/css; charset=utf-8','byjh.css':'text/css; charset=utf-8'};
 async function textAsset(req,res,name){
   if(!TEXT_ASSETS[name])return send(res,404,'Not found','text/plain');
-  const state=await store.load();
+  const state=await store.loadPublic();
   const body=replaceMedia(read(name),state);
-  res.statusCode=200;res.setHeader('Content-Type',TEXT_ASSETS[name]);res.setHeader('Cache-Control','public, max-age=0, s-maxage=5, stale-while-revalidate=30');res.end(body);
+  res.statusCode=200;res.setHeader('Content-Type',TEXT_ASSETS[name]);res.setHeader('Cache-Control','public, max-age=0, s-maxage=30, stale-while-revalidate=300');res.end(body);
 }
 
 module.exports=async(req,res)=>{

@@ -25,6 +25,28 @@ async function save(state){
   const before=(await list({prefix:PREFIX})).blobs;
   await put(PREFIX+String(Date.now()).padStart(15,'0')+'.json',JSON.stringify(state),{access:ACCESS,addRandomSuffix:false,contentType:'application/json'});
   if(before.length)await del(before.map(b=>b.url)).catch(()=>{});
+  await writeSnapshot(state).catch(()=>{});
+}
+// Public pages read a published-only snapshot at a fixed URL instead of calling list(): CDN hits are free, while list()
+// is a metered "advanced operation" (2,000 a month on the Hobby plan, then storage is blocked). It may lag a save by a minute.
+const SNAPSHOT='byjh/public.json';
+function snapshotURL(){
+  const id=String(process.env.BLOB_READ_WRITE_TOKEN||'').split('_')[3];
+  return id?`https://${id.toLowerCase()}.public.blob.vercel-storage.com/${SNAPSHOT}`:null;
+}
+async function writeSnapshot(state){
+  const {put}=require('@vercel/blob');
+  const content=Object.fromEntries(Object.entries(state.content).map(([page,row])=>[page,{published:row.published||{}}]));
+  await put(SNAPSHOT,JSON.stringify({content,media:state.media,uploads:[]}),{access:'public',addRandomSuffix:false,allowOverwrite:true,contentType:'application/json',cacheControlMaxAge:60});
+}
+async function loadPublic(){
+  if(process.env.BYJH_LOCAL_STATE)return load();
+  const url=snapshotURL();
+  const res=url&&await fetch(url).catch(()=>null);
+  if(res&&res.ok)return {...empty(),...(await res.json())};
+  const state=await load();
+  await writeSnapshot(state).catch(()=>{});
+  return state;
 }
 async function putFile(name,buffer,contentType){
   if(process.env.BYJH_LOCAL_STATE)return 'data:'+contentType+';base64,'+buffer.toString('base64');
@@ -62,4 +84,4 @@ async function liveMarks(prefix){
 }
 // Expiry stamp shared by every request in the current minute, one day ahead: a per-minute marker name that also says when to delete it.
 const dayAfterThisMinute=()=>(Math.floor(Date.now()/60000)+1440)*60;
-module.exports={load,save,putFile,mark,marks,unmark,liveMarks,dayAfterThisMinute};
+module.exports={load,loadPublic,save,putFile,mark,marks,unmark,liveMarks,dayAfterThisMinute};
