@@ -260,3 +260,6 @@ html, body {overscroll-behavior-y: none;}
 .footer-pages {flex-wrap:wrap;row-gap:16px;}
 .footer-pages a {white-space:nowrap;}
 @media(max-width:760px) {.footer-pages {gap:16px 20px;justify-content:flex-start;}}
+
+/* Gallery cards show only their title; the running number ("01", "02"…) is hidden, including on items added in the admin. */
+.gallery-caption > span:nth-child(2) {display:none;}
