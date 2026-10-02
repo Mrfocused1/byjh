@@ -62,6 +62,19 @@
   .partner {padding:18px;}
   .partner span {left:12px; bottom:10px; font-size:8px;}
   .partners-end {flex-direction:column; align-items:flex-start;}
+  /* Phones: the road (van and partner logos) is part of the first screen. The intro is tighter, the road sits straight
+     under it, and once pinned it holds near the middle of the screen instead of filling a full-height panel. */
+  .partners-intro {padding-top:108px;}
+  .partners-drive {margin-top:0;}
+  .drive-road {--road-h:clamp(240px, 38svh, 340px);}
+  .drive-sticky {height:auto; min-height:0; top:max(0px, calc(50svh - 240px)); justify-content:flex-start;}
+}
+/* Short phones (iPhone SE and similar): tighten the intro further so the road clears the join bar. */
+@media (max-width:760px) and (max-height:740px) {
+  .partners-intro {padding-top:88px; padding-bottom:8px;}
+  .partners-intro h1 {margin-top:16px;}
+  .partners-intro .intro-aside {padding-top:16px; padding-bottom:0;}
+  .partners-intro .intro-aside p {margin:10px 0 6px;}
 }
 
 .drive-caption .motion-toggle {margin-left:auto; font-size:10px; min-height:44px; padding:10px 18px;}
