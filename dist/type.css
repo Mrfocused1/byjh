@@ -57,7 +57,7 @@ small,figcaption,.form-note,.gallery-caption,.contact-number,.footer-bottom,.foo
 .header-pages a,.footer-pages a,.world-links a{font-weight:500;font-size:14px;letter-spacing:-0.006em;color:var(--text)}
 .menu-dialog nav a{font-weight:600;font-size:25px;line-height:1.18;letter-spacing:-0.02em;color:var(--text)}
 /* Buttons */
-.pill,.text-link,.text-button,.contact-action,.rail-book,.byjh-join-dock>button,.btn,.byjh-footer-access a{
+.pill,.text-link,.text-button,.contact-action,.rail-book,.byjh-join-dock>button,.btn{
   font-weight:600!important;font-size:15px!important;line-height:1!important;letter-spacing:-0.006em!important;text-transform:none!important}
 .pill span,.text-link span{font-size:18px;line-height:1}
 .pill,.pill.dark,.pill.light,.btn.primary,.byjh-join-dock>button{background:var(--text-app);color:#111;border-color:var(--text-app);border-radius:999px}
@@ -69,6 +69,13 @@ small,figcaption,.form-note,.gallery-caption,.contact-number,.footer-bottom,.foo
 .film-controls button{font-weight:500;font-size:11px;line-height:1;letter-spacing:0.12em;color:var(--text-2);gap:8px;transition:color .2s var(--ease-out)}
 .film-controls button:hover,.film-controls button:focus-visible{color:var(--text)}
 .film-controls button span{font-size:10px;opacity:0.8}
+/* Footer: the "Private office" link is a quiet small link, and the extra bottom room that keeps the footer clear of the
+   floating join bar only applies on the pages that have that bar. */
+footer{padding-bottom:32px}
+.byjh-footer-access{margin-top:20px;padding-bottom:env(safe-area-inset-bottom)}
+:is(.members-page,.partners-page) .byjh-footer-access{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+.byjh-footer-access a{font-weight:500;font-size:13px;letter-spacing:0;text-transform:none;color:var(--text-2)}
+.byjh-footer-access a:hover{color:var(--text)}
 /* Chips and tags */
 .partner span,.passing-name{font-weight:600;font-size:12px;letter-spacing:0;color:var(--text-2)}
 .badge,.tag{font-weight:700;font-size:11px;letter-spacing:0;color:var(--mint);background:var(--mint-tint);border:0;border-radius:999px;padding:3px 9px}
@@ -99,6 +106,25 @@ dialog::backdrop{background:rgba(7,4,8,0.72)}
 input,select,textarea{background:var(--card);color:var(--text);border:1px solid var(--hairline);border-radius:12px;font:500 15px/1.4 var(--font);letter-spacing:-0.006em}
 input::placeholder,textarea::placeholder{color:var(--text-3)}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
+/* Contact form fields: filled, rounded and quiet, in place of the old underlined inputs and native dropdowns.
+   16px text so phones don't zoom in on focus. */
+.contact-form :is(input:not([type=checkbox]):not([type=radio]),select,textarea){
+  -webkit-appearance:none;appearance:none;display:block;width:100%;margin-top:8px;min-height:52px;padding:14px 16px;
+  background-color:var(--card);color:var(--text);border:1px solid var(--hairline);border-radius:14px;box-shadow:none;
+  font:500 16px/1.4 var(--font);letter-spacing:-0.006em;
+  transition:border-color .2s var(--ease-out),background-color .2s var(--ease-out),box-shadow .2s var(--ease-out)}
+.contact-form select{padding-right:44px;cursor:pointer;text-overflow:ellipsis;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%238e8e93' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 18px center;background-size:12px 8px}
+.contact-form select option{background:var(--card);color:var(--text)}
+.contact-form textarea{min-height:140px;line-height:1.5;resize:vertical}
+.contact-form input[type=date]{color-scheme:dark;min-height:52px}
+.contact-form input[type=date]::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer}
+.contact-form input[type=date]::-webkit-date-and-time-value{text-align:left}
+.contact-form :is(input,textarea)::placeholder{color:var(--text-3)}
+.contact-form :is(input,select,textarea):hover{border-color:rgba(255,255,255,0.14)}
+.contact-form :is(input:not([type=checkbox]):not([type=radio]),select,textarea):focus{outline:none;background-color:var(--card-2);border-color:var(--mint);box-shadow:0 0 0 3px rgba(159,227,184,0.18)}
+.contact-form-heading{border-bottom-color:var(--hairline)}
 form label,.contact-form label{font-weight:500;font-size:13px;line-height:1.45;color:var(--text-2)}
 a{color:inherit}
 
