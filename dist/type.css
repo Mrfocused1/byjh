@@ -4,13 +4,15 @@
 
 :root{
   --font:"Manrope","Helvetica Neue",Arial,sans-serif;
-  --text:#f5f5f7;--text-app:#f4f4f2;--text-2:#86868b;--text-ui:#8e8e93;--text-3:#6e6e73;--text-body:#9a9aa0;
+  --text:#f5f5f7;--text-app:#f4f4f2;
+  /* Secondary, UI, tertiary and body text are white too (the user asked for no grey text) */
+  --text-2:#f5f5f7;--text-ui:#f5f5f7;--text-3:#f5f5f7;--text-body:#f5f5f7;--placeholder:rgba(245,245,247,0.45);
   --mint:#9fe3b8;--on-mint:#0d2117;--mint-tint:rgba(159,227,184,0.14);
   --bg:#0b0b0c;--bg-deep:#070408;--card:#18181b;--card-2:#202024;--hairline:rgba(255,255,255,0.07);
   --glow:radial-gradient(120% 70% at 50% 18%,#1d1d21 0%,#0b0b0c 62%);
   --ease-out:cubic-bezier(0.22,1,0.36,1);--ease-in-out:cubic-bezier(0.65,0,0.35,1);
   /* the older public and admin stylesheets read these */
-  --paper:#0b0b0c;--ink:#f5f5f7;--muted:#86868b;--line:rgba(255,255,255,0.07);--surface:#202024;--inverse:#111;
+  --paper:#0b0b0c;--ink:#f5f5f7;--muted:#f5f5f7;--line:rgba(255,255,255,0.07);--surface:#202024;--inverse:#111;
   color-scheme:dark;
 }
 html{background:var(--bg)}
@@ -20,6 +22,7 @@ body,button,input,select,textarea,.service-symbol,.byjh-join-dock,#journey-summa
 h1,h2,h3,h4{text-wrap:balance}
 p,li,dd,blockquote,figcaption{text-wrap:pretty}
 .bw{display:inline-block;white-space:pre}
+.bw.bw{color:inherit} /* word wrappers take their parent's colour, not older 'h1 span' rules */
 html.bt-wait :is(main,header,footer){visibility:hidden;animation:bt-failsafe 0s 2.5s forwards}
 @keyframes bt-failsafe{to{visibility:visible}}
 
@@ -31,6 +34,8 @@ html.bt-wait :is(main,header,footer){visibility:hidden;animation:bt-failsafe 0s 
 /* Hero line */
 h1,.hero h1,.page-intro h1,.cinema-copy h1,.contact-heading h1,.member-name,.member-copy .member-name{font-weight:600;font-size:26px;line-height:1.15;letter-spacing:-0.02em;color:var(--text)}
 h1 span,.hero h1 span,.page-intro h1 span,.contact-heading h1 span{font-size:inherit;line-height:inherit;letter-spacing:inherit;font-weight:inherit}
+/* The home hero line ("EVERY JOURNEY.") is the one place the type steps up: larger, bolder, pure white. */
+#hero-title,.cinema-copy #hero-title{font-weight:700;font-size:clamp(40px,4.6vw,64px);line-height:1.02;letter-spacing:-0.035em;color:#fff!important}
 /* Title */
 h2,.world-copy h2,.perspective-heading h2,.experience h2,.occasion h2,.journey-intro h2,.contact-image-strip h2,.contact-review h2,
 .vehicle-modal-content h2,.booking-dialog h2,.cabin-dialog h2,.collection-heading h2,.contact-option h2,.partners-list .list-head h2{
@@ -76,6 +81,12 @@ footer{padding-bottom:32px}
 :is(.members-page,.partners-page) .byjh-footer-access{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
 .byjh-footer-access a{font-weight:500;font-size:13px;letter-spacing:0;text-transform:none;color:var(--text-2)}
 .byjh-footer-access a:hover{color:var(--text)}
+/* Older styles hard-code grey text in places; all of it is white */
+.cinema-copy h1,.horizontal-pagination,.horizontal-pagination span,.chapter-indicator,.chapter-indicator span,.horizontal-panel p,.fleet-panel p,
+.muted,h1 .muted,h2 .muted,.required-mark,.contact-required,.contact-delivery-note,
+.workspace-switch span,.profile small,.welcome .eyebrow-w,.welcome p,.footer-note span,#app small,dialog :is(p,li,small,dd,dt){color:var(--text)!important}
+/* The progress pill shows the section name and percentage, without the running number on the left */
+.chapter-indicator .chapter-number{display:none}
 /* Chips and tags */
 .partner span,.passing-name{font-weight:600;font-size:12px;letter-spacing:0;color:var(--text-2)}
 .badge,.tag{font-weight:700;font-size:11px;letter-spacing:0;color:var(--mint);background:var(--mint-tint);border:0;border-radius:999px;padding:3px 9px}
@@ -104,7 +115,7 @@ dialog::backdrop{background:rgba(7,4,8,0.72)}
 .gallery-image-wrap{border-radius:20px;overflow:hidden}
 /* Forms */
 input,select,textarea{background:var(--card);color:var(--text);border:1px solid var(--hairline);border-radius:12px;font:500 15px/1.4 var(--font);letter-spacing:-0.006em}
-input::placeholder,textarea::placeholder{color:var(--text-3)}
+input::placeholder,textarea::placeholder{color:var(--placeholder)}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);outline-offset:1px;border-color:transparent}
 /* Contact form fields: filled, rounded and quiet, in place of the old underlined inputs and native dropdowns.
    16px text so phones don't zoom in on focus. */
@@ -121,7 +132,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--mint);outline-of
 .contact-form input[type=date]{color-scheme:dark;min-height:52px}
 .contact-form input[type=date]::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer}
 .contact-form input[type=date]::-webkit-date-and-time-value{text-align:left}
-.contact-form :is(input,textarea)::placeholder{color:var(--text-3)}
+.contact-form :is(input,textarea)::placeholder{color:var(--placeholder)}
 .contact-form :is(input,select,textarea):hover{border-color:rgba(255,255,255,0.14)}
 .contact-form :is(input:not([type=checkbox]):not([type=radio]),select,textarea):focus{outline:none;background-color:var(--card-2);border-color:var(--mint);box-shadow:0 0 0 3px rgba(159,227,184,0.18)}
 .contact-form-heading{border-bottom-color:var(--hairline)}
