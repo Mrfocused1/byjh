@@ -13,6 +13,13 @@
       "connect:15"
     ]
   },
+  "ui.public.cf01481f62": {
+    "label": "Privacy",
+    "value": "Privacy",
+    "locations": [
+      "connect:28"
+    ]
+  },
   "ui.public.63a139fe57": {
     "label": "Private office",
     "value": "Private office",

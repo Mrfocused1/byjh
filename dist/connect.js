@@ -25,7 +25,7 @@
   const lead=document.querySelector('.contact-heading .contact-lead');
   if(lead){const p=document.createElement('p');p.className='contact-social';p.append(igLink('in-contact',C('social.follow','Follow us on Instagram')));lead.after(p);}
   const footer=document.querySelector('footer');
-  if(footer){const links=document.createElement('div');links.className='byjh-footer-access';links.innerHTML=`<a href="/admin/">${B.h("ui.public.63a139fe57","Private office")}</a>`;footer.append(links);}
+  if(footer){const links=document.createElement('div');links.className='byjh-footer-access';links.innerHTML=`<a href="/privacy/">${B.h("ui.public.cf01481f62","Privacy")}</a><a href="/admin/">${B.h("ui.public.63a139fe57","Private office")}</a>`;footer.append(links);}
 })();
 
 }
